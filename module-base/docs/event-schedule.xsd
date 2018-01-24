@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:tns="http://www.example.org/OneIdSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.example.org/OneIdSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1" elementFormDefault="qualified">
+	<xsd:annotation>
+		<xsd:appinfo>
+			<jaxb:globalBindings>
+				<jaxb:javaType name="java.util.Date" xmlType="xsd:dateTime" parseMethod="au.com.scds.eventschedule.fixture.generated.DataTypeAdapter.parseDateTime" printMethod="au.com.scds.eventschedule.fixture.generated.DataTypeAdapter.printDateTime" />
+				<jaxb:javaType name="java.util.Date" xmlType="xsd:date" parseMethod="au.com.scds.eventschedule.fixture.generated.DataTypeAdapter.parseDate" printMethod="au.com.scds.eventschedule.fixture.generated.DataTypeAdapter.printDate" />
+			</jaxb:globalBindings>
+		</xsd:appinfo>
+	</xsd:annotation>
+	<xsd:complexType name="SheduledEvent">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="date" type="xsd:dateTime" maxOccurs="1" minOccurs="1"></xsd:element>
+			<xsd:element name="waitList" type="tns:WaitList" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="booking" type="tns:Booking" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="attendance" type="tns:Attendance" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="eventFacilitator" type="tns:EventFacilitator" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Attendee">
+		<xsd:sequence>
+			<xsd:element name="person" type="tns:Person" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Organisation">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="sheduledEvent" type="tns:SheduledEvent" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="eventFacilitator" type="tns:EventFacilitator" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="contactor" type="tns:Contactor" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="WaitList">
+		<xsd:sequence>
+			<xsd:element name="attendee" type="tns:Attendee" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Booking">
+		<xsd:sequence>
+			<xsd:element name="attendee" type="tns:Attendee" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Attendance">
+		<xsd:sequence>
+			<xsd:element name="attendee" type="tns:Attendee" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="EventFacilitator">
+		<xsd:sequence>
+			<xsd:element name="person" type="tns:Person" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Person">
+		<xsd:sequence>
+			<xsd:element name="fullname" type="xsd:string" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ScheduledContact">
+		<xsd:sequence>
+			<xsd:element name="contactor" type="tns:Contactor" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="contactee" type="tns:Contactee" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Contactee">
+		<xsd:sequence>
+			<xsd:element name="person" type="tns:Person" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Contactor">
+		<xsd:sequence>
+			<xsd:element name="person" type="tns:Person" minOccurs="1" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="events">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="event" type="tns:SheduledEvent" maxOccurs="unbounded" minOccurs="1"></xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

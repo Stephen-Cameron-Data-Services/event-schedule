@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:events xmlns:tns="http://www.example.org/OneIdSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/OneIdSchema event-schedule.xsd ">
+  <tns:event>
+    <tns:name>tns:name</tns:name>
+    <tns:date>2001-12-31T12:00:00</tns:date>
+    <tns:waitList>
+      <tns:attendee>
+        <tns:person>
+          <tns:name>tns:name</tns:name>
+        </tns:person>
+      </tns:attendee>
+    </tns:waitList>
+    <tns:booking>
+      <tns:attendee>
+        <tns:person>
+          <tns:name>tns:name</tns:name>
+        </tns:person>
+      </tns:attendee>
+    </tns:booking>
+    <tns:attendance>
+      <tns:attendee>
+        <tns:person>
+          <tns:name>tns:name</tns:name>
+        </tns:person>
+      </tns:attendee>
+    </tns:attendance>
+    <tns:eventFacilitator>
+      <tns:person>
+        <tns:name>tns:name</tns:name>
+      </tns:person>
+    </tns:eventFacilitator>
+  </tns:event>
+</tns:events>
