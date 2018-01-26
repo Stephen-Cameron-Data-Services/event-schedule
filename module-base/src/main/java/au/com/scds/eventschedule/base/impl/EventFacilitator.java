@@ -2,6 +2,7 @@ package au.com.scds.eventschedule.base.impl;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.DomainObject;
@@ -20,9 +21,16 @@ public class EventFacilitator {
 	@Setter()
     protected Person person;
 	
-	public EventFacilitator(Person person2) {
-		super();
+	private EventFacilitator() {
+	}
+	
+	public EventFacilitator(Person person) {
 		this.setPerson(person);
+	}
+	
+	@NotPersistent
+	public String getFullname(){
+		return this.getPerson().getFullname();
 	}
 
 }

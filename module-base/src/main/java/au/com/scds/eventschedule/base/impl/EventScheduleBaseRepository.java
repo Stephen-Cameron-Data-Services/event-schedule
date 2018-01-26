@@ -8,13 +8,7 @@ import org.apache.isis.applib.services.repository.RepositoryService;
 
 @DomainService(nature = NatureOfService.DOMAIN)
 public class EventScheduleBaseRepository {
-
-	public Attendance createAttendance(ScheduledEvent event, Attendee attendee) {
-		Attendance object = new Attendance(event, attendee);
-		repositoryService.persist(object);
-		return object;
-	}
-
+	
 	public Attendee createAttendee(String name) {
 		Person person = new Person(name);
 		repositoryService.persist(person);
@@ -23,10 +17,28 @@ public class EventScheduleBaseRepository {
 		return object;
 	}
 
+	public Attendance createAttendance(ScheduledEvent event, Attendee attendee) {
+		Attendance object = new Attendance(event, attendee);
+		repositoryService.persist(object);
+		return object;
+	}
+
+	public void destroyAttendance(Attendance attendance) {
+		attendance.getEvent().getAttendances().remove(attendance);
+		attendance.getAttendee().getAttendances().remove(attendance);
+		repositoryService.removeAndFlush(attendance);
+	}
+
 	public Booking createBooking(ScheduledEvent event, Attendee attendee) {
 		Booking object = new Booking(event, attendee);
 		repositoryService.persist(object);
 		return object;
+	}
+	
+	public void destroyBooking(Booking booking) {
+		booking.getEvent().getBookings().remove(booking);
+		booking.getAttendee().getBookings().remove(booking);
+		repositoryService.removeAndFlush(booking);
 	}
 
 	public Contactee createContactee(String name, Date date) {
@@ -75,4 +87,6 @@ public class EventScheduleBaseRepository {
 
 	@javax.inject.Inject
 	RepositoryService repositoryService;
+
+
 }

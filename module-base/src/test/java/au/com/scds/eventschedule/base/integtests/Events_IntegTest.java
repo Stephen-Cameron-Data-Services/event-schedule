@@ -19,13 +19,13 @@ package au.com.scds.eventschedule.base.integtests;
  */
 
 
-import java.sql.Timestamp;
-
 import javax.inject.Inject;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import au.com.scds.eventschedule.base.impl.Attendee;
+import au.com.scds.eventschedule.base.impl.EventFacilitator;
 import au.com.scds.eventschedule.base.impl.ScheduledEvent;
 import au.com.scds.eventschedule.fixture.CreateScheduledEvents;
 
@@ -57,12 +57,40 @@ public class Events_IntegTest extends IntegTestAbstract {
 
 	        @Test
 	        public void accessible() throws Exception {
-	            // when
-	            final String name = wrap(event).getName();
 
 	            // then
-	            assertThat(wrap(event).getName()).isEqualTo("Test Event");
-	            assertThat(wrap(event).getDate()).isCloseTo("2018-12-31T12:00:00",100);
+	            assertThat(event.getName()).isEqualTo("Test Event");
+	            assertThat(event.getDate()).isCloseTo("2018-12-31T12:00:00",100);
+	            
+	            assertThat(event.getBookingsList().size()).isEqualTo(1);
+	            assertThat(event.getAttendancesList().size()).isEqualTo(1);
+	            assertThat(event.getWaitListed().size()).isEqualTo(1);
+	            assertThat(event.getFacilitatorsList().size()).isEqualTo(1);
+	         
+	            Attendee attendee1 = event.getBookingsList().get(0).getAttendee();
+	            Attendee attendee2 = event.getAttendancesList().get(0).getAttendee();
+	            Attendee attendee3 = event.getWaitListed().get(0);
+	            EventFacilitator facilitator1 = event.getFacilitatorsList().get(0);
+	            
+	            assertThat(attendee1.getFullname()).isEqualTo("Anders Zorn");
+	            assertThat(attendee2.getFullname()).isEqualTo("Pablo Picasso");
+	            assertThat(attendee3.getFullname()).isEqualTo("Albert Namatjira");
+	            assertThat(facilitator1.getFullname()).isEqualTo("Rembrandt van Rijn");
+
+	            assertThat(attendee1.getBookingsList().size()).isEqualTo(1);
+	            assertThat(attendee2.getAttendancesList().size()).isEqualTo(1);
+	            
+	            event.removeBooking(event.getBookingsList().get(0));
+	            event.removeAttendance(event.getAttendancesList().get(0));
+	            //event.getWaitListed().remove(0);
+	            //event.getFacilitatorsList().remove(0);
+	            
+	            assertThat(event.getBookingsList().size()).isEqualTo(0);
+	            assertThat(event.getAttendancesList().size()).isEqualTo(0);
+	            assertThat(attendee1.getBookingsList().size()).isEqualTo(0);
+	            assertThat(attendee2.getAttendancesList().size()).isEqualTo(0);
+	            //assertThat(event.getWaitListed().size()).isEqualTo(0);
+	            //assertThat(event.getFacilitatorsList().size()).isEqualTo(0);
 	        }
 	    }
 
