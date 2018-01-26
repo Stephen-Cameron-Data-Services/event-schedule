@@ -126,8 +126,8 @@ public class ScheduledEvent {
 
 	@Action
 	public ScheduledEvent removeWaitListed(Attendee attendee) {
-		if (this.getWaitListed().contains(attendee))
-			this.getFacilitators().remove(attendee);
+		if (this.getWaitList().contains(attendee))
+			this.getWaitList().remove(attendee);
 		return this;
 	}
 

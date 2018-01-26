@@ -82,15 +82,15 @@ public class Events_IntegTest extends IntegTestAbstract {
 	            
 	            event.removeBooking(event.getBookingsList().get(0));
 	            event.removeAttendance(event.getAttendancesList().get(0));
-	            //event.getWaitListed().remove(0);
-	            //event.getFacilitatorsList().remove(0);
+	            event.removeWaitListed(attendee3);
+	            event.removeFacilitator(facilitator1);
 	            
 	            assertThat(event.getBookingsList().size()).isEqualTo(0);
 	            assertThat(event.getAttendancesList().size()).isEqualTo(0);
+	            assertThat(event.getWaitListed().size()).isEqualTo(0);
+	            assertThat(event.getFacilitatorsList().size()).isEqualTo(0);
 	            assertThat(attendee1.getBookingsList().size()).isEqualTo(0);
 	            assertThat(attendee2.getAttendancesList().size()).isEqualTo(0);
-	            //assertThat(event.getWaitListed().size()).isEqualTo(0);
-	            //assertThat(event.getFacilitatorsList().size()).isEqualTo(0);
 	        }
 	    }
 

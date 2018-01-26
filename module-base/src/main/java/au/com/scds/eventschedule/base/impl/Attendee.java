@@ -28,13 +28,13 @@ public class Attendee {
 
 	@Persistent(mappedBy = "attendee")
 	@Order(column = "attendee_bookings_idx")
-	@Getter(value = AccessLevel.PACKAGE)
+	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected List<Booking> bookings = new ArrayList<>();
 
 	@Persistent(mappedBy = "attendee")
 	@Order(column = "attendee_attendances_idx")
-	@Getter(value = AccessLevel.PACKAGE)
+	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected List<Attendance> attendances = new ArrayList<>();
 
