@@ -22,6 +22,11 @@ public class Attendance {
 	@Getter()
 	@Setter()
 	public Attendee attendee;
+	
+	@Column(allowsNull = "true")
+	@Getter()
+	@Setter()
+	public Booking booking;
 
 	public Attendance() {
 	}
@@ -29,6 +34,12 @@ public class Attendance {
 	public Attendance(ScheduledEvent event, Attendee attendee) {
 		this.setEvent(event);
 		this.setAttendee(attendee);
+	}
+	
+	public Attendance(Booking booking) {
+		this.setEvent(booking.getEvent());
+		this.setAttendee(booking.getAttendee());
+		this.setBooking(booking);
 	}
 
 }

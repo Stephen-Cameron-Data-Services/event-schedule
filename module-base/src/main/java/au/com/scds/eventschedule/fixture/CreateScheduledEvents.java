@@ -31,7 +31,7 @@ public class CreateScheduledEvents extends FixtureScript {
 			Events _events = (Events) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(is));
 
 			for (SheduledEvent _event : _events.getEvent()) {
-				this.event = eventMenu.createScheduledEvent(null, _event.getName(), _event.getDate());
+				this.event = eventMenu.createScheduledEvent(_event.getName(), _event.getDate());
 				au.com.scds.eventschedule.base.impl.Attendee attendee = null;
 				for(Booking _booking : _event.getBooking()){
 					attendee = eventMenu.createAttendee(_booking.getAttendee().getPerson().getFullname());

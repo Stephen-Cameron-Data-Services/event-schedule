@@ -3,7 +3,11 @@ package au.com.scds.eventschedule.base.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.Column;
@@ -16,6 +20,7 @@ import javax.jdo.annotations.Persistent;
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.DomainObject;
 
+
 import au.com.scds.eventschedule.base.impl.Attendance;
 import au.com.scds.eventschedule.base.impl.Booking;
 import au.com.scds.eventschedule.base.impl.EventFacilitator;
@@ -26,7 +31,7 @@ import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "event")
 @DomainObject()
-public class ScheduledEvent {
+public class ScheduledEvent  {
 
 	@Column(allowsNull = "true")
 	@Getter()
@@ -78,7 +83,7 @@ public class ScheduledEvent {
 
 	@Action
 	public ScheduledEvent removeBooking(Booking booking) {
-		if (this.getBookings().contains(booking)){
+		if (this.getBookings().contains(booking)) {
 			baseRepo.destroyBooking(booking);
 		}
 		return this;
@@ -151,6 +156,8 @@ public class ScheduledEvent {
 	public final List<EventFacilitator> getFacilitatorsList() {
 		return Collections.unmodifiableList(this.getFacilitators());
 	}
+
+
 
 	@Inject
 	EventScheduleBaseRepository baseRepo;

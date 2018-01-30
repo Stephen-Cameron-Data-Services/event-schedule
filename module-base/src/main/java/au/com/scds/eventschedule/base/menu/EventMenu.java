@@ -21,7 +21,7 @@ import au.com.scds.eventschedule.base.impl.ScheduledEvent;
         objectType = "EventSchedule.EventMenu"
 )
 @DomainServiceLayout(
-        named = "Event",
+        named = "Events",
         menuOrder = "10"
 )
 public class EventMenu {
@@ -37,8 +37,8 @@ public class EventMenu {
 	}
 
 	@Action
-	public ScheduledEvent createScheduledEvent(Organisation organisation, String name, Date date) {
-		return repo.createScheduledEvent(organisation, name, date);
+	public ScheduledEvent createScheduledEvent( String name, Date date) {
+		return repo.createScheduledEvent(null, name, date);
 	}
 
 	@Inject

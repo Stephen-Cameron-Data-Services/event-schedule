@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="event" type="{http://www.example.org/OneIdSchema}SheduledEvent" maxOccurs="unbounded"/&gt;
+ *         &lt;element name="allocation" type="{http://www.example.org/OneIdSchema}ContactAllocation" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -38,41 +38,41 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "event"
+    "allocation"
 })
-@XmlRootElement(name = "events")
-public class Events {
+@XmlRootElement(name = "allocations")
+public class Allocations {
 
     @XmlElement(required = true)
-    protected List<SheduledEvent> event;
+    protected List<ContactAllocation> allocation;
 
     /**
-     * Gets the value of the event property.
+     * Gets the value of the allocation property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the event property.
+     * This is why there is not a <CODE>set</CODE> method for the allocation property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getEvent().add(newItem);
+     *    getAllocation().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link SheduledEvent }
+     * {@link ContactAllocation }
      * 
      * 
      */
-    public List<SheduledEvent> getEvent() {
-        if (event == null) {
-            event = new ArrayList<SheduledEvent>();
+    public List<ContactAllocation> getAllocation() {
+        if (allocation == null) {
+            allocation = new ArrayList<ContactAllocation>();
         }
-        return this.event;
+        return this.allocation;
     }
 
 }

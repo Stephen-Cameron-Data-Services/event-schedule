@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:allocations xmlns:tns="http://www.example.org/OneIdSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/OneIdSchema event-schedule.xsd ">
+  <tns:allocation>
+    <tns:contactee>
+      <tns:person>
+        <tns:fullname>Ian Fleming</tns:fullname>
+      </tns:person>
+    </tns:contactee>
+    <tns:contactor>
+      <tns:person>
+        <tns:fullname>James Bond</tns:fullname>
+      </tns:person>
+    </tns:contactor>
+  </tns:allocation>
+</tns:allocations>

@@ -15,17 +15,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ScheduledContact complex type.
+ * <p>Java class for ContactAllocation complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ScheduledContact"&gt;
+ * &lt;complexType name="ContactAllocation"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="contactor" type="{http://www.example.org/OneIdSchema}Contactor"/&gt;
  *         &lt;element name="contactee" type="{http://www.example.org/OneIdSchema}Contactee"/&gt;
+ *         &lt;element name="contactor" type="{http://www.example.org/OneIdSchema}Contactor"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -35,40 +35,16 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ScheduledContact", propOrder = {
-    "contactor",
-    "contactee"
+@XmlType(name = "ContactAllocation", propOrder = {
+    "contactee",
+    "contactor"
 })
-public class ScheduledContact {
+public class ContactAllocation {
 
-    @XmlElement(required = true)
-    protected Contactor contactor;
     @XmlElement(required = true)
     protected Contactee contactee;
-
-    /**
-     * Gets the value of the contactor property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Contactor }
-     *     
-     */
-    public Contactor getContactor() {
-        return contactor;
-    }
-
-    /**
-     * Sets the value of the contactor property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Contactor }
-     *     
-     */
-    public void setContactor(Contactor value) {
-        this.contactor = value;
-    }
+    @XmlElement(required = true)
+    protected Contactor contactor;
 
     /**
      * Gets the value of the contactee property.
@@ -92,6 +68,30 @@ public class ScheduledContact {
      */
     public void setContactee(Contactee value) {
         this.contactee = value;
+    }
+
+    /**
+     * Gets the value of the contactor property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Contactor }
+     *     
+     */
+    public Contactor getContactor() {
+        return contactor;
+    }
+
+    /**
+     * Sets the value of the contactor property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Contactor }
+     *     
+     */
+    public void setContactor(Contactor value) {
+        this.contactor = value;
     }
 
 }

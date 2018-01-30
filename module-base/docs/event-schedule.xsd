@@ -81,4 +81,19 @@
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
+
+	<xsd:complexType name="ContactAllocation">
+		<xsd:sequence>
+			<xsd:element name="contactee" type="tns:Contactee" maxOccurs="1" minOccurs="1"></xsd:element>
+			<xsd:element name="contactor" type="tns:Contactor" maxOccurs="1" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="allocations">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="allocation" type="tns:ContactAllocation" maxOccurs="unbounded" minOccurs="1"></xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
 </xsd:schema>

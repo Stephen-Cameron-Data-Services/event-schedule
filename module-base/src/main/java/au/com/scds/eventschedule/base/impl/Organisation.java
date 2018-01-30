@@ -18,4 +18,8 @@ public class Organisation {
 	@Getter()
 	@Setter()
     protected String name;
+
+	public Organisation(String name) {
+		this.setName(name);
+	}
 }
