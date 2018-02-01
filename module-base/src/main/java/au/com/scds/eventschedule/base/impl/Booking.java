@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "booking")
-@DomainObject()
+@DomainObject(objectType="Booking")
 public class Booking {
 
 	@Column(allowsNull = "false")

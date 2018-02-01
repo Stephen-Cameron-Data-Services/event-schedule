@@ -13,7 +13,7 @@ import lombok.Setter;
 
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table="eventfacilitator")
-@DomainObject()
+@DomainObject(objectType="EventFacilitator")
 public class EventFacilitator {
 
 	@Column(allowsNull = "true")
@@ -31,6 +31,10 @@ public class EventFacilitator {
 	@NotPersistent
 	public String getFullname(){
 		return this.getPerson().getFullname();
+	}
+	
+	public String title(){
+		return this.getFullname();
 	}
 
 }

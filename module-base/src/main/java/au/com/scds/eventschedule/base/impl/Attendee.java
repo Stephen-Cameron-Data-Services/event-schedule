@@ -23,7 +23,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "attendee")
-@DomainObject()
+@DomainObject(objectType="Attendee")
 public class Attendee {
 
 	@Persistent(mappedBy = "attendee")
@@ -48,6 +48,10 @@ public class Attendee {
 
 	public Attendee(Person person) {
 		this.setPerson(person);
+	}
+	
+	public String title(){
+		return this.getFullname();
 	}
 
 	@NotPersistent

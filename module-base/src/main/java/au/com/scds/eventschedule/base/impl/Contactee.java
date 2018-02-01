@@ -12,34 +12,38 @@ import javax.jdo.annotations.Persistent;
 
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.DomainObject;
+import org.apache.isis.applib.services.i18n.TranslatableString;
 
 import au.com.scds.eventschedule.base.impl.Person;
 import lombok.Getter;
 import lombok.Setter;
 
-
-@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table="contactee")
-@DomainObject()
-public class Contactee{
+@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "contactee")
+@DomainObject(objectType = "Contactee")
+public class Contactee {
 
 	@Column(allowsNull = "false")
 	@Getter()
 	@Setter()
-    protected Person person;
-	
-	@Persistent(mappedBy="contactee")
-	@Order(column="contactee_allocations_idx")
+	protected Person person;
+
+	@Persistent(mappedBy = "contactee")
+	@Order(column = "contactee_allocations_idx")
 	@Getter()
 	@Setter()
-    protected List<ContactAllocation> allocations  = new ArrayList<>();	
+	protected List<ContactAllocation> allocations = new ArrayList<>();
 
 	@Persistent
 	@Getter()
 	@Setter()
 	protected List<ScheduledContact> contacts = new ArrayList<>();
-	
-	public Contactee(Person person){
+
+	public Contactee(Person person) {
 		this.setPerson(person);
+	}
+
+	public TranslatableString title() {
+		return TranslatableString.tr("Contactee: {fullname}", "fullname", this.getPerson().getFullname());
 	}
 
 	@Action
@@ -52,7 +56,7 @@ public class Contactee{
 	}
 
 	public void removeAllocation(ContactAllocation allocation) {
-		if(this.getAllocations().contains(allocation))
+		if (this.getAllocations().contains(allocation))
 			this.getAllocations().remove(allocation);
 	}
 }

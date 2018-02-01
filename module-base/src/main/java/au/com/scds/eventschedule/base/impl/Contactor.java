@@ -12,6 +12,7 @@ import javax.jdo.annotations.Persistent;
 
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.DomainObject;
+import org.apache.isis.applib.services.i18n.TranslatableString;
 
 import au.com.scds.eventschedule.base.impl.Person;
 import lombok.AccessLevel;
@@ -19,7 +20,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "contactor")
-@DomainObject()
+@DomainObject(objectType="Contactor")
 public class Contactor {
 
 	@Column(allowsNull = "false")
@@ -35,6 +36,10 @@ public class Contactor {
 
 	public Contactor(Person person) {
 		this.setPerson(person);
+	}
+	
+	public TranslatableString title() {
+		return TranslatableString.tr("Contactor: {fullname}", this.getPerson().getFullname());
 	}
 
 	@Action

@@ -11,7 +11,7 @@ import lombok.Setter;
 
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table="organisation")
-@DomainObject()
+@DomainObject(objectType="Organisation")
 public class Organisation {
 
 	@Column(allowsNull = "true")

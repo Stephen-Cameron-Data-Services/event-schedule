@@ -60,7 +60,7 @@ public class Events_IntegTest extends IntegTestAbstract {
 
 	            // then
 	            assertThat(event.getName()).isEqualTo("Test Event");
-	            assertThat(event.getDate()).isCloseTo("2018-12-31T12:00:00",100);
+	            assertThat(event.getStart().toDate()).isCloseTo("2018-12-31T12:00:00",100);
 	            
 	            assertThat(event.getBookingsList().size()).isEqualTo(1);
 	            assertThat(event.getAttendancesList().size()).isEqualTo(1);

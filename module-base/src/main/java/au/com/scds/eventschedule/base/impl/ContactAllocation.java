@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table="contact_allocation")
-@DomainObject()
+@DomainObject(objectType="ContactAllocation")
 public class ContactAllocation {
 	
 	@Column(allowsNull = "false")

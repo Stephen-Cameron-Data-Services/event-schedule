@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.jdo.annotations.Column;
+import javax.jdo.annotations.Discriminator;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
@@ -25,28 +26,45 @@ import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
-@DomainObject()
-public class CalendarableScheduledEvent extends ScheduledEvent implements Calendarable {
-	
+@Discriminator(value="CalendarableScheduledEvent")
+@DomainObject(objectType="CalendarableScheduledEvent")
+public class CalendarableScheduledEvent extends ScheduledEvent implements CalendarEventable /*Calendarable*/ {
+
 	public static final String DEFAULT_CALENDAR_NAME = "Scheduled Events";
 
 	@Column(allowsNull = "true")
 	@Getter()
 	@Setter()
 	protected String calendarName;
-	
-	public CalendarableScheduledEvent(Organisation organisation, String name, String calendarName, Date date) {
+
+	@Column(allowsNull = "true")
+	@Getter()
+	@Setter()
+	protected String calendarNote;
+
+	public CalendarableScheduledEvent(Organisation organisation, String name, String calendarName, DateTime date,
+			String note) {
 		super(organisation, name, date);
 		this.setCalendarName((calendarName != null) ? calendarName : this.DEFAULT_CALENDAR_NAME);
+		this.setCalendarNote(note);
 	}
 
-	// Calendarable
 	@Override
+	public CalendarEvent toCalendarEvent() {
+		return new CalendarEvent(this.getStart(),
+				this.getCalendarName(), this.getName(),
+				this.getCalendarNote());
+	}
+	
+/*
+	@Override
+	@NotPersistent
 	public Set<String> getCalendarNames() {
 		return Stream.of(this.getCalendarName()).collect(Collectors.toSet());
 	}
 
 	@Override
+	@NotPersistent
 	public ImmutableMap<String, CalendarEventable> getCalendarEvents() {
 		return ImmutableMap.of(this.getCalendarName(), new CalendarEvent2());
 	}
@@ -61,8 +79,8 @@ public class CalendarableScheduledEvent extends ScheduledEvent implements Calend
 		@Override
 		public CalendarEvent toCalendarEvent() {
 			return new CalendarEvent(new DateTime(CalendarableScheduledEvent.this.getDate()),
-					CalendarableScheduledEvent.this.getCalendarName(), CalendarableScheduledEvent.this.getName());
+					CalendarableScheduledEvent.this.getCalendarName(), CalendarableScheduledEvent.this.getName(),
+					CalendarableScheduledEvent.this.getCalendarNote());
 		}
-	}
-	// end Calendarable
+	}*/
 }

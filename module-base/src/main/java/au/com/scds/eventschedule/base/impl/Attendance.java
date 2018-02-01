@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "attendance")
-@DomainObject()
+@DomainObject(objectType="Attendance")
 public class Attendance {
 
 	@Column(allowsNull = "false")
@@ -41,5 +41,8 @@ public class Attendance {
 		this.setAttendee(booking.getAttendee());
 		this.setBooking(booking);
 	}
-
+	
+	public String title(){
+		return this.getAttendee().getFullname() +  "-in-" + this.getEvent().getName();
+	}
 }

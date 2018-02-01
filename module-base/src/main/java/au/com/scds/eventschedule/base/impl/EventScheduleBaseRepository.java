@@ -1,12 +1,15 @@
 package au.com.scds.eventschedule.base.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.services.repository.RepositoryService;
+import org.joda.time.DateTime;
+
 
 @DomainService(nature = NatureOfService.DOMAIN)
 public class EventScheduleBaseRepository {
@@ -111,18 +114,32 @@ public class EventScheduleBaseRepository {
 		return object;
 	}
 
-	public ScheduledContact createScheduledContact(Contactor contactor, Contactee contactee, Date date) {
+	public ScheduledContact createScheduledContact(Contactor contactor, Contactee contactee, DateTime date) {
 		if (contactor == null || contactee == null || date == null)
 			return null;
 		ScheduledContact object = new ScheduledContact(contactor, contactee, date);
 		repositoryService.persistAndFlush(object);
 		return object;
 	}
+	
+	public SimpleEvent createSimpleEvent() {
+		SimpleEvent object = new SimpleEvent();
+		repositoryService.persistAndFlush(object);
+		return object;
+	}
 
-	public ScheduledEvent createScheduledEvent(Organisation organisation, String name, Date date) {
+	public ScheduledEvent createScheduledEvent(Organisation organisation, String name, DateTime date) {
 		if (name == null || date == null)
 			return null;
 		ScheduledEvent object = new ScheduledEvent(organisation, name, date);
+		repositoryService.persistAndFlush(object);
+		return object;
+	}
+	
+	public CalendarableScheduledEvent createCalendarableScheduledEvent(Organisation organisation, String eventName, String calendarName, DateTime date, String note) {
+		if (eventName == null || date == null)
+			return null;
+		CalendarableScheduledEvent object = new CalendarableScheduledEvent(organisation, eventName, calendarName, date, note);
 		repositoryService.persistAndFlush(object);
 		return object;
 	}
@@ -138,8 +155,23 @@ public class EventScheduleBaseRepository {
 	public void destroyContactAllocation(ContactAllocation allocation) {
 		repositoryService.removeAndFlush(allocation);
 	}
+	
+	public List<ScheduledEvent> listScheduledEvent() {
+		return repositoryService.allInstances(ScheduledEvent.class);
+	}
+
+	public List<CalendarableScheduledEvent> listCalendarableScheduledEvent() {
+		return repositoryService.allInstances(CalendarableScheduledEvent.class);
+	}
+
+	public List<EventFacilitator> listEventFacilitators() {
+		return repositoryService.allInstances(EventFacilitator.class);
+	}
+
+	public List<Attendee> listAttendees() {
+		return repositoryService.allInstances(Attendee.class);
+	}
 
 	@Inject
 	RepositoryService repositoryService;
-
 }

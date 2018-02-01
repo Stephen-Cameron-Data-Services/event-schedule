@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table="person")
-@DomainObject()
+@DomainObject(objectType="Person")
 public class Person {
 
 	@Column(allowsNull = "true")
@@ -24,5 +24,9 @@ public class Person {
 
 	public Person(String name) {
 		this.setFullname(name);
+	}
+	
+	public String title(){
+		return this.getFullname();
 	}
 }
