@@ -17,39 +17,33 @@
  *  under the License.
  */
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.activity;
 
-import javax.jdo.annotations.Column;
 import javax.jdo.annotations.Discriminator;
-import javax.jdo.annotations.DiscriminatorStrategy;
-import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.DomainObject;
-
+import org.joda.time.DateTime;
+import au.com.scds.eventschedule.base.impl.Organisation;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
-@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "booking")
-@Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
-@Discriminator(strategy=DiscriminatorStrategy.VALUE_MAP, value="Booking")
-@DomainObject(objectType="Booking")
-public class Booking {
+@PersistenceCapable()
+@Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
+@Discriminator(value = "BaseParentedActivityEvent")
+@DomainObject(objectType = "BaseParentedActivityEvent")
+public class BaseParentedActivityEvent extends BaseActivityEvent {
+	
+	@Getter(value=AccessLevel.PRIVATE)
+	@Setter(value=AccessLevel.PRIVATE)
+	protected BaseRecurringActivityEvent parent;
 
-	@Column(allowsNull = "false")
-	@Getter()
-	@Setter()
-	protected ScheduledEvent event;
-
-	@Column(allowsNull = "false")
-	@Getter()
-	@Setter()
-	public Attendee attendee;
-
-	public Booking(ScheduledEvent event, Attendee attendee) {
-		this.event = event;
-		this.attendee = attendee;
+	public BaseParentedActivityEvent(BaseRecurringActivityEvent parent, String name, String calendarName, DateTime date,
+			String note) {
+		super(null, name, calendarName, date, note);
+		this.setParent(parent);
 	}
 }

@@ -15,18 +15,18 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for Attendee complex type.
+ * <p>Java class for ParentedActivityEvent complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Attendee"&gt;
+ * &lt;complexType name="ParentedActivityEvent"&gt;
  *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *     &lt;extension base="{http://www.example.org/OneIdSchema}ActivityEvent"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="person" type="{http://www.example.org/OneIdSchema}Person"/&gt;
+ *         &lt;element name="parent" type="{http://www.example.org/OneIdSchema}ActivityEvent"/&gt;
  *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
+ *     &lt;/extension&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
@@ -34,36 +34,38 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Attendee", propOrder = {
-    "person"
+@XmlType(name = "ParentedActivityEvent", propOrder = {
+    "parent"
 })
-public class Attendee {
+public class ParentedActivityEvent
+    extends ActivityEvent
+{
 
     @XmlElement(required = true)
-    protected Person person;
+    protected ActivityEvent parent;
 
     /**
-     * Gets the value of the person property.
+     * Gets the value of the parent property.
      * 
      * @return
      *     possible object is
-     *     {@link Person }
+     *     {@link ActivityEvent }
      *     
      */
-    public Person getPerson() {
-        return person;
+    public ActivityEvent getParent() {
+        return parent;
     }
 
     /**
-     * Sets the value of the person property.
+     * Sets the value of the parent property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Person }
+     *     {@link ActivityEvent }
      *     
      */
-    public void setPerson(Person value) {
-        this.person = value;
+    public void setParent(ActivityEvent value) {
+        this.parent = value;
     }
 
 }

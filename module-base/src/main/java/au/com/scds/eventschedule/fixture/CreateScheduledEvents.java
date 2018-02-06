@@ -8,7 +8,7 @@ import javax.xml.bind.*;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 import org.joda.time.DateTime;
 
-import au.com.scds.eventschedule.base.impl.ScheduledEvent;
+import au.com.scds.eventschedule.fixture.generated.ScheduledEvent;
 import au.com.scds.eventschedule.base.menu.EventMenu;
 import au.com.scds.eventschedule.fixture.generated.*;
 
@@ -18,7 +18,7 @@ public class CreateScheduledEvents extends FixtureScript {
 		withDiscoverability(Discoverability.DISCOVERABLE);
 	}
 
-	private ScheduledEvent event = null;
+	private au.com.scds.eventschedule.base.impl.ScheduledEvent event = null;
 
 	@Override
 	protected void execute(ExecutionContext ec) {
@@ -31,7 +31,7 @@ public class CreateScheduledEvents extends FixtureScript {
 			jaxbUnmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
 			Events _events = (Events) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(is));
 
-			for (SheduledEvent _event : _events.getEvent()) {
+			for (ScheduledEvent _event : _events.getEvent()) {
 				this.event = eventMenu.createScheduledEvent(_event.getName(), new DateTime(_event.getDate()));
 				au.com.scds.eventschedule.base.impl.Attendee attendee = null;
 				for(Booking _booking : _event.getBooking()){
@@ -58,7 +58,7 @@ public class CreateScheduledEvents extends FixtureScript {
 		}
 	}
 
-	public ScheduledEvent getEvent() {
+	public au.com.scds.eventschedule.base.impl.ScheduledEvent getEvent() {
 		return this.event;
 	}
 	

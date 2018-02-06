@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:activities xmlns:tns="http://www.example.org/OneIdSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/OneIdSchema event-schedule.xsd ">
+	<tns:activity xsi:type="tns:ActivityEvent">
+		<tns:name>Test Activity</tns:name>
+		<tns:date>2018-01-31T12:00:00</tns:date>
+		<tns:waitList>
+			<tns:attendee>
+				<tns:person>
+					<tns:fullname>Wait Listed Person</tns:fullname>
+				</tns:person>
+			</tns:attendee>
+		</tns:waitList>
+		<tns:attendance>
+			<tns:attendee>
+				<tns:person>
+					<tns:fullname>Attendance Person</tns:fullname>
+				</tns:person>
+			</tns:attendee>
+		</tns:attendance>
+		<tns:eventFacilitator>
+			<tns:person>
+				<tns:fullname>Event Facilitator</tns:fullname>
+			</tns:person>
+		</tns:eventFacilitator>
+		<tns:participation>
+			<tns:attendee>
+				<tns:person>
+					<tns:fullname>Participant Person</tns:fullname>
+				</tns:person>
+			</tns:attendee>
+		</tns:participation>
+	</tns:activity>
+</tns:activities>

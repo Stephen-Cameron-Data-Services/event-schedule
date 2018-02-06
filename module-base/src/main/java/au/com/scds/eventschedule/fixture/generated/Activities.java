@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -27,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="event" type="{http://www.example.org/OneIdSchema}ScheduledEvent" maxOccurs="unbounded"/&gt;
+ *         &lt;element name="activity" type="{http://www.example.org/OneIdSchema}ActivityEvent" maxOccurs="unbounded" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -38,41 +37,40 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "event"
+    "activity"
 })
-@XmlRootElement(name = "events")
-public class Events {
+@XmlRootElement(name = "activities")
+public class Activities {
 
-    @XmlElement(required = true)
-    protected List<ScheduledEvent> event;
+    protected List<ActivityEvent> activity;
 
     /**
-     * Gets the value of the event property.
+     * Gets the value of the activity property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the event property.
+     * This is why there is not a <CODE>set</CODE> method for the activity property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getEvent().add(newItem);
+     *    getActivity().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ScheduledEvent }
+     * {@link ActivityEvent }
      * 
      * 
      */
-    public List<ScheduledEvent> getEvent() {
-        if (event == null) {
-            event = new ArrayList<ScheduledEvent>();
+    public List<ActivityEvent> getActivity() {
+        if (activity == null) {
+            activity = new ArrayList<ActivityEvent>();
         }
-        return this.event;
+        return this.activity;
     }
 
 }

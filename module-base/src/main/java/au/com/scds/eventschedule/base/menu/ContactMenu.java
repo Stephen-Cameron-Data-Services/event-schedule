@@ -18,7 +18,7 @@ import au.com.scds.eventschedule.base.impl.EventScheduleBaseRepository;
 import au.com.scds.eventschedule.base.impl.ScheduledContact;
 
 @DomainService(nature = NatureOfService.VIEW_MENU_ONLY, objectType = "ContactsMenu")
-@DomainServiceLayout(named = "Contacts", menuOrder = "30")
+@DomainServiceLayout(named = "Contacts", menuOrder = "40")
 public class ContactMenu {
 
 	@Action
