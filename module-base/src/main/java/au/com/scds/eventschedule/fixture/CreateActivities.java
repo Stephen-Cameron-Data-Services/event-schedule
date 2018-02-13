@@ -13,7 +13,7 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 import org.joda.time.DateTime;
 
-import au.com.scds.eventschedule.base.impl.activity.BaseActivityEvent;
+//import au.com.scds.eventschedule.base.impl.activity.ActivityEvent;
 import au.com.scds.eventschedule.base.menu.ActivityMenu;
 import au.com.scds.eventschedule.base.menu.EventMenu;
 import au.com.scds.eventschedule.fixture.generated.Activities;
@@ -27,7 +27,7 @@ public class CreateActivities extends FixtureScript {
 		withDiscoverability(Discoverability.DISCOVERABLE);
 	}
 
-	private List<BaseActivityEvent> activities = new ArrayList<>();
+	private List<au.com.scds.eventschedule.base.impl.activity.ActivityEvent> activities = new ArrayList<>();
 
 	@Override
 	protected void execute(ExecutionContext ec) {
@@ -40,7 +40,7 @@ public class CreateActivities extends FixtureScript {
 			jaxbUnmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
 			Activities _activities = (Activities) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(is));
 			for (ActivityEvent _activity : _activities.getActivity()) {
-				BaseActivityEvent activity = activityMenu.createActivityEvent(_activity.getName(), new DateTime(_activity.getDate()));
+				au.com.scds.eventschedule.base.impl.activity.ActivityEvent activity = activityMenu.createActivityEvent(_activity.getName(), new DateTime(_activity.getDate()));
 				au.com.scds.eventschedule.base.impl.Attendee attendee = null;
 				for(Participation _participation : _activity.getParticipation()){
 					attendee = eventMenu.createAttendee(_participation.getAttendee().getPerson().getFullname());
@@ -53,7 +53,7 @@ public class CreateActivities extends FixtureScript {
 		}
 	}
 
-	public List<BaseActivityEvent> getActivities() {
+	public List<au.com.scds.eventschedule.base.impl.activity.ActivityEvent> getActivities() {
 		return this.activities;
 	}
 

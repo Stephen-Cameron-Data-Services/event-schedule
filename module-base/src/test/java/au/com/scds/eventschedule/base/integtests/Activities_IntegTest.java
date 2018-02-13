@@ -27,7 +27,7 @@ import org.junit.Test;
 import au.com.scds.eventschedule.base.impl.ContactAllocation;
 import au.com.scds.eventschedule.base.impl.Contactee;
 import au.com.scds.eventschedule.base.impl.Contactor;
-import au.com.scds.eventschedule.base.impl.activity.BaseActivityEvent;
+import au.com.scds.eventschedule.base.impl.activity.ActivityEvent;
 import au.com.scds.eventschedule.fixture.CreateActivities;
 import au.com.scds.eventschedule.fixture.CreateAllocations;
 
@@ -45,7 +45,7 @@ public class Activities_IntegTest extends IntegTestAbstract {
 	    @Inject
 	    TransactionService transactionService;
 	    
-	    List<BaseActivityEvent> activities  =  null;
+	    List<ActivityEvent> activities  =  null;
 
 	    @Before
 	    public void setUp() throws Exception {

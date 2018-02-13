@@ -14,8 +14,7 @@
 			<xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1" />
 			<xsd:element name="date" type="xsd:dateTime" maxOccurs="1" minOccurs="1"></xsd:element>
 			<xsd:element name="waitList" type="tns:WaitList" minOccurs="1" maxOccurs="1" />
-			<xsd:element name="booking" type="tns:Booking" minOccurs="0" maxOccurs="unbounded" />
-			<xsd:element name="attendance" type="tns:Attendance" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="booking" type="tns:Booking" minOccurs="0" maxOccurs="unbounded" />
 			<xsd:element name="eventFacilitator" type="tns:EventFacilitator" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
@@ -101,7 +100,9 @@
 		<xsd:complexContent>
 			<xsd:extension base="tns:ScheduledEvent">
 				<xsd:sequence>
-					<xsd:element name="participation" type="tns:Participation" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					<xsd:element name="participation" type="tns:Participation" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+
+					<xsd:element name="attendance" type="tns:Attendance" maxOccurs="unbounded" minOccurs="0"></xsd:element>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -124,17 +125,26 @@
 
 
 	<xsd:complexType name="RecurringActivityEvent">
-		<xsd:sequence>
-            <xsd:element name="child-activity" type="tns:ActivityEvent" maxOccurs="unbounded" minOccurs="0"></xsd:element>
-            <xsd:element name="participation" type="tns:Participation" maxOccurs="unbounded" minOccurs="0"></xsd:element>
-		</xsd:sequence>
+		<xsd:complexContent>
+			<xsd:extension base="tns:ActivityEvent">
+				<xsd:sequence>
+					<xsd:element name="childEvent" type="tns:PartentedActivityEvent" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:element name="recurringactivity">
+	<xsd:element name="recurringactivities">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="activity" type="tns:RecurringActivityEvent" maxOccurs="unbounded" minOccurs="1"></xsd:element>
+				<xsd:element name="recurringActivity" type="tns:RecurringActivityEvent" maxOccurs="unbounded" minOccurs="1"></xsd:element>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
+
+	<xsd:complexType name="PartentedActivityEvent">
+		<xsd:complexContent>
+			<xsd:extension base="tns:ActivityEvent"></xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
 </xsd:schema>

@@ -17,9 +17,9 @@ import au.com.scds.eventschedule.base.impl.ScheduledEvent;
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
 @Discriminator(value = "BaseParticipation")
 @DomainObject(objectType = "BaseParticipation")
-public class BaseParticipation extends Booking {
+public class Participation extends Booking {
 
-	public BaseParticipation(ScheduledEvent event, Attendee attendee) {
+	public Participation(ScheduledEvent event, Attendee attendee) {
 		super(event, attendee);
 	}
 

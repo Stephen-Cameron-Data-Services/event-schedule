@@ -18,7 +18,7 @@
  */
 
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.activity;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
@@ -26,6 +26,9 @@ import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.DomainObject;
 
+import au.com.scds.eventschedule.base.impl.Attendee;
+import au.com.scds.eventschedule.base.impl.Booking;
+import au.com.scds.eventschedule.base.impl.ScheduledEvent;
 import lombok.Getter;
 import lombok.Setter;
 

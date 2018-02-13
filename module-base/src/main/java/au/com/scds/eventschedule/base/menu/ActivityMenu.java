@@ -12,19 +12,19 @@ import org.joda.time.DateTime;
 
 import au.com.scds.eventschedule.base.impl.Organisation;
 import au.com.scds.eventschedule.base.impl.activity.ActivityBaseRepository;
-import au.com.scds.eventschedule.base.impl.activity.BaseActivityEvent;
+import au.com.scds.eventschedule.base.impl.activity.ActivityEvent;
 
 @DomainService(nature = NatureOfService.VIEW_MENU_ONLY, objectType = "ActivityMenu")
 @DomainServiceLayout(named = "Activities", menuOrder = "30")
 public class ActivityMenu {
 
 	@Action
-	public BaseActivityEvent createActivityEvent(String name, DateTime date) {
+	public ActivityEvent createActivityEvent(String name, DateTime date) {
 		return repo.createActivityEvent(null, name, "Activities", date, null);
 	}
 
 	@Action
-	public List<BaseActivityEvent> listActivityEvents() {
+	public List<ActivityEvent> listActivityEvents() {
 		return repo.listBaseActivityEvents();
 	}
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:recurringactivities xmlns:tns="http://www.example.org/OneIdSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/OneIdSchema event-schedule.xsd ">
+  <tns:activity>
+    <tns:name>tns:name</tns:name>
+    <tns:date>2001-12-31T12:00:00</tns:date>
+    <tns:waitList/>
+    <tns:booking xsi:type="tns:Booking">
+      <tns:attendee>
+        <tns:person>
+          <tns:fullname>tns:fullname</tns:fullname>
+        </tns:person>
+      </tns:attendee>
+    </tns:booking>
+    <tns:eventFacilitator>
+      <tns:person>
+        <tns:fullname>tns:fullname</tns:fullname>
+      </tns:person>
+    </tns:eventFacilitator>
+    <tns:participation>
+      <tns:attendee>
+        <tns:person>
+          <tns:fullname>tns:fullname</tns:fullname>
+        </tns:person>
+      </tns:attendee>
+    </tns:participation>
+    <tns:attendance>
+      <tns:attendee>
+        <tns:person>
+          <tns:fullname>tns:fullname</tns:fullname>
+        </tns:person>
+      </tns:attendee>
+    </tns:attendance>
+    <tns:childEvent>
+      <tns:name>tns:name</tns:name>
+      <tns:date>2001-12-31T12:00:00</tns:date>
+      <tns:waitList/>
+    </tns:childEvent>
+  </tns:activity>
+</tns:recurringactivities>

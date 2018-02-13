@@ -17,7 +17,6 @@
  *  under the License.
  */
 
-
 package au.com.scds.eventschedule.base.impl;
 
 import java.util.ArrayList;
@@ -35,15 +34,15 @@ import javax.jdo.annotations.Persistent;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.fixturescripts.FixtureResult;
 
-import au.com.scds.eventschedule.base.impl.Attendance;
 import au.com.scds.eventschedule.base.impl.Booking;
 import au.com.scds.eventschedule.base.impl.Person;
+import au.com.scds.eventschedule.base.impl.activity.Attendance;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "attendee")
-@DomainObject(objectType="Attendee")
+@DomainObject(objectType = "Attendee")
 public class Attendee {
 
 	@Persistent(mappedBy = "attendee")
@@ -69,8 +68,8 @@ public class Attendee {
 	public Attendee(Person person) {
 		this.setPerson(person);
 	}
-	
-	public String title(){
+
+	public String title() {
 		return this.getFullname();
 	}
 
@@ -86,12 +85,22 @@ public class Attendee {
 	public List<Attendance> getAttendancesList() {
 		return Collections.unmodifiableList(this.getAttendances());
 	}
+	
+	public void addBooking(Booking booking) {
+		if (!this.getBookings().contains(booking))
+			this.getBookings().add(booking);
+	}
 
 	public void removeBooking(Booking booking) {
 		if (this.getBookings().contains(booking))
 			this.getBookings().remove(booking);
 	}
 
+	public void addAttendance(Attendance attendance) {
+		if (!this.getAttendances().contains(attendance))
+			this.getAttendances().add(attendance);
+	}
+	
 	public void removeAttendance(Attendance attendance) {
 		if (this.getAttendances().contains(attendance))
 			this.getAttendances().remove(attendance);

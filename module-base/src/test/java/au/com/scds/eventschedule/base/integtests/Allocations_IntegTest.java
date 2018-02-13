@@ -36,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-public class Allocation_IntegTest extends IntegTestAbstract {
+public class Allocations_IntegTest extends IntegTestAbstract {
 
 	   @Inject
 	    FixtureScripts fixtureScripts;
@@ -55,7 +55,7 @@ public class Allocation_IntegTest extends IntegTestAbstract {
 	        assertThat(allocations).isNotNull();
 	    }
 
-	    public static class Name extends Allocation_IntegTest {
+	    public static class Allocations extends Allocations_IntegTest {
 
 	        @Test
 	        public void accessible() throws Exception {

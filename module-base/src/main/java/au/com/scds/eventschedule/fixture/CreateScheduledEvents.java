@@ -38,10 +38,6 @@ public class CreateScheduledEvents extends FixtureScript {
 					attendee = eventMenu.createAttendee(_booking.getAttendee().getPerson().getFullname());
 					event.addBooking(attendee);
 				}
-				for(Attendance _attendance : _event.getAttendance()){
-					attendee = eventMenu.createAttendee(_attendance.getAttendee().getPerson().getFullname());
-					event.addAttendance(attendee);
-				}
 				for(Attendee _attendee : _event.getWaitList().getAttendee()){
 					attendee = eventMenu.createAttendee(_attendee.getPerson().getFullname());
 					event.addWaitListed(attendee);

@@ -43,9 +43,9 @@ import org.apache.isis.applib.annotation.Title;
 import org.apache.isis.applib.services.i18n.TranslatableString;
 import org.joda.time.DateTime;
 
-import au.com.scds.eventschedule.base.impl.Attendance;
 import au.com.scds.eventschedule.base.impl.Booking;
 import au.com.scds.eventschedule.base.impl.EventFacilitator;
+import au.com.scds.eventschedule.base.impl.activity.Attendance;
 import au.com.scds.eventschedule.base.impl.Attendee;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -71,11 +71,6 @@ public class ScheduledEvent extends BaseEvent {
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected List<Booking> bookings = new ArrayList<>();
-	@Persistent(mappedBy = "event")
-	@Order(column = "event_attendance_idx")
-	@Getter(value = AccessLevel.PROTECTED)
-	@Setter(value = AccessLevel.PROTECTED)
-	protected List<Attendance> attendances = new ArrayList<>();
 	@Persistent
 	@Join
 	@Getter(value = AccessLevel.PROTECTED)
@@ -131,40 +126,6 @@ public class ScheduledEvent extends BaseEvent {
 
 	public List<Booking> getBookingsList() {
 		return Collections.unmodifiableList(this.getBookings());
-	}
-
-	@Action
-	public ScheduledEvent addAttendance(Attendee attendee) {
-		this.createAttendance(attendee);
-		return this;
-	}
-	
-	public List<Attendee> choices0AddAttendance(){
-		return baseRepo.listAttendees();
-	}
-
-	@Action
-	public ScheduledEvent removeAttendance(Attendance attendance) {
-		if (this.getAttendances().contains(attendance)){
-			this.getAttendances().remove(attendance);
-			//baseRepo.destroyAttendance(attendance);
-		}
-		return this;
-	}
-	
-	public List<Attendance> choices0RemoveAttendance(){
-		return this.getAttendances();
-	}
-
-	public Attendance createAttendance(Attendee attendee) {
-		Attendance attendance = baseRepo.createAttendance(this, attendee);
-		this.getAttendances().add(attendance);
-		attendee.getAttendances().add(attendance);
-		return attendance;
-	}
-	
-	public List<Attendance> getAttendancesList() {
-		return Collections.unmodifiableList(this.getAttendances());
 	}
 
 	@Action

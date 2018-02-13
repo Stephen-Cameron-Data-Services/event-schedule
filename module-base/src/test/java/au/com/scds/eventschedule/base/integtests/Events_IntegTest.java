@@ -53,7 +53,7 @@ public class Events_IntegTest extends IntegTestAbstract {
 	        assertThat(event).isNotNull();
 	    }
 
-	    public static class Name extends Events_IntegTest {
+	    public static class Events extends Events_IntegTest {
 
 	        @Test
 	        public void accessible() throws Exception {
@@ -63,34 +63,34 @@ public class Events_IntegTest extends IntegTestAbstract {
 	            assertThat(event.getStart().toDate()).isCloseTo("2018-12-31T12:00:00",100);
 	            
 	            assertThat(event.getBookingsList().size()).isEqualTo(1);
-	            assertThat(event.getAttendancesList().size()).isEqualTo(1);
+
 	            assertThat(event.getWaitListed().size()).isEqualTo(1);
 	            assertThat(event.getFacilitatorsList().size()).isEqualTo(1);
 	         
 	            Attendee attendee1 = event.getBookingsList().get(0).getAttendee();
-	            Attendee attendee2 = event.getAttendancesList().get(0).getAttendee();
+	            //Attendee attendee2 = event.getAttendancesList().get(0).getAttendee();
 	            Attendee attendee3 = event.getWaitListed().get(0);
 	            EventFacilitator facilitator1 = event.getFacilitatorsList().get(0);
 	            
 	            assertThat(attendee1.getFullname()).isEqualTo("Anders Zorn");
-	            assertThat(attendee2.getFullname()).isEqualTo("Pablo Picasso");
+	            //assertThat(attendee2.getFullname()).isEqualTo("Pablo Picasso");
 	            assertThat(attendee3.getFullname()).isEqualTo("Albert Namatjira");
 	            assertThat(facilitator1.getFullname()).isEqualTo("Rembrandt van Rijn");
 
 	            assertThat(attendee1.getBookingsList().size()).isEqualTo(1);
-	            assertThat(attendee2.getAttendancesList().size()).isEqualTo(1);
+	            //assertThat(attendee2.getAttendancesList().size()).isEqualTo(1);
 	            
 	            event.removeBooking(event.getBookingsList().get(0));
-	            event.removeAttendance(event.getAttendancesList().get(0));
+	            //event.removeAttendance(event.getAttendancesList().get(0));
 	            event.removeWaitListed(attendee3);
 	            event.removeFacilitator(facilitator1);
 	            
 	            assertThat(event.getBookingsList().size()).isEqualTo(0);
-	            assertThat(event.getAttendancesList().size()).isEqualTo(0);
+	            //assertThat(event.getAttendancesList().size()).isEqualTo(0);
 	            assertThat(event.getWaitListed().size()).isEqualTo(0);
 	            assertThat(event.getFacilitatorsList().size()).isEqualTo(0);
 	            assertThat(attendee1.getBookingsList().size()).isEqualTo(0);
-	            assertThat(attendee2.getAttendancesList().size()).isEqualTo(0);
+	            //assertThat(attendee2.getAttendancesList().size()).isEqualTo(0);
 	        }
 	    }
 

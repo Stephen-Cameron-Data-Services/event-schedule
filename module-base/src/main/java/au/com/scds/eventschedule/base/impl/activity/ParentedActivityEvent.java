@@ -35,13 +35,13 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
 @Discriminator(value = "BaseParentedActivityEvent")
 @DomainObject(objectType = "BaseParentedActivityEvent")
-public class BaseParentedActivityEvent extends BaseActivityEvent {
+public class ParentedActivityEvent extends ActivityEvent {
 	
 	@Getter(value=AccessLevel.PRIVATE)
 	@Setter(value=AccessLevel.PRIVATE)
-	protected BaseRecurringActivityEvent parent;
+	protected RecurringActivityEvent parent;
 
-	public BaseParentedActivityEvent(BaseRecurringActivityEvent parent, String name, String calendarName, DateTime date,
+	public ParentedActivityEvent(RecurringActivityEvent parent, String name, String calendarName, DateTime date,
 			String note) {
 		super(null, name, calendarName, date, note);
 		this.setParent(parent);

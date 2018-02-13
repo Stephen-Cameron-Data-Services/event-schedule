@@ -30,6 +30,8 @@ import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.joda.time.DateTime;
 
+import au.com.scds.eventschedule.base.impl.activity.Attendance;
+
 
 @DomainService(nature = NatureOfService.DOMAIN)
 public class EventScheduleBaseRepository {
@@ -42,20 +44,6 @@ public class EventScheduleBaseRepository {
 		Attendee object = new Attendee(person);
 		repositoryService.persistAndFlush(object);
 		return object;
-	}
-
-	public Attendance createAttendance(ScheduledEvent event, Attendee attendee) {
-		if (event == null || attendee == null)
-			return null;
-		Attendance object = new Attendance(event, attendee);
-		repositoryService.persistAndFlush(object);
-		return object;
-	}
-
-	public void destroyAttendance(Attendance attendance) {
-		attendance.getEvent().getAttendances().remove(attendance);
-		attendance.getAttendee().getAttendances().remove(attendance);
-		repositoryService.removeAndFlush(attendance);
 	}
 
 	public Booking createBooking(ScheduledEvent event, Attendee attendee) {
