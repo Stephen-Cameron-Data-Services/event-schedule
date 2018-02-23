@@ -27,33 +27,29 @@ import javax.jdo.annotations.PersistenceCapable;
 import org.apache.isis.applib.annotation.DomainObject;
 
 import au.com.scds.eventschedule.base.impl.Person;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
-
-@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table="eventfacilitator")
-@DomainObject(objectType="EventFacilitator")
+@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "eventfacilitator")
+@DomainObject(objectType = "EventFacilitator")
 public class EventFacilitator {
 
 	@Column(allowsNull = "true")
 	@Getter()
-	@Setter()
-    protected Person person;
-	
-	private EventFacilitator() {
-	}
-	
+	@Setter(value = AccessLevel.PRIVATE)
+	protected Person person;
+
 	public EventFacilitator(Person person) {
 		this.setPerson(person);
 	}
-	
+
 	@NotPersistent
-	public String getFullname(){
+	public String getFullname() {
 		return this.getPerson().getFullname();
 	}
-	
-	public String title(){
+
+	public String title() {
 		return this.getFullname();
 	}
-
 }

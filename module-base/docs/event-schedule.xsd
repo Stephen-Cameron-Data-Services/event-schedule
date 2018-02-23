@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:tns="http://www.example.org/OneIdSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.example.org/OneIdSchema"
+<xsd:schema xmlns:tns="http://www.example.org/EventSchedule" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.example.org/EventSchedule"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1" elementFormDefault="qualified">
 	<xsd:annotation>
 		<xsd:appinfo>
@@ -128,13 +128,13 @@
 		<xsd:complexContent>
 			<xsd:extension base="tns:ActivityEvent">
 				<xsd:sequence>
-					<xsd:element name="childEvent" type="tns:PartentedActivityEvent" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					<xsd:element name="childEvent" type="tns:ParentedActivityEvent" maxOccurs="unbounded" minOccurs="0"></xsd:element>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:element name="recurringactivities">
+	<xsd:element name="recurringActivities">
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="recurringActivity" type="tns:RecurringActivityEvent" maxOccurs="unbounded" minOccurs="1"></xsd:element>
@@ -142,7 +142,7 @@
 		</xsd:complexType>
 	</xsd:element>
 
-	<xsd:complexType name="PartentedActivityEvent">
+	<xsd:complexType name="ParentedActivityEvent">
 		<xsd:complexContent>
 			<xsd:extension base="tns:ActivityEvent"></xsd:extension>
 		</xsd:complexContent>

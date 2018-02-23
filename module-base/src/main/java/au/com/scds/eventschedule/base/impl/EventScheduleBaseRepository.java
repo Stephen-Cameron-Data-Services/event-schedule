@@ -55,8 +55,8 @@ public class EventScheduleBaseRepository {
 	}
 
 	public void destroyBooking(Booking booking) {
-		booking.getEvent().getBookings().remove(booking);
-		booking.getAttendee().getBookings().remove(booking);
+		booking.getEvent().getBookingSet().remove(booking);
+		booking.getAttendee().getBookingsSet().remove(booking);
 		repositoryService.removeAndFlush(booking);
 	}
 

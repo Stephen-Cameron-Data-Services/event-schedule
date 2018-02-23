@@ -1,7 +1,8 @@
 package au.com.scds.eventschedule.base.impl.activity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.Discriminator;
@@ -14,9 +15,8 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.joda.time.DateTime;
 
 import au.com.scds.eventschedule.base.impl.Attendee;
-import au.com.scds.eventschedule.base.impl.Booking;
 import au.com.scds.eventschedule.base.impl.Organisation;
-import au.com.scds.eventschedule.base.impl.ScheduledEvent;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,9 +26,9 @@ import lombok.Setter;
 @DomainObject(objectType = "BaseRecurringActivityEventt")
 public class RecurringActivityEvent extends ActivityEvent{
 
-	@Getter()
-	@Setter()
-	protected List<ParentedActivityEvent> childEvents = new ArrayList<>();
+	@Getter(value=AccessLevel.PROTECTED)
+	@Setter(value=AccessLevel.PROTECTED)
+	protected SortedSet<ParentedActivityEvent> childEventsSet = new TreeSet<>();
 	
 	public RecurringActivityEvent(Organisation organisation, String name, String calendarName, DateTime date,
 			String note) {
@@ -48,13 +48,17 @@ public class RecurringActivityEvent extends ActivityEvent{
 	@Action
 	public RecurringActivityEvent addChildEvent(){
 		ParentedActivityEvent child = activityRepo.createParentedActivityEvent(this);
-		this.getChildEvents().add(child);
+		this.getChildEventsSet().add(child);
 		return this;
 	}
 	
 	@Action
 	public RecurringActivityEvent removeChildEvent(){
 		return this;
+	}
+	
+	public SortedSet<ParentedActivityEvent> getChildEvents(){
+		return Collections.unmodifiableSortedSet(this.getChildEventsSet());
 	}
 	
 	@Inject

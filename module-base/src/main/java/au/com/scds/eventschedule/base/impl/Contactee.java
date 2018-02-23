@@ -22,6 +22,8 @@ package au.com.scds.eventschedule.base.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
@@ -34,6 +36,7 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.services.i18n.TranslatableString;
 
 import au.com.scds.eventschedule.base.impl.Person;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -47,15 +50,15 @@ public class Contactee {
 	protected Person person;
 
 	@Persistent(mappedBy = "contactee")
-	@Order(column = "contactee_allocations_idx")
-	@Getter()
-	@Setter()
-	protected List<ContactAllocation> allocations = new ArrayList<>();
+	//@Order(column = "contactee_allocations_idx")
+	@Getter(value=AccessLevel.PROTECTED)
+	@Setter(value=AccessLevel.PROTECTED)
+	protected SortedSet<ContactAllocation> allocationSet = new TreeSet<>();
 
 	@Persistent
 	@Getter()
 	@Setter()
-	protected List<ScheduledContact> contacts = new ArrayList<>();
+	protected SortedSet<ScheduledContact> contactSet = new TreeSet<>();
 
 	public Contactee(Person person) {
 		this.setPerson(person);
@@ -67,15 +70,15 @@ public class Contactee {
 
 	@Action
 	public void addAllocation(ContactAllocation allocation) {
-		this.getAllocations().add(allocation);
+		this.getAllocationSet().add(allocation);
 	}
 
-	public List<ContactAllocation> getAllocationsList() {
-		return Collections.unmodifiableList(this.getAllocations());
+	public SortedSet<ContactAllocation> getAllocations() {
+		return Collections.unmodifiableSortedSet(this.getAllocationSet());
 	}
 
 	public void removeAllocation(ContactAllocation allocation) {
-		if (this.getAllocations().contains(allocation))
-			this.getAllocations().remove(allocation);
+		if (this.getAllocationSet().contains(allocation))
+			this.getAllocationSet().remove(allocation);
 	}
 }

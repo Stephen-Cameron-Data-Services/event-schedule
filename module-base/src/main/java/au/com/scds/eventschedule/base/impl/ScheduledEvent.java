@@ -23,7 +23,9 @@ package au.com.scds.eventschedule.base.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.Column;
@@ -70,17 +72,17 @@ public class ScheduledEvent extends BaseEvent {
 	@Order(column = "event_booking_idx")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
-	protected List<Booking> bookings = new ArrayList<>();
+	protected SortedSet<Booking> bookingSet = new TreeSet<>();
 	@Persistent
 	@Join
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
-	protected List<Attendee> waitList = new ArrayList<>();
+	protected SortedSet<Attendee> waitListedSet = new TreeSet<>();
 	@Persistent
 	@Join
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
-	protected List<EventFacilitator> facilitators = new ArrayList<>();
+	protected SortedSet<EventFacilitator> facilitatorSet = new TreeSet<>();
 
 	public ScheduledEvent() {
 	}
@@ -107,30 +109,30 @@ public class ScheduledEvent extends BaseEvent {
 
 	@Action
 	public ScheduledEvent removeBooking(Booking booking) {
-		if (this.getBookings().contains(booking)) {
-			this.getBookings().remove(booking);
+		if (this.getBookingSet().contains(booking)) {
+			this.getBookingSet().remove(booking);
 			//baseRepo.destroyBooking(booking);
 		}
 		return this;
 	}
 	
-	public List<Booking> choices0RemoveBooking(){
-		return this.getBookings();
+	public Set<Booking> choices0RemoveBooking(){
+		return this.getBookingSet();
 	}
 
 	public Booking createBooking(Attendee attendee) {
 		Booking booking = baseRepo.createBooking(this, attendee);
-		this.getBookings().add(booking);
+		this.getBookingSet().add(booking);
 		return booking;
 	}
 
-	public List<Booking> getBookingsList() {
-		return Collections.unmodifiableList(this.getBookings());
+	public SortedSet<Booking> getBookingsList() {
+		return Collections.unmodifiableSortedSet(this.getBookingSet());
 	}
 
 	@Action
 	public ScheduledEvent addWaitListed(Attendee attendee) {
-		this.getWaitList().add(attendee);
+		this.getWaitListedSet().add(attendee);
 		return this;
 	}
 	
@@ -140,22 +142,22 @@ public class ScheduledEvent extends BaseEvent {
 
 	@Action
 	public ScheduledEvent removeWaitListed(Attendee attendee) {
-		if (this.getWaitList().contains(attendee))
-			this.getWaitList().remove(attendee);
+		if (this.getWaitListedSet().contains(attendee))
+			this.getWaitListedSet().remove(attendee);
 		return this;
 	}
 	
-	public List<Attendee> choices0RemoveWaitListed(){
-		return this.getWaitList();
+	public Set<Attendee> choices0RemoveWaitListed(){
+		return this.getWaitListedSet();
 	}
 
-	public final List<Attendee> getWaitListed() {
-		return Collections.unmodifiableList(this.getWaitList());
+	public SortedSet<Attendee> getWaitListed() {
+		return Collections.unmodifiableSortedSet(this.getWaitListedSet());
 	}
 
 	@Action
 	public ScheduledEvent addFacilitator(EventFacilitator facilitator) {
-		this.getFacilitators().add(facilitator);
+		this.getFacilitatorSet().add(facilitator);
 		return this;
 	}
 	
@@ -165,17 +167,17 @@ public class ScheduledEvent extends BaseEvent {
 
 	@Action
 	public ScheduledEvent removeFacilitator(EventFacilitator facilitator) {
-		if (this.getFacilitators().contains(facilitator))
-			this.getFacilitators().remove(facilitator);
+		if (this.getFacilitatorSet().contains(facilitator))
+			this.getFacilitatorSet().remove(facilitator);
 		return this;
 	}
 	
-	public List<EventFacilitator> choices0RemoveFacilitator(){
-		return this.getFacilitators();
+	public Set<EventFacilitator> choices0RemoveFacilitator(){
+		return this.getFacilitatorSet();
 	}
 
-	public final List<EventFacilitator> getFacilitatorsList() {
-		return Collections.unmodifiableList(this.getFacilitators());
+	public SortedSet<EventFacilitator> getFacilitatorsList() {
+		return Collections.unmodifiableSortedSet(this.getFacilitatorSet());
 	}
 
 	@Inject

@@ -63,8 +63,8 @@ public class Activities_IntegTest extends IntegTestAbstract {
 	        public void accessible() throws Exception {
 	            // then
 	        	assertThat(activities.get(0)).isNotNull();
-	        	assertThat(activities.get(0).getParticipationsList()).isNotNull();
-	        	assertThat(activities.get(0).getParticipationsList().size()).isEqualTo(1);
+	        	assertThat(activities.get(0).getParticipations()).isNotNull();
+	        	assertThat(activities.get(0).getParticipations().size()).isEqualTo(1);
 	        }
 	    }
 

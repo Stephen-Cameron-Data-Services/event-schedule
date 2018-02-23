@@ -22,6 +22,9 @@ package au.com.scds.eventschedule.base.impl.activity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.Discriminator;
@@ -53,10 +56,10 @@ import lombok.Setter;
 public class ActivityEvent extends CalendarableScheduledEvent {
 
 	@Persistent(mappedBy = "event")
-	@Order(column = "event_attendance_idx")
+	//@Order(column = "event_attendance_idx")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
-	protected List<Attendance> attendances = new ArrayList<>();
+	protected SortedSet<Attendance> attendancesSet = new TreeSet<>();
 
 	public ActivityEvent(Organisation organisation, String name, String calendarName, DateTime date, String note) {
 		super(organisation, name, calendarName, date, note);
@@ -66,7 +69,7 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 	@Action
 	public ActivityEvent addParticipation(Attendee attendee) {
 		Participation participation = activityRepo.createParticipation(this, attendee);
-		this.getBookings().add(participation);
+		this.getBookingSet().add(participation);
 		return this;
 	}
 
@@ -78,18 +81,18 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 
 	public List<Participation> choices0RemoveParticipation() {
 		List<Participation> list = new ArrayList();
-		for (Booking booking : this.getBookings()) {
+		for (Booking booking : this.getBookingSet()) {
 			list.add((Participation) booking);
 		}
 		return list;
 	}
 
-	public List<Participation> getParticipationsList() {
-		List<Participation> list = new ArrayList();
-		for (Booking booking : this.getBookings()) {
-			list.add((Participation) booking);
+	public SortedSet<Participation> getParticipations() {
+		SortedSet<Participation> set = new TreeSet();
+		for (Booking booking : this.getBookingSet()) {
+			set.add((Participation) booking);
 		}
-		return Collections.unmodifiableList(list);
+		return Collections.unmodifiableSortedSet(set);
 	}
 
 	@Override
@@ -115,26 +118,26 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 
 	@Action
 	public ActivityEvent removeAttendance(Attendance attendance) {
-		if (this.getAttendances().contains(attendance)) {
-			this.getAttendances().remove(attendance);
+		if (this.getAttendancesSet().contains(attendance)) {
+			this.getAttendancesSet().remove(attendance);
 			// baseRepo.destroyAttendance(attendance);
 		}
 		return this;
 	}
 
-	public List<Attendance> choices0RemoveAttendance() {
-		return this.getAttendances();
+	public Set<Attendance> choices0RemoveAttendance() {
+		return this.getAttendancesSet();
 	}
 
 	public Attendance createAttendance(Attendee attendee) {
 		Attendance attendance = activityRepo.createAttendance(this, attendee);
-		this.getAttendances().add(attendance);
+		this.getAttendancesSet().add(attendance);
 		attendee.addAttendance(attendance);
 		return attendance;
 	}
 
-	public List<Attendance> getAttendancesList() {
-		return Collections.unmodifiableList(this.getAttendances());
+	public SortedSet<Attendance> getAttendances() {
+		return Collections.unmodifiableSortedSet(this.getAttendancesSet());
 	}
 
 	@Inject

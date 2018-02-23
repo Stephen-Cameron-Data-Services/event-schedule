@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
@@ -46,16 +48,16 @@ import lombok.Setter;
 public class Attendee {
 
 	@Persistent(mappedBy = "attendee")
-	@Order(column = "attendee_bookings_idx")
+	//@Order(column = "attendee_bookings_idx")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
-	protected List<Booking> bookings = new ArrayList<>();
+	protected SortedSet<Booking> bookingsSet = new TreeSet<>();
 
 	@Persistent(mappedBy = "attendee")
-	@Order(column = "attendee_attendances_idx")
+	//@Order(column = "attendee_attendances_idx")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
-	protected List<Attendance> attendances = new ArrayList<>();
+	protected SortedSet<Attendance> attendancesSet = new TreeSet<>();
 
 	@Column(allowsNull = "false")
 	@Getter()
@@ -78,31 +80,31 @@ public class Attendee {
 		return this.getPerson().getFullname();
 	}
 
-	public List<Booking> getBookingsList() {
-		return Collections.unmodifiableList(this.getBookings());
+	public SortedSet<Booking> getBookings() {
+		return Collections.unmodifiableSortedSet(this.getBookingsSet());
 	}
 
-	public List<Attendance> getAttendancesList() {
-		return Collections.unmodifiableList(this.getAttendances());
+	public SortedSet<Attendance> getAttendances() {
+		return Collections.unmodifiableSortedSet(this.getAttendancesSet());
 	}
 	
 	public void addBooking(Booking booking) {
-		if (!this.getBookings().contains(booking))
-			this.getBookings().add(booking);
+		if (!this.getBookingsSet().contains(booking))
+			this.getBookingsSet().add(booking);
 	}
 
 	public void removeBooking(Booking booking) {
-		if (this.getBookings().contains(booking))
-			this.getBookings().remove(booking);
+		if (this.getBookingsSet().contains(booking))
+			this.getBookingsSet().remove(booking);
 	}
 
 	public void addAttendance(Attendance attendance) {
-		if (!this.getAttendances().contains(attendance))
-			this.getAttendances().add(attendance);
+		if (!this.getAttendancesSet().contains(attendance))
+			this.getAttendancesSet().add(attendance);
 	}
 	
 	public void removeAttendance(Attendance attendance) {
-		if (this.getAttendances().contains(attendance))
-			this.getAttendances().remove(attendance);
+		if (this.getAttendancesSet().contains(attendance))
+			this.getAttendancesSet().remove(attendance);
 	}
 }

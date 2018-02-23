@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tns:allocations xmlns:tns="http://www.example.org/OneIdSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/OneIdSchema event-schedule.xsd ">
+<tns:allocations xmlns:tns="http://www.example.org/EventSchedule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/EventSchedule event-schedule.xsd ">
   <tns:allocation>
     <tns:contactee>
       <tns:person>

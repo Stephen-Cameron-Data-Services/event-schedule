@@ -19,13 +19,12 @@
 
 package au.com.scds.eventschedule.base.impl;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.Order;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
@@ -48,10 +47,10 @@ public class Contactor {
 	protected Person person;
 
 	@Persistent(mappedBy = "contactor")
-	@Order(column="contactor_allocations_idx")
+	//@Order(column="contactor_allocations_idx")
 	@Getter()
 	@Setter(value = AccessLevel.PROTECTED)
-	protected List<ContactAllocation> allocations = new ArrayList<>();
+	protected SortedSet<ContactAllocation> allocationSet = new TreeSet<>();
 
 	public Contactor(Person person) {
 		this.setPerson(person);
@@ -63,16 +62,16 @@ public class Contactor {
 
 	@Action
 	public void addAllocation(ContactAllocation allocation) {
-		this.getAllocations().add(allocation);
+		this.getAllocationSet().add(allocation);
 	}
 
-	public List<ContactAllocation> getAllocationsList() {
-		return Collections.unmodifiableList(this.getAllocations());
+	public SortedSet<ContactAllocation> getAllocations() {
+		return Collections.unmodifiableSortedSet(this.getAllocationSet());
 	}
 
 	public void removeAllocation(ContactAllocation allocation) {
-		if(this.getAllocations().contains(allocation))
-			this.getAllocations().remove(allocation);
+		if(this.getAllocationSet().contains(allocation))
+			this.getAllocationSet().remove(allocation);
 		
 	}
 }

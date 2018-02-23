@@ -67,20 +67,20 @@ public class Events_IntegTest extends IntegTestAbstract {
 	            assertThat(event.getWaitListed().size()).isEqualTo(1);
 	            assertThat(event.getFacilitatorsList().size()).isEqualTo(1);
 	         
-	            Attendee attendee1 = event.getBookingsList().get(0).getAttendee();
+	            Attendee attendee1 = event.getBookingsList().first().getAttendee();
 	            //Attendee attendee2 = event.getAttendancesList().get(0).getAttendee();
-	            Attendee attendee3 = event.getWaitListed().get(0);
-	            EventFacilitator facilitator1 = event.getFacilitatorsList().get(0);
+	            Attendee attendee3 = event.getWaitListed().first();
+	            EventFacilitator facilitator1 = event.getFacilitatorsList().first();
 	            
 	            assertThat(attendee1.getFullname()).isEqualTo("Anders Zorn");
 	            //assertThat(attendee2.getFullname()).isEqualTo("Pablo Picasso");
 	            assertThat(attendee3.getFullname()).isEqualTo("Albert Namatjira");
 	            assertThat(facilitator1.getFullname()).isEqualTo("Rembrandt van Rijn");
 
-	            assertThat(attendee1.getBookingsList().size()).isEqualTo(1);
+	            assertThat(attendee1.getBookings().size()).isEqualTo(1);
 	            //assertThat(attendee2.getAttendancesList().size()).isEqualTo(1);
 	            
-	            event.removeBooking(event.getBookingsList().get(0));
+	            event.removeBooking(event.getBookingsList().first());
 	            //event.removeAttendance(event.getAttendancesList().get(0));
 	            event.removeWaitListed(attendee3);
 	            event.removeFacilitator(facilitator1);
@@ -89,7 +89,7 @@ public class Events_IntegTest extends IntegTestAbstract {
 	            //assertThat(event.getAttendancesList().size()).isEqualTo(0);
 	            assertThat(event.getWaitListed().size()).isEqualTo(0);
 	            assertThat(event.getFacilitatorsList().size()).isEqualTo(0);
-	            assertThat(attendee1.getBookingsList().size()).isEqualTo(0);
+	            assertThat(attendee1.getBookings().size()).isEqualTo(0);
 	            //assertThat(attendee2.getAttendancesList().size()).isEqualTo(0);
 	        }
 	    }
