@@ -32,7 +32,7 @@ import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table="person")
 @DomainObject(objectType="Person")
-public class Person {
+public class Person implements Comparable<Person>{
 
 	@Column(allowsNull = "true")
 	@Getter()
@@ -48,5 +48,9 @@ public class Person {
 	
 	public String title(){
 		return this.getFullname();
+	}
+
+	public int compareTo(Person person) {
+		return this.getFullname().compareTo(person.getFullname());
 	}
 }

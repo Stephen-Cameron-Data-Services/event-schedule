@@ -34,7 +34,7 @@ import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table="contact_allocation")
 @DomainObject(objectType="ContactAllocation")
-public class ContactAllocation {
+public class ContactAllocation implements Comparable<ContactAllocation>{
 	
 	@Column(allowsNull = "false")
 	@Getter()
@@ -53,19 +53,27 @@ public class ContactAllocation {
 	
 	@Action
 	public ContactAllocation reassignTo(Contactor contactor){
-		this.getContactor().removeAllocation(this);
+		Contactor prev = this.getContactor();
 		this.setContactor(contactor);
+		prev.removeAllocation(this);
 		contactor.addAllocation(this);
 		return this;
 	}
 	
 	@Action
 	public void delete(){
-		this.getContactee().removeAllocation(this);
-		this.getContactor().removeAllocation(this);
+		//this.getContactee().removeAllocation(this);
+		//this.getContactor().removeAllocation(this);
 		baseRepo.destroyContactAllocation(this);
+	}
+	
+	@Override
+	public int compareTo(ContactAllocation other) {
+		return this.getContactee().compareTo(other.getContactee());
 	}
 	
 	@Inject
 	EventScheduleBaseRepository baseRepo;
+
+
 }

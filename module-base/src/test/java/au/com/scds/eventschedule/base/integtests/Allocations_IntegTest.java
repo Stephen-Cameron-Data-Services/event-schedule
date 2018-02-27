@@ -97,7 +97,8 @@ public class Allocations_IntegTest extends IntegTestAbstract {
 	        	assertThat(allocation1.getContactee()).isSameAs(contactee1);
 	        	assertThat(allocation1.getContactor()).isSameAs(contactor1);
 	        	
-	        	allocation2.delete();
+	        	//allocation2.delete();
+	        	contactor1.removeAllocation(allocation2);
 	        	assertThat(contactor1.getAllocations().size()).isEqualTo(1);
 	        	assertThat(contactor2.getAllocations().size()).isEqualTo(0);
 	        }

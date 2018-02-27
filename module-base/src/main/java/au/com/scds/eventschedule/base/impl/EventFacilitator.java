@@ -33,7 +33,7 @@ import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "eventfacilitator")
 @DomainObject(objectType = "EventFacilitator")
-public class EventFacilitator {
+public class EventFacilitator implements Comparable<EventFacilitator>{
 
 	@Column(allowsNull = "true")
 	@Getter()
@@ -51,5 +51,10 @@ public class EventFacilitator {
 
 	public String title() {
 		return this.getFullname();
+	}
+
+	@Override
+	public int compareTo(EventFacilitator other) {
+		return this.getPerson().compareTo(other.getPerson());
 	}
 }

@@ -36,7 +36,7 @@ import lombok.Setter;
 @Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy=DiscriminatorStrategy.VALUE_MAP, value="Booking")
 @DomainObject(objectType="Booking")
-public class Booking {
+public class Booking implements Comparable<Booking> {
 
 	@Column(allowsNull = "false")
 	@Getter()
@@ -51,5 +51,11 @@ public class Booking {
 	public Booking(ScheduledEvent event, Attendee attendee) {
 		this.event = event;
 		this.attendee = attendee;
+	}
+
+	@Override
+	public int compareTo(Booking o) {
+		
+		return this.getAttendee().compareTo(o.getAttendee());
 	}
 }

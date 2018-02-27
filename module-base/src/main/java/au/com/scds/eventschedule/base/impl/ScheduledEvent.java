@@ -17,10 +17,8 @@
  *  under the License.
  */
 
-
 package au.com.scds.eventschedule.base.impl;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -54,10 +52,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "event")
-@Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
-@Discriminator(strategy=DiscriminatorStrategy.VALUE_MAP, column="type", value="ScheduledEvent")
-@DomainObject(objectType="ScheduledEvent")
-public class ScheduledEvent extends BaseEvent {
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, column = "type", value = "ScheduledEvent")
+@DomainObject(objectType = "ScheduledEvent")
+public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEvent> {
 
 	@Column(allowsNull = "true")
 	@Getter()
@@ -96,14 +94,14 @@ public class ScheduledEvent extends BaseEvent {
 	public TranslatableString title() {
 		return TranslatableString.tr("{name}", "name", this.getName());
 	}
-	
+
 	@Action
 	public ScheduledEvent addBooking(Attendee attendee) {
 		this.createBooking(attendee);
 		return this;
 	}
-	
-	public List<Attendee> choices0AddBooking(){
+
+	public List<Attendee> choices0AddBooking() {
 		return baseRepo.listAttendees();
 	}
 
@@ -111,12 +109,12 @@ public class ScheduledEvent extends BaseEvent {
 	public ScheduledEvent removeBooking(Booking booking) {
 		if (this.getBookingSet().contains(booking)) {
 			this.getBookingSet().remove(booking);
-			//baseRepo.destroyBooking(booking);
+			// baseRepo.destroyBooking(booking);
 		}
 		return this;
 	}
-	
-	public Set<Booking> choices0RemoveBooking(){
+
+	public Set<Booking> choices0RemoveBooking() {
 		return this.getBookingSet();
 	}
 
@@ -135,8 +133,8 @@ public class ScheduledEvent extends BaseEvent {
 		this.getWaitListedSet().add(attendee);
 		return this;
 	}
-	
-	public List<Attendee> choices0AddWaitListed(){
+
+	public List<Attendee> choices0AddWaitListed() {
 		return baseRepo.listAttendees();
 	}
 
@@ -146,8 +144,8 @@ public class ScheduledEvent extends BaseEvent {
 			this.getWaitListedSet().remove(attendee);
 		return this;
 	}
-	
-	public Set<Attendee> choices0RemoveWaitListed(){
+
+	public Set<Attendee> choices0RemoveWaitListed() {
 		return this.getWaitListedSet();
 	}
 
@@ -160,8 +158,8 @@ public class ScheduledEvent extends BaseEvent {
 		this.getFacilitatorSet().add(facilitator);
 		return this;
 	}
-	
-	public List<EventFacilitator> choices0AddFacilitator(){
+
+	public List<EventFacilitator> choices0AddFacilitator() {
 		return baseRepo.listEventFacilitators();
 	}
 
@@ -171,8 +169,8 @@ public class ScheduledEvent extends BaseEvent {
 			this.getFacilitatorSet().remove(facilitator);
 		return this;
 	}
-	
-	public Set<EventFacilitator> choices0RemoveFacilitator(){
+
+	public Set<EventFacilitator> choices0RemoveFacilitator() {
 		return this.getFacilitatorSet();
 	}
 
@@ -182,5 +180,21 @@ public class ScheduledEvent extends BaseEvent {
 
 	@Inject
 	EventScheduleBaseRepository baseRepo;
+
+	@Override
+	public int compareTo(final ScheduledEvent other) {
+
+		if (this == other) {
+			return 0;
+		} else {
+			// most recent first
+			int result = other.getStart().compareTo(this.getStart());
+			if (result != 0) {
+				return result;
+			} else {
+				return this.getName().compareTo(other.getName());
+			}
+		}
+	}
 
 }

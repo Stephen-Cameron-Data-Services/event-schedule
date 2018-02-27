@@ -19,22 +19,17 @@
 
 package au.com.scds.eventschedule.base.impl;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
-import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.NotPersistent;
-import javax.jdo.annotations.Order;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
 import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.fixturescripts.FixtureResult;
 
 import au.com.scds.eventschedule.base.impl.Booking;
 import au.com.scds.eventschedule.base.impl.Person;
@@ -45,16 +40,16 @@ import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "attendee")
 @DomainObject(objectType = "Attendee")
-public class Attendee {
+public class Attendee implements Comparable<Attendee> {
 
 	@Persistent(mappedBy = "attendee")
-	//@Order(column = "attendee_bookings_idx")
+	// @Order(column = "attendee_bookings_idx")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<Booking> bookingsSet = new TreeSet<>();
 
 	@Persistent(mappedBy = "attendee")
-	//@Order(column = "attendee_attendances_idx")
+	// @Order(column = "attendee_attendances_idx")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<Attendance> attendancesSet = new TreeSet<>();
@@ -87,7 +82,7 @@ public class Attendee {
 	public SortedSet<Attendance> getAttendances() {
 		return Collections.unmodifiableSortedSet(this.getAttendancesSet());
 	}
-	
+
 	public void addBooking(Booking booking) {
 		if (!this.getBookingsSet().contains(booking))
 			this.getBookingsSet().add(booking);
@@ -102,9 +97,13 @@ public class Attendee {
 		if (!this.getAttendancesSet().contains(attendance))
 			this.getAttendancesSet().add(attendance);
 	}
-	
+
 	public void removeAttendance(Attendance attendance) {
 		if (this.getAttendancesSet().contains(attendance))
 			this.getAttendancesSet().remove(attendance);
+	}
+
+	public int compareTo(Attendee o) {
+		return this.getPerson().compareTo(o.getPerson());
 	}
 }
