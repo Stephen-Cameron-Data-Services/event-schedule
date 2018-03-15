@@ -65,7 +65,7 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 		super(organisation, name, calendarName, date, note);
 	}
 
-	// Participations instead of Bookings
+	// has Participations instead of Bookings
 	@Action
 	public ActivityEvent addParticipation(Attendee attendee) {
 		Participation participation = activityRepo.createParticipation(this, attendee);
@@ -145,4 +145,8 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 
 	@Inject
 	ActivityBaseRepository activityRepo;
+
+	protected void createAttendanceSetFromParticipantSet() {
+		// TODO Auto-generated method stub
+	}
 }

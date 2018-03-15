@@ -46,6 +46,7 @@ import org.joda.time.DateTime;
 import au.com.scds.eventschedule.base.impl.Booking;
 import au.com.scds.eventschedule.base.impl.EventFacilitator;
 import au.com.scds.eventschedule.base.impl.activity.Attendance;
+import au.com.scds.chats.dom.general.Address;
 import au.com.scds.eventschedule.base.impl.Attendee;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -66,6 +67,22 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 	@Getter()
 	@Setter()
 	protected String name;
+	@Column(allowsNull = "true")
+	@Getter()
+	@Setter()
+	protected String description;
+	@Column(allowsNull = "true")
+	@Getter()
+	@Setter()	
+	protected Integer cutoffLimit;
+	@Column(allowsNull = "false")
+	@Getter()
+	@Setter()	
+	protected boolean cancelled;
+	@Column(allowsNull = "true")
+	@Getter()
+	@Setter()
+	protected Address address;
 	@Persistent(mappedBy = "event")
 	@Order(column = "event_booking_idx")
 	@Getter(value = AccessLevel.PROTECTED)

@@ -36,11 +36,11 @@ import lombok.Setter;
 @DomainObject(objectType = "SimpleEvent", editing = Editing.ENABLED)
 public class SimpleEvent extends BaseEvent {
 
-	@Column()
+	@Column(allowsNull = "true")
 	@Getter
 	@Setter
 	private String name;
-	@Column()
+	@Column(allowsNull = "true")
 	@Getter
 	@Setter
 	private String description;

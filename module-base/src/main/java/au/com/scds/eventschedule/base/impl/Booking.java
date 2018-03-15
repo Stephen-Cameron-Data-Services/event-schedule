@@ -49,13 +49,17 @@ public class Booking implements Comparable<Booking> {
 	public Attendee attendee;
 
 	public Booking(ScheduledEvent event, Attendee attendee) {
-		this.event = event;
-		this.attendee = attendee;
+		setEvent(event);
+		setAttendee(attendee);
 	}
 
 	@Override
 	public int compareTo(Booking o) {
-		
-		return this.getAttendee().compareTo(o.getAttendee());
+		int result = this.getEvent().compareTo(o.getEvent());
+		if (result != 0) {
+			return result;
+		} else {
+			return this.getAttendee().compareTo(o.getAttendee());
+		}
 	}
 }
