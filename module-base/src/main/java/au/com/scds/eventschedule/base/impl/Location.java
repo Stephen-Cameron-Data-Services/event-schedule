@@ -26,22 +26,15 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.PrimaryKey;
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.Queries;
 import javax.jdo.annotations.Query;
 
-import org.apache.isis.applib.AbstractDomainObject;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.MemberOrder;
-import org.apache.isis.applib.annotation.Optionality;
-import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.Where;
-import org.isisaddons.wicket.gmap3.cpt.applib.Locatable;
-
-import au.com.scds.chats.dom.AbstractChatsDomainEntity;
 
 /**
  * Has a name and a latitude and longitude

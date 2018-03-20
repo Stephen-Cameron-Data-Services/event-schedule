@@ -33,6 +33,7 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.Join;
+import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.Order;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -46,7 +47,6 @@ import org.joda.time.DateTime;
 import au.com.scds.eventschedule.base.impl.Booking;
 import au.com.scds.eventschedule.base.impl.EventFacilitator;
 import au.com.scds.eventschedule.base.impl.activity.Attendance;
-import au.com.scds.chats.dom.general.Address;
 import au.com.scds.eventschedule.base.impl.Attendee;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -67,6 +67,11 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 	@Getter()
 	@Setter()
 	protected String name;
+	@Column(allowsNull = "false")
+	@Title()
+	@Getter()
+	@Setter()
+	protected String identifierCodeName;
 	@Column(allowsNull = "true")
 	@Getter()
 	@Setter()
@@ -193,6 +198,16 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 
 	public SortedSet<EventFacilitator> getFacilitatorsList() {
 		return Collections.unmodifiableSortedSet(this.getFacilitatorSet());
+	}
+	
+	@NotPersistent
+	public String getLocationName(){
+		return (getAddress() != null) ? getAddress().getName() : null;
+	}
+
+	@NotPersistent
+	public String getStreetAddress(){
+		return (getAddress() != null) ? getAddress().getFullStreetAddress() : null;
 	}
 
 	@Inject

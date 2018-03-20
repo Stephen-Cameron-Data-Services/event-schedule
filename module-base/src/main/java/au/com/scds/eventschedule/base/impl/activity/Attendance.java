@@ -29,29 +29,32 @@ import org.apache.isis.applib.annotation.DomainObject;
 import au.com.scds.eventschedule.base.impl.Attendee;
 import au.com.scds.eventschedule.base.impl.Booking;
 import au.com.scds.eventschedule.base.impl.ScheduledEvent;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "attendance")
 @DomainObject(objectType="Attendance")
-public class Attendance {
+public class Attendance implements Comparable<Attendance>{
 
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter()
+	@Setter(value=AccessLevel.PROTECTED)
 	public ScheduledEvent event;
-
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter()
+	@Setter(value=AccessLevel.PROTECTED)
 	public Attendee attendee;
-	
 	@Column(allowsNull = "true")
 	@Getter()
 	@Setter()
 	public Booking booking;
+	@Column(allowsNull = "true")
+	@Getter()
+	@Setter()
+	public Boolean attended;
 
-	public Attendance() {
+	private Attendance() {
 	}
 
 	public Attendance(ScheduledEvent event, Attendee attendee) {
@@ -67,5 +70,11 @@ public class Attendance {
 	
 	public String title(){
 		return this.getAttendee().getFullname() +  "-in-" + this.getEvent().getName();
+	}
+
+	@Override
+	public int compareTo(Attendance o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
