@@ -17,7 +17,6 @@
  *  under the License.
  */
 
-
 package au.com.scds.eventschedule.base.impl;
 
 import javax.jdo.annotations.Column;
@@ -53,6 +52,11 @@ public abstract class BaseEvent {
 	@Getter
 	@Setter(value = AccessLevel.PROTECTED)
 	protected DateTime end;
+
+	public BaseEvent(DateTime start, DateTime end) {
+		setStart(start);
+		setEnd(end);
+	}
 
 	@NotPersistent
 	public String getIntervalLengthFormatted() {

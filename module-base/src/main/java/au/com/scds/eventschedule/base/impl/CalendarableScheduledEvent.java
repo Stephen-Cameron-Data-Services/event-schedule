@@ -44,7 +44,7 @@ import com.google.common.collect.ImmutableMap;
 import lombok.Getter;
 import lombok.Setter;
 
-@PersistenceCapable(identityType = IdentityType.DATASTORE)
+@PersistenceCapable()
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
 @Discriminator(value="CalendarableScheduledEvent")
 @DomainObject(objectType="CalendarableScheduledEvent")

@@ -34,11 +34,11 @@ import org.apache.isis.applib.util.TitleBuffer;
 
 @PersistenceCapable()
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
-@Discriminator(value = "ADDRESS")
+@Discriminator(value = "Address")
 @Queries({
-		@Query(name = "findAddressByName", language = "JDOQL", value = "SELECT FROM au.com.scds.chats.dom.general.Address WHERE name == :name"),
-		@Query(name = "findAllAddresses", language = "JDOQL", value = "SELECT FROM au.com.scds.chats.dom.general.Address"),
-		@Query(name = "findAllNamedAddresses", language = "JDOQL", value = "SELECT FROM au.com.scds.chats.dom.general.Address WHERE name != null && name.trim().length() > 0 ORDER BY name") })
+		@Query(name = "findAddressByName", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.Address WHERE name == :name"),
+		@Query(name = "findAllAddresses", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.Address"),
+		@Query(name = "findAllNamedAddresses", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.Address WHERE name != null && name.trim().length() > 0 ORDER BY name") })
 public class Address extends Location {
 
 	private String street1;
