@@ -38,7 +38,8 @@ import org.apache.isis.applib.query.QueryDefault;
 import org.apache.isis.applib.services.message.MessageService;
 import org.apache.isis.applib.services.registry.ServiceRegistry2;
 import org.apache.isis.applib.services.repository.RepositoryService;
-import org.isisaddons.wicket.gmap3.cpt.service.LocationLookupService;
+import org.incode.example.commchannel.dom.api.GeocodedAddress;
+import org.incode.example.commchannel.dom.api.GeocodingService;
 
 @DomainService(repositoryFor = Location.class, nature=NatureOfService.DOMAIN)
 @DomainServiceLayout(menuBar = MenuBar.SECONDARY, named = "Administration", menuOrder = "100.9")
@@ -80,29 +81,11 @@ public class Locations {
 	}
 	
 	@Programmatic()
-	public TransportHub createTransportHub() {
-		final TransportHub obj = new TransportHub();
-		serviceRegistry.injectServicesInto(obj);
-		repositoryService.persist(obj);
-		return obj;
-	}
-	
-	@Programmatic()
 	public List<Address> listAllNamedAddressLocations() {
 		List<Address> addresses = repositoryService.allMatches(new QueryDefault<>(Address.class, "findAllNamedAddresses"));
 		return addresses;
 	}
 	
-	@Programmatic()
-	public List<TransportHub> listAllTransportHubs() {
-		List<TransportHub> hubs = repositoryService.allMatches(new QueryDefault<>(TransportHub.class, "findAllTransportHubs"));
-		return hubs;
-	}
-	
-	public List<TransportHub> listAllNamedTransportHubs() {
-		List<TransportHub> hubs = repositoryService.allMatches(new QueryDefault<>(TransportHub.class, "findAllNamedTransportHubs"));
-		return hubs;
-	}
 
 	@Programmatic
 	public String nameForLocation(Location location) {
@@ -128,8 +111,8 @@ public class Locations {
 	}
 	
 	@Programmatic 
-	public org.isisaddons.wicket.gmap3.cpt.applib.Location locationOfAddressViaGmapLookup(String address){
-		return locationLookupService.lookup(address);
+	public GeocodedAddress locationOfAddressViaGmapLookup(String address){
+		return geocodingService.lookup(address);
 	}
 
 	@Inject
@@ -142,5 +125,5 @@ public class Locations {
 	protected MessageService messageService;
 	
 	@Inject
-	private LocationLookupService locationLookupService;
+	private GeocodingService geocodingService;
 }

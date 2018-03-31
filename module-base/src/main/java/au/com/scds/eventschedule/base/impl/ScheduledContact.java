@@ -34,22 +34,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "contact_event")
-@DomainObject(objectType="ScheduledContact")
+@DomainObject(objectType = "ScheduledContact")
 public class ScheduledContact extends BaseEvent {
 
 	@Column(allowsNull = "false")
 	@Getter()
 	@Setter()
 	protected Contactor contactor;
-	
+
 	@Column(allowsNull = "false")
 	@Getter()
 	@Setter()
 	protected Contactee contactee;
 
 	public ScheduledContact(Contactor contactor, Contactee contactee, DateTime date) {
+		super(date, null);
 		this.setContactor(contactor);
 		this.setContactee(contactee);
-		this.setStart(date);
 	}
 }

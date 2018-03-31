@@ -43,7 +43,7 @@ public class CreateActivities extends FixtureScript {
 				au.com.scds.eventschedule.base.impl.activity.ActivityEvent activity = activityMenu.createActivityEvent(_activity.getName(), new DateTime(_activity.getDate()));
 				au.com.scds.eventschedule.base.impl.Attendee attendee = null;
 				for(Participation _participation : _activity.getParticipation()){
-					attendee = eventMenu.createAttendee(_participation.getAttendee().getPerson().getFullname());
+					attendee = eventMenu.createEventAttendee(_participation.getAttendee().getPerson().getFullname());
 					activity.addParticipation(attendee);
 				}
 				activities.add(activity);

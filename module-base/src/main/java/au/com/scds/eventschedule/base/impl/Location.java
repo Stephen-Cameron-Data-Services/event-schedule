@@ -44,10 +44,10 @@ import org.apache.isis.applib.annotation.Where;
  */
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "chats", table = "location")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
-@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "LOCATION")
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Location")
 @Queries({
-		@Query(name = "findLocationByName", language = "JDOQL", value = "SELECT FROM au.com.scds.chats.dom.general.Location WHERE name == :name"),
-		@Query(name = "findAllLocations", language = "JDOQL", value = "SELECT FROM au.com.scds.chats.dom.general.Location ORDER BY name") })
+		@Query(name = "findLocationByName", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.Location WHERE name == :name"),
+		@Query(name = "findAllLocations", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.Location ORDER BY name") })
 @DomainObject()
 public class Location {
 

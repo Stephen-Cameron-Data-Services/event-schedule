@@ -16,57 +16,65 @@ import org.joda.time.DateTime;
 import au.com.scds.eventschedule.base.impl.Attendee;
 import au.com.scds.eventschedule.base.impl.CalendarableScheduledEvent;
 import au.com.scds.eventschedule.base.impl.EventFacilitator;
-import au.com.scds.eventschedule.base.impl.EventScheduleBaseRepository;
+import au.com.scds.eventschedule.base.impl.EventsRepository;
 import au.com.scds.eventschedule.base.impl.Organisation;
 import au.com.scds.eventschedule.base.impl.ScheduledEvent;
 //import domainapp.modules.simple.dom.impl.SimpleObject;
 import au.com.scds.eventschedule.base.impl.SimpleEvent;
 
-@DomainService(
-        nature = NatureOfService.VIEW_MENU_ONLY,
-        objectType = "EventsMenu"
-)
-@DomainServiceLayout(
-        named = "Events",
-        menuOrder = "20"
-)
+@DomainService(nature = NatureOfService.VIEW_MENU_ONLY, objectType = "EventsMenu")
+@DomainServiceLayout(named = "Events", menuOrder = "20")
 public class EventMenu {
 	
 	@Action
-	public Attendee createAttendee(String fullname) {
-		return repo.createAttendee(fullname);
-	}
-	
-	@Action
-	public EventFacilitator createFacilitator(String fullname) {
-		return repo.createEventFacilitator(fullname);
-	}
-
-	@Action
-	public ScheduledEvent createScheduledEvent( String name, DateTime date) {
-		return repo.createScheduledEvent(null, name, date);
-	}
-	
-	@Action
-	public List<ScheduledEvent> listScheduledEvents() {
-		return repo.listScheduledEvent();
-	}
-	
-	@Action
+	@MemberOrder(sequence = "1")
 	public SimpleEvent createSimpleEvent() {
 		return repo.createSimpleEvent();
 	}
 	
 	@Action
-	public CalendarableScheduledEvent createCalendarableScheduledEvent( String eventName, String calendarName, DateTime date, String note) {
-		return repo.createCalendarableScheduledEvent(null, eventName, calendarName, date, note);
+	@MemberOrder(sequence = "2")
+	public ScheduledEvent createScheduledEvent(String name, DateTime date) {
+		return repo.createScheduledEvent(null, name, date);
 	}
 	
 	@Action
+	@MemberOrder(sequence = "3")
+	public CalendarableScheduledEvent createCalendarableScheduledEvent(String eventName, String calendarName,
+			DateTime date, String note) {
+		return repo.createCalendarableScheduledEvent(null, eventName, calendarName, date, note);
+	}
+
+	@Action
+	@MemberOrder(sequence = "4")
+	public Attendee createEventAttendee(String fullname) {
+		return repo.createAttendee(fullname);
+	}
+
+	@Action
+	@MemberOrder(sequence = "5")
+	public EventFacilitator createEventFacilitator(String fullname) {
+		return repo.createEventFacilitator(fullname);
+	}
+	
+	@Action
+	@MemberOrder(sequence = "6")
+	public List<SimpleEvent> listSimpleEvents() {
+		return repo.listSimpleEvent();
+	}
+
+	@Action
+	@MemberOrder(sequence = "7")
+	public List<ScheduledEvent> listScheduledEvents() {
+		return repo.listScheduledEvent();
+	}
+
+	@Action
+	@MemberOrder(sequence = "8")
 	public List<CalendarableScheduledEvent> listCalendarableScheduledEvent() {
 		return repo.listCalendarableScheduledEvent();
 	}
 
 	@Inject
-	EventScheduleBaseRepository repo;
+	EventsRepository repo;
 }

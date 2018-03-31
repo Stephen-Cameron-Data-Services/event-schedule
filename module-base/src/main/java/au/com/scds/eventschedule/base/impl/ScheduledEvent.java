@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
 import javax.inject.Inject;
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.Discriminator;
@@ -37,16 +36,13 @@ import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.Order;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
-
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.Title;
 import org.apache.isis.applib.services.i18n.TranslatableString;
 import org.joda.time.DateTime;
-
 import au.com.scds.eventschedule.base.impl.Booking;
 import au.com.scds.eventschedule.base.impl.EventFacilitator;
-import au.com.scds.eventschedule.base.impl.activity.Attendance;
 import au.com.scds.eventschedule.base.impl.Attendee;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -67,22 +63,22 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 	@Getter()
 	@Setter()
 	protected String name;
-	@Column(allowsNull = "false")
+	@Column(allowsNull = "true")
 	@Title()
 	@Getter()
 	@Setter()
-	protected String identifierCodeName;
+	protected String codeName;
 	@Column(allowsNull = "true")
 	@Getter()
 	@Setter()
 	protected String description;
 	@Column(allowsNull = "true")
 	@Getter()
-	@Setter()	
+	@Setter()
 	protected Integer cutoffLimit;
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter()	
+	@Setter()
 	protected boolean cancelled;
 	@Column(allowsNull = "true")
 	@Getter()
@@ -104,10 +100,8 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<EventFacilitator> facilitatorSet = new TreeSet<>();
 
-	public ScheduledEvent() {
-	}
-
 	public ScheduledEvent(Organisation organisation, String name, DateTime date) {
+		super(date, null);
 		this.setOrganisation(organisation);
 		this.setName(name);
 		this.setStart(date);
@@ -199,19 +193,19 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 	public SortedSet<EventFacilitator> getFacilitatorsList() {
 		return Collections.unmodifiableSortedSet(this.getFacilitatorSet());
 	}
-	
+
 	@NotPersistent
-	public String getLocationName(){
+	public String getLocationName() {
 		return (getAddress() != null) ? getAddress().getName() : null;
 	}
 
 	@NotPersistent
-	public String getStreetAddress(){
+	public String getStreetAddress() {
 		return (getAddress() != null) ? getAddress().getFullStreetAddress() : null;
 	}
 
 	@Inject
-	EventScheduleBaseRepository baseRepo;
+	EventsRepository baseRepo;
 
 	@Override
 	public int compareTo(final ScheduledEvent other) {

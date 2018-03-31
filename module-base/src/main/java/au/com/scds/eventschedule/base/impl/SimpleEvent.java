@@ -27,13 +27,16 @@ import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.Editing;
+import org.apache.isis.applib.services.i18n.TranslatableString;
+import org.joda.time.DateTime;
+import org.joda.time.Duration;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "simple_event")
+@PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
-@DomainObject(objectType = "SimpleEvent", editing = Editing.ENABLED)
+@DomainObject(objectType = "SimpleEvent")
 public class SimpleEvent extends BaseEvent {
 
 	@Column(allowsNull = "true")
@@ -44,5 +47,9 @@ public class SimpleEvent extends BaseEvent {
 	@Getter
 	@Setter
 	private String description;
+	
+	public TranslatableString title() {
+		return TranslatableString.tr("{name}", "name", this.getName());
+	}
 
 }

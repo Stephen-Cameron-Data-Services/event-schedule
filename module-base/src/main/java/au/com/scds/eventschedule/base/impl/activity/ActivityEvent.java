@@ -38,11 +38,12 @@ import javax.jdo.annotations.Persistent;
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.joda.time.DateTime;
+import org.joda.time.Duration;
 
 import au.com.scds.eventschedule.base.impl.Attendee;
 import au.com.scds.eventschedule.base.impl.Booking;
 import au.com.scds.eventschedule.base.impl.CalendarableScheduledEvent;
-import au.com.scds.eventschedule.base.impl.EventScheduleBaseRepository;
+import au.com.scds.eventschedule.base.impl.EventsRepository;
 import au.com.scds.eventschedule.base.impl.Organisation;
 import au.com.scds.eventschedule.base.impl.ScheduledEvent;
 import lombok.AccessLevel;
@@ -56,7 +57,6 @@ import lombok.Setter;
 public class ActivityEvent extends CalendarableScheduledEvent {
 
 	@Persistent(mappedBy = "event")
-	//@Order(column = "event_attendance_idx")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<Attendance> attendancesSet = new TreeSet<>();
@@ -139,9 +139,28 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 	public SortedSet<Attendance> getAttendances() {
 		return Collections.unmodifiableSortedSet(this.getAttendancesSet());
 	}
+	
+	@Override
+	public String validateStartAndFinishDateTimes(DateTime start, DateTime finish) {
+		if (start != null && finish != null) {
+			if (finish.isBefore(start) || finish.equals(start))
+				return "End is before or equal to Start";
+			else {
+				Duration duration = new Duration(start, finish);
+				if (duration.getStandardMinutes() == 0)
+					return "End is equal to Start";
+				if (duration.getStandardHours() > 12)
+					return "End and Start are not in the same 12 hour period";
+				if (finish.getDayOfWeek() != start.getDayOfWeek()) {
+					return "End and Start are on different days of the week";
+				}
+			}
+		}
+		return null;
+	}
 
 	@Inject
-	EventScheduleBaseRepository baseRepo;
+	EventsRepository baseRepo;
 
 	@Inject
 	ActivityBaseRepository activityRepo;

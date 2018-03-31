@@ -35,16 +35,16 @@ public class CreateScheduledEvents extends FixtureScript {
 				this.event = eventMenu.createScheduledEvent(_event.getName(), new DateTime(_event.getDate()));
 				au.com.scds.eventschedule.base.impl.Attendee attendee = null;
 				for(Booking _booking : _event.getBooking()){
-					attendee = eventMenu.createAttendee(_booking.getAttendee().getPerson().getFullname());
+					attendee = eventMenu.createEventAttendee(_booking.getAttendee().getPerson().getFullname());
 					event.addBooking(attendee);
 				}
 				for(Attendee _attendee : _event.getWaitList().getAttendee()){
-					attendee = eventMenu.createAttendee(_attendee.getPerson().getFullname());
+					attendee = eventMenu.createEventAttendee(_attendee.getPerson().getFullname());
 					event.addWaitListed(attendee);
 				}
 				au.com.scds.eventschedule.base.impl.EventFacilitator facilitator = null;
 				for(EventFacilitator _facilitator : _event.getEventFacilitator()){
-					facilitator = eventMenu.createFacilitator(_facilitator.getPerson().getFullname());
+					facilitator = eventMenu.createEventFacilitator(_facilitator.getPerson().getFullname());
 					event.addFacilitator(facilitator);
 				}
 			}

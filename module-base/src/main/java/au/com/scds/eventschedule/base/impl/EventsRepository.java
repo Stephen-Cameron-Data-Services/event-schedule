@@ -20,21 +20,37 @@
 
 package au.com.scds.eventschedule.base.impl;
 
-import java.util.Date;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.joda.time.DateTime;
 
-import au.com.scds.eventschedule.base.impl.activity.Attendance;
-
-
 @DomainService(nature = NatureOfService.DOMAIN)
-public class EventScheduleBaseRepository {
+public class EventsRepository {
+	
+	public SimpleEvent createSimpleEvent() {
+		SimpleEvent object = new SimpleEvent();
+		repositoryService.persistAndFlush(object);
+		return object;
+	}
+
+	public ScheduledEvent createScheduledEvent(Organisation organisation, String name, DateTime date) {
+		if (name == null || date == null)
+			return null;
+		ScheduledEvent object = new ScheduledEvent(organisation, name, date);
+		repositoryService.persistAndFlush(object);
+		return object;
+	}
+	
+	public CalendarableScheduledEvent createCalendarableScheduledEvent(Organisation organisation, String eventName, String calendarName, DateTime date, String note) {
+		if (eventName == null || date == null)
+			return null;
+		CalendarableScheduledEvent object = new CalendarableScheduledEvent(organisation, eventName, calendarName, date, note);
+		repositoryService.persistAndFlush(object);
+		return object;
+	}
 
 	public Attendee createAttendee(String name) {
 		if (name == null)
@@ -42,6 +58,16 @@ public class EventScheduleBaseRepository {
 		Person person = new Person(name);
 		repositoryService.persistAndFlush(person);
 		Attendee object = new Attendee(person);
+		repositoryService.persistAndFlush(object);
+		return object;
+	}
+	
+	public EventFacilitator createEventFacilitator(String name) {
+		if (name == null)
+			return null;
+		Person person = new Person(name);
+		repositoryService.persistAndFlush(person);
+		EventFacilitator object = new EventFacilitator(person);
 		repositoryService.persistAndFlush(object);
 		return object;
 	}
@@ -96,16 +122,6 @@ public class EventScheduleBaseRepository {
 		return object;
 	}
 
-	public EventFacilitator createEventFacilitator(String name) {
-		if (name == null)
-			return null;
-		Person person = new Person(name);
-		repositoryService.persistAndFlush(person);
-		EventFacilitator object = new EventFacilitator(person);
-		repositoryService.persistAndFlush(object);
-		return object;
-	}
-
 	public Organisation createOrganisation(String name) {
 		if (name == null)
 			return null;
@@ -130,28 +146,6 @@ public class EventScheduleBaseRepository {
 		return object;
 	}
 	
-	public SimpleEvent createSimpleEvent() {
-		SimpleEvent object = new SimpleEvent();
-		repositoryService.persistAndFlush(object);
-		return object;
-	}
-
-	public ScheduledEvent createScheduledEvent(Organisation organisation, String name, DateTime date) {
-		if (name == null || date == null)
-			return null;
-		ScheduledEvent object = new ScheduledEvent(organisation, name, date);
-		repositoryService.persistAndFlush(object);
-		return object;
-	}
-	
-	public CalendarableScheduledEvent createCalendarableScheduledEvent(Organisation organisation, String eventName, String calendarName, DateTime date, String note) {
-		if (eventName == null || date == null)
-			return null;
-		CalendarableScheduledEvent object = new CalendarableScheduledEvent(organisation, eventName, calendarName, date, note);
-		repositoryService.persistAndFlush(object);
-		return object;
-	}
-
 	public ContactAllocation createContactAllocation(Contactor contactor, Contactee contactee) {
 		if (contactor == null || contactee == null)
 			return null;
@@ -162,6 +156,11 @@ public class EventScheduleBaseRepository {
 	
 	public void destroyContactAllocation(ContactAllocation allocation) {
 		repositoryService.removeAndFlush(allocation);
+	}
+	
+
+	public List<SimpleEvent> listSimpleEvent() {
+		return repositoryService.allInstances(SimpleEvent.class);
 	}
 	
 	public List<ScheduledEvent> listScheduledEvent() {

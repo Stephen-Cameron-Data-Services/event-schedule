@@ -31,6 +31,7 @@ import javax.jdo.annotations.Query;
 
 import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.util.TitleBuffer;
+import org.incode.example.commchannel.dom.api.GeocodedAddress;
 
 @PersistenceCapable()
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
@@ -142,11 +143,11 @@ public class Address extends Location {
 		String address = (getStreet1() != null ? getStreet1() + ", " : "")
 				+ (getStreet2() != null ? getStreet2() + ", " : "")
 				+ (getPostcode() != null ? getPostcode() + ", " : "") + ", Australia";
-		org.isisaddons.wicket.gmap3.cpt.applib.Location location = locationsRepo
+		GeocodedAddress location = locationsRepo
 				.locationOfAddressViaGmapLookup(address);
 		if (location != null) {
-			setLatitude(location.getLatitude());
-			setLongitude(location.getLongitude());
+			//setLatitude(location.getLatLng().sub);
+			//setLongitude(location.getLongitude());
 		}
 	}
 

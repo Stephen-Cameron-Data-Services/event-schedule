@@ -37,7 +37,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * An interval as represented by a start and a finish date-time on the same date
+ *
+ * An event having a start date-time.
+ * 
+ * Possibly also an interval if having a finish date-time.
  * 
  */
 @PersistenceCapable()
@@ -52,6 +55,9 @@ public abstract class BaseEvent {
 	@Getter
 	@Setter(value = AccessLevel.PROTECTED)
 	protected DateTime end;
+
+	public BaseEvent() {
+	}
 
 	public BaseEvent(DateTime start, DateTime end) {
 		setStart(start);
@@ -80,20 +86,10 @@ public abstract class BaseEvent {
 			return null;
 	}
 
-	public static String validateStartAndFinishDateTimes(DateTime start, DateTime finish) {
+	public String validateStartAndFinishDateTimes(DateTime start, DateTime finish) {
 		if (start != null && finish != null) {
 			if (finish.isBefore(start) || finish.equals(start))
 				return "End is before or equal to Start";
-			else {
-				Duration duration = new Duration(start, finish);
-				if (duration.getStandardMinutes() == 0)
-					return "End is equal to Start";
-				if (duration.getStandardHours() > 12)
-					return "End and Start are not in the same 12 hour period";
-				if (finish.getDayOfWeek() != start.getDayOfWeek()) {
-					return "End and Start are on different days of the week";
-				}
-			}
 		}
 		return null;
 	}

@@ -14,7 +14,7 @@ import org.joda.time.DateTime;
 import au.com.scds.eventschedule.base.impl.Contactee;
 import au.com.scds.eventschedule.base.impl.ContactAllocation;
 import au.com.scds.eventschedule.base.impl.Contactor;
-import au.com.scds.eventschedule.base.impl.EventScheduleBaseRepository;
+import au.com.scds.eventschedule.base.impl.EventsRepository;
 import au.com.scds.eventschedule.base.impl.ScheduledContact;
 
 @DomainService(nature = NatureOfService.VIEW_MENU_ONLY, objectType = "ContactsMenu")
@@ -39,6 +39,8 @@ public class ContactMenu {
 		return repo.createScheduledContact(contactor, contactee, date);
 	}
 
+	@Action
+	@MemberOrder(sequence = "4")
 	public ContactAllocation createContactAllocation(Contactor contactor,
 			Contactee contactee) {
 		ContactAllocation allocation = repo.createContactAllocation(contactor, contactee);
@@ -48,5 +50,5 @@ public class ContactMenu {
 	}
 	
 	@Inject
-	EventScheduleBaseRepository repo;
+	EventsRepository repo;
 }

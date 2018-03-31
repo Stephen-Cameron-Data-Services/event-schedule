@@ -73,7 +73,7 @@ public class ContactAllocation implements Comparable<ContactAllocation>{
 	}
 	
 	@Inject
-	EventScheduleBaseRepository baseRepo;
+	EventsRepository baseRepo;
 
 
 }
