@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bs3:grid
+	xsi:schemaLocation="http://isis.apache.org/applib/layout/component http://isis.apache.org/applib/layout/component/component.xsd http://isis.apache.org/applib/layout/links http://isis.apache.org/applib/layout/links/links.xsd http://isis.apache.org/applib/layout/grid/bootstrap3 http://isis.apache.org/applib/layout/grid/bootstrap3/bootstrap3.xsd"
+	xmlns:bs3="http://isis.apache.org/applib/layout/grid/bootstrap3" xmlns:cpt="http://isis.apache.org/applib/layout/component" xmlns:lnk="http://isis.apache.org/applib/layout/links" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<bs3:row>
+		<bs3:col span="12" unreferencedActions="true">
+			<cpt:domainObject bookmarking="AS_ROOT" />
+			<cpt:action id="addBooking" hidden="EVERYWHERE" />
+			<cpt:action id="removeBooking" hidden="EVERYWHERE" />
+		</bs3:col>
+	</bs3:row>
+	<bs3:row>
+		<bs3:col span="6">
+			<cpt:fieldSet name="General" id="general" unreferencedProperties="true">
+				<cpt:property id="datanucleusIdLong" hidden="ALL_TABLES" />
+				<cpt:property id="datanucleusVersionLong" hidden="ALL_TABLES" />
+				<cpt:property id="datanucleusVersionTimestamp" hidden="ALL_TABLES" />
+				<cpt:property id="name" />
+				<cpt:property id="codeName" hidden="ALL_TABLES" />
+				<cpt:property id="description" multiLine="4" hidden="ALL_TABLES" />
+				<cpt:property id="organisation" hidden="ALL_TABLES" />
+				<cpt:property id="address" hidden="EVERYWHERE" />
+				<cpt:property id="cancelled" />
+				<cpt:property id="cutoffLimit" hidden="ALL_TABLES" />
+				<cpt:property id="locationName" hidden="ALL_TABLES" />
+				<cpt:property id="streetAddress" hidden="ALL_TABLES" />
+			</cpt:fieldSet>
+		</bs3:col>
+		<bs3:col span="6" unreferencedCollections="true">
+			<cpt:fieldSet name="Times" id="time">
+				<cpt:property id="intervalLengthFormatted">
+					<cpt:named>Period</cpt:named>
+					<cpt:describedAs>Calculated Period Length (HH:MM).</cpt:describedAs>
+				</cpt:property>
+				<cpt:property id="intervalLengthInMinutes" hidden="OBJECT_FORMS">
+					<cpt:named>Minutes</cpt:named>
+					<cpt:describedAs>Calculated Period Length (Minutes).</cpt:describedAs>
+				</cpt:property>
+				<cpt:property id="start">
+					<cpt:named>Start Date-time</cpt:named>
+					<cpt:describedAs>Start Date-time of the Activity.</cpt:describedAs>
+					<cpt:action id="updateStartDateTime" position="BELOW">
+						<cpt:describedAs>Change the Start Date Time.</cpt:describedAs>
+					</cpt:action>
+				</cpt:property>
+				<cpt:property id="end" hidden="ALL_TABLES">
+					<cpt:named>End Date-time</cpt:named>
+					<cpt:describedAs>End Date-time of the Activity.</cpt:describedAs>
+					<cpt:action id="updateEndDateTime" position="BELOW">
+						<cpt:describedAs>Set, change or delete the End Date-time of the Activity.</cpt:describedAs>
+					</cpt:action>
+					<cpt:action id="updateEndDateTimeOffStart" position="BELOW">
+						<cpt:named>Start Date Time + N</cpt:named>
+						<cpt:describedAs>Set or Change the End Date-time as Start Date-time plus N minutes (N an integer).</cpt:describedAs>
+					</cpt:action>
+				</cpt:property>
+			</cpt:fieldSet>
+			<cpt:collection defaultView="table" id="bookingsList" hidden="EVERYWHERE" />
+			<cpt:collection defaultView="table" id="attendances" hidden="EVERYWHERE">
+				<cpt:action id="addAttendance" />
+				<cpt:action id="removeAttendance" />
+			</cpt:collection>
+			<cpt:collection defaultView="table" id="participations">
+				<cpt:action id="addParticipation">
+					<cpt:named>Add</cpt:named>
+				</cpt:action>
+				<cpt:action id="removeParticipation">
+					<cpt:named>Remove</cpt:named>
+				</cpt:action>
+			</cpt:collection>
+			<cpt:collection defaultView="table" id="childEvents">
+				<cpt:action id="addChildEvent">
+					<cpt:named>Add</cpt:named>
+				</cpt:action>
+				<cpt:action id="removeChildEvent">
+					<cpt:named>Remove</cpt:named>
+				</cpt:action>
+			</cpt:collection>
+			<cpt:collection defaultView="table" id="waitListed">
+				<cpt:action id="addWaitListed">
+					<cpt:named>Add</cpt:named>
+				</cpt:action>
+				<cpt:action id="removeWaitListed">
+					<cpt:named>Remove</cpt:named>
+				</cpt:action>
+				<cpt:action id="moveWaitListed">
+					<cpt:named>Move</cpt:named>
+				</cpt:action>
+			</cpt:collection>
+			<cpt:collection defaultView="table" id="facilitatorsList">
+				<cpt:action id="addFacilitator">
+					<cpt:named>Add</cpt:named>
+				</cpt:action>
+				<cpt:action id="removeFacilitator">
+					<cpt:named>Remove</cpt:named>
+				</cpt:action>
+			</cpt:collection>
+		</bs3:col>
+	</bs3:row>
+</bs3:grid>

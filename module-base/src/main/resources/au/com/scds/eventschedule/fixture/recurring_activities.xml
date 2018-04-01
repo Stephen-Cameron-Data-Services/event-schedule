@@ -52,5 +52,35 @@
 				</tns:attendee>
 			</tns:attendance>
 		</tns:childEvent>
+		<tns:childEvent>
+			<tns:name>Parent Activity Second Child</tns:name>
+			<tns:date>2018-03-01T12:00:00</tns:date>
+			<tns:waitList>
+				<tns:attendee>
+					<tns:person>
+						<tns:fullname>Michelangelo di Lodovico Buonarroti Simoni</tns:fullname>
+					</tns:person>
+				</tns:attendee>
+			</tns:waitList>
+			<tns:eventFacilitator>
+				<tns:person>
+					<tns:fullname>Leonardo da Vinci</tns:fullname>
+				</tns:person>
+			</tns:eventFacilitator>
+			<tns:participation>
+				<tns:attendee>
+					<tns:person>
+						<tns:fullname>Raffaello Sanzio da Urbino (Raphael)</tns:fullname>
+					</tns:person>
+				</tns:attendee>
+			</tns:participation>
+			<tns:attendance>
+				<tns:attendee>
+					<tns:person>
+						<tns:fullname>Donato di Niccolò di Betto Bardi (Donatello)</tns:fullname>
+					</tns:person>
+				</tns:attendee>
+			</tns:attendance>
+		</tns:childEvent>
 	</tns:recurringActivity>
 </tns:recurringActivities>

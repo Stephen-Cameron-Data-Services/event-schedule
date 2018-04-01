@@ -9,6 +9,7 @@ import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.NatureOfService;
+import org.apache.isis.applib.annotation.ParameterLayout;
 import org.joda.time.DateTime;
 
 import au.com.scds.eventschedule.base.impl.Contactee;
@@ -23,19 +24,20 @@ public class ContactMenu {
 
 	@Action
 	@MemberOrder(sequence = "1")
-	public Contactor createContactor(String fullname) {
+	public Contactor createContactor(@ParameterLayout(named="Full Name") String fullname) {
 		return repo.createContactor(fullname);
 	}
 
 	@Action
 	@MemberOrder(sequence = "2")
-	public Contactee createContactee(String fullname) {
+	public Contactee createContactee(@ParameterLayout(named="Full Name") String fullname) {
 		return repo.createContactee(fullname);
 	}
 
 	@Action
 	@MemberOrder(sequence = "3")
-	public ScheduledContact createScheduledContact(Contactor contactor, Contactee contactee, DateTime date) {
+	public ScheduledContact createScheduledContact(Contactor contactor, Contactee contactee, 
+			@ParameterLayout(named="Date-time") DateTime date) {
 		return repo.createScheduledContact(contactor, contactee, date);
 	}
 

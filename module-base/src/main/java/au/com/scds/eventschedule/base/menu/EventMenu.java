@@ -11,6 +11,7 @@ import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.DomainServiceLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.NatureOfService;
+import org.apache.isis.applib.annotation.ParameterLayout;
 import org.joda.time.DateTime;
 
 import au.com.scds.eventschedule.base.impl.Attendee;
@@ -25,38 +26,41 @@ import au.com.scds.eventschedule.base.impl.SimpleEvent;
 @DomainService(nature = NatureOfService.VIEW_MENU_ONLY, objectType = "EventsMenu")
 @DomainServiceLayout(named = "Events", menuOrder = "20")
 public class EventMenu {
-	
+
 	@Action
 	@MemberOrder(sequence = "1")
 	public SimpleEvent createSimpleEvent() {
 		return repo.createSimpleEvent();
 	}
-	
+
 	@Action
 	@MemberOrder(sequence = "2")
-	public ScheduledEvent createScheduledEvent(String name, DateTime date) {
+	public ScheduledEvent createScheduledEvent(@ParameterLayout(named = "Name") String name, DateTime date) {
 		return repo.createScheduledEvent(null, name, date);
 	}
-	
+
 	@Action
 	@MemberOrder(sequence = "3")
-	public CalendarableScheduledEvent createCalendarableScheduledEvent(String eventName, String calendarName,
-			DateTime date, String note) {
+	public CalendarableScheduledEvent createCalendarableScheduledEvent(
+			@ParameterLayout(named = "Event Name") String eventName,
+			@ParameterLayout(named = "Calendar Name") String calendarName,
+			@ParameterLayout(named = "Date-time") DateTime date, 
+			@ParameterLayout(named = "Calendar Note") String note) {
 		return repo.createCalendarableScheduledEvent(null, eventName, calendarName, date, note);
 	}
 
 	@Action
 	@MemberOrder(sequence = "4")
-	public Attendee createEventAttendee(String fullname) {
+	public Attendee createEventAttendee(@ParameterLayout(named = "Full Name") String fullname) {
 		return repo.createAttendee(fullname);
 	}
 
 	@Action
 	@MemberOrder(sequence = "5")
-	public EventFacilitator createEventFacilitator(String fullname) {
+	public EventFacilitator createEventFacilitator(@ParameterLayout(named = "Full Name") String fullname) {
 		return repo.createEventFacilitator(fullname);
 	}
-	
+
 	@Action
 	@MemberOrder(sequence = "6")
 	public List<SimpleEvent> listSimpleEvents() {
