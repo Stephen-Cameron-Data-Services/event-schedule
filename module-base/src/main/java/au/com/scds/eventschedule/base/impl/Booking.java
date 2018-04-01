@@ -25,10 +25,12 @@ import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.DomainObject;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,17 +42,26 @@ public class Booking implements Comparable<Booking> {
 
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter()
+	@Setter(value=AccessLevel.PROTECTED)
 	protected ScheduledEvent event;
 
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter()
+	@Setter(value=AccessLevel.PROTECTED)
 	public Attendee attendee;
 
 	public Booking(ScheduledEvent event, Attendee attendee) {
 		setEvent(event);
 		setAttendee(attendee);
+	}
+	
+	public String title(){
+		return this.getAttendeeName() + "-in-" + this.getEvent().title();
+	}
+	
+	@NotPersistent
+	public String getAttendeeName() {
+		return this.getAttendee().getFullname();
 	}
 
 	@Override

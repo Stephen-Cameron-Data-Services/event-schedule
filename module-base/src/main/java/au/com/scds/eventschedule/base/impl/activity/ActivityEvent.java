@@ -141,7 +141,7 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 	}
 	
 	@Override
-	public String validateStartAndFinishDateTimes(DateTime start, DateTime finish) {
+	public String doValidateStartAndFinishDateTimes(DateTime start, DateTime finish) {
 		if (start != null && finish != null) {
 			if (finish.isBefore(start) || finish.equals(start))
 				return "End is before or equal to Start";

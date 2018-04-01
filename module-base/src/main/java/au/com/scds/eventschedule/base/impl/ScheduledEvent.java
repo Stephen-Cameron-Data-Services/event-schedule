@@ -121,6 +121,14 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 		return baseRepo.listAttendees();
 	}
 
+	public String disableAddBooking() {
+		if (this.getCutoffLimit() != null && this.getBookingSet().size() == this.getCutoffLimit()) {
+			return "Count has reached Cut-off Limit";
+		} else {
+			return null;
+		}
+	}
+
 	@Action
 	public ScheduledEvent removeBooking(Booking booking) {
 		if (this.getBookingSet().contains(booking)) {
@@ -167,6 +175,27 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 
 	public SortedSet<Attendee> getWaitListed() {
 		return Collections.unmodifiableSortedSet(this.getWaitListedSet());
+	}
+
+	@Action
+	public ScheduledEvent moveWaitListed(Attendee attendee) {
+		if (getWaitListed().contains(attendee)) {
+			this.addBooking(attendee);
+			this.removeWaitListed(attendee);
+		}
+		return this;
+	}
+
+	public Set<Attendee> choices0MoveWaitListed() {
+		return getWaitListed();
+	}
+
+	public String disableMoveWaitListed() {
+		if (this.getCutoffLimit() != null && this.getBookingSet().size() >= this.getCutoffLimit()) {
+			return "Count has reached Cut-off Limit";
+		} else {
+			return null;
+		}
 	}
 
 	@Action

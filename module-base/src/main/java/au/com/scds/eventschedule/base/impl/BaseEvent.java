@@ -86,7 +86,7 @@ public abstract class BaseEvent {
 			return null;
 	}
 
-	public String validateStartAndFinishDateTimes(DateTime start, DateTime finish) {
+	public String doValidateStartAndFinishDateTimes(DateTime start, DateTime finish) {
 		if (start != null && finish != null) {
 			if (finish.isBefore(start) || finish.equals(start))
 				return "End is before or equal to Start";
@@ -109,7 +109,7 @@ public abstract class BaseEvent {
 	}
 
 	public String validateUpdateStartDateTime(DateTime start) {
-		return validateStartAndFinishDateTimes(start, this.getEnd());
+		return doValidateStartAndFinishDateTimes(start, this.getEnd());
 	}
 
 	// NOTE Must keep end date time optional to be able to change start date
@@ -129,7 +129,7 @@ public abstract class BaseEvent {
 	}
 
 	public String validateUpdateEndDateTime(DateTime end) {
-		return validateStartAndFinishDateTimes(this.getStart(), end);
+		return doValidateStartAndFinishDateTimes(this.getStart(), end);
 	}
 
 	@Action()
@@ -140,7 +140,7 @@ public abstract class BaseEvent {
 	}
 
 	public String validateUpdateEndDateTimeOffStart(Integer minutes) {
-		return validateStartAndFinishDateTimes(this.getStart(), this.getStart().plusMinutes(minutes));
+		return doValidateStartAndFinishDateTimes(this.getStart(), this.getStart().plusMinutes(minutes));
 	}
 
 	public String disableUpdateEndDateTimeOffStart() {
