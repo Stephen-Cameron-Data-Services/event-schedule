@@ -26,14 +26,27 @@ public class ActivityBaseRepository {
 		return object;
 	}
 	
-	public ParentedActivityEvent createParentedActivityEvent(RecurringActivityEvent recurringActivityEvent) {
-		ParentedActivityEvent child = new ParentedActivityEvent(recurringActivityEvent, null, null, null, null);
+	public RecurringActivityEvent createRecurringActivityEvent(Organisation organisation, String eventName, String calendarName,
+			DateTime date, String note) {
+		if (eventName == null || date == null)
+			return null;
+		RecurringActivityEvent object = new RecurringActivityEvent(organisation, eventName, calendarName, date, note);
+		repositoryService.persistAndFlush(object);
+		return object;
+	}
+	
+	public ParentedActivityEvent createParentedActivityEvent(RecurringActivityEvent recurringActivityEvent, DateTime date) {
+		ParentedActivityEvent child = new ParentedActivityEvent(recurringActivityEvent, recurringActivityEvent.getName(), "Activity", date, null);
 		repositoryService.persistAndFlush(child);
 		return child;
 	}
 
-	public List<ActivityEvent> listBaseActivityEvents() {
+	public List<ActivityEvent> listActivityEvents() {
 		return repositoryService.allInstances(ActivityEvent.class);
+	}
+	
+	public List<RecurringActivityEvent> listRecurringActivityEvents() {
+		return repositoryService.allInstances(RecurringActivityEvent.class);
 	}
 
 	public Participation createParticipation(ActivityEvent event, Attendee attendee) {
@@ -65,5 +78,7 @@ public class ActivityBaseRepository {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }

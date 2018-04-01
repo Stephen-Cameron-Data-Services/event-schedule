@@ -24,8 +24,8 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.Nature;
 import org.apache.isis.applib.services.i18n.TranslatableString;
 
-import domainapp.modules.simple.dom.impl.SimpleObject;
-import domainapp.modules.simple.dom.impl.SimpleObjects;
+import au.com.scds.eventschedule.base.impl.EventsRepository;
+import au.com.scds.eventschedule.base.impl.SimpleEvent;
 
 @DomainObject(
         nature = Nature.VIEW_MODEL,
@@ -37,10 +37,10 @@ public class HomePageViewModel {
         return TranslatableString.tr("{num} objects", "num", getObjects().size());
     }
 
-    public List<SimpleObject> getObjects() {
-        return simpleObjects.listAll();
+    public List<SimpleEvent> getObjects() {
+        return simpleObjects.listSimpleEvent();
     }
 
     @javax.inject.Inject
-    SimpleObjects simpleObjects;
+    EventsRepository simpleObjects;
 }

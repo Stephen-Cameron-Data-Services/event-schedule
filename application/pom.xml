@@ -26,7 +26,7 @@
     </parent>
 
     <artifactId>event-schedule-application</artifactId>
-    <name>SimpleApp Application</name>
+    <name>Events &amp; Contacts  Application</name>
 
     <description>This defines the application (manifest) and runs application-level fixtures and integration (smoke) tests</description>
 
@@ -93,10 +93,6 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>event-schedule-module-simple</artifactId>
-        </dependency>
         
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -109,13 +105,6 @@
             <artifactId>isis-core-wrapper</artifactId>
         </dependency>
 
-        <!-- test -->
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>event-schedule-module-simple</artifactId>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.apache.isis.mavendeps</groupId>

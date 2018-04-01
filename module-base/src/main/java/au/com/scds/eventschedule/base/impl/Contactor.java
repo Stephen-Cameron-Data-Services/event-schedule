@@ -57,7 +57,7 @@ public class Contactor {
 	}
 	
 	public TranslatableString title() {
-		return TranslatableString.tr("Contactor: {fullname}", this.getPerson().getFullname());
+		return TranslatableString.tr("Contactor: {fullname}", "fullname", this.getPerson().getFullname());
 	}
 
 	@Action

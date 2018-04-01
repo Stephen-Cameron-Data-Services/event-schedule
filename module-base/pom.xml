@@ -27,7 +27,7 @@
 	</parent>
 
 	<artifactId>event-schedule-module-base</artifactId>
-	<name>SimpleApp Simple Module</name>
+	<name>Events &amp; Contacts Base Module</name>
 
 	<properties>
 		<isis-maven-plugin.validate.appManifest>au.com.scds.eventschedule.base.EventScheduleBaseManifest</isis-maven-plugin.validate.appManifest>

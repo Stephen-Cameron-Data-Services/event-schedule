@@ -1,5 +1,6 @@
 package au.com.scds.eventschedule.base.impl.activity;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -46,8 +47,8 @@ public class RecurringActivityEvent extends ActivityEvent{
 	}
 	
 	@Action
-	public RecurringActivityEvent addChildEvent(){
-		ParentedActivityEvent child = activityRepo.createParentedActivityEvent(this);
+	public RecurringActivityEvent addChildEvent(DateTime date){
+		ParentedActivityEvent child = activityRepo.createParentedActivityEvent(this, date);
 		this.getChildEventsSet().add(child);
 		return this;
 	}

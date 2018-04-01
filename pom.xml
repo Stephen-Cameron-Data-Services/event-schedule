@@ -29,7 +29,7 @@
     <artifactId>event-schedule</artifactId>
     <version>1.0</version>
 
-    <name>SimpleApp Parent</name>
+    <name>Events &amp; Contacts Parent</name>
 
     <packaging>pom</packaging>
 

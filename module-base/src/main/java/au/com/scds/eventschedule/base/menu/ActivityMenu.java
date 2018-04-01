@@ -14,6 +14,7 @@ import org.joda.time.DateTime;
 import au.com.scds.eventschedule.base.impl.Organisation;
 import au.com.scds.eventschedule.base.impl.activity.ActivityBaseRepository;
 import au.com.scds.eventschedule.base.impl.activity.ActivityEvent;
+import au.com.scds.eventschedule.base.impl.activity.RecurringActivityEvent;
 
 @DomainService(nature = NatureOfService.VIEW_MENU_ONLY, objectType = "ActivityMenu")
 @DomainServiceLayout(named = "Activities", menuOrder = "30")
@@ -27,8 +28,20 @@ public class ActivityMenu {
 
 	@Action
 	@MemberOrder(sequence = "2")
+	public RecurringActivityEvent createRecurringActivityEvent(String name, DateTime date) {
+		return repo.createRecurringActivityEvent(null, name, "Activities", date, null);
+	}
+
+	@Action
+	@MemberOrder(sequence = "3")
 	public List<ActivityEvent> listActivityEvents() {
-		return repo.listBaseActivityEvents();
+		return repo.listActivityEvents();
+	}
+
+	@Action
+	@MemberOrder(sequence = "4")
+	public List<RecurringActivityEvent> listRecurringActivityEvents() {
+		return repo.listRecurringActivityEvents();
 	}
 
 	@Inject

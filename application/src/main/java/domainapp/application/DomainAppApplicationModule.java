@@ -27,12 +27,12 @@ import au.com.scds.eventschedule.base.EventScheduleBaseModule;
 import org.apache.isis.applib.Module;
 import org.apache.isis.applib.ModuleAbstract;
 
-import domainapp.modules.simple.SimpleModule;
+//import domainapp.modules.simple.SimpleModule;
 
 public class DomainAppApplicationModule extends ModuleAbstract {
 
     @Override
     public Set<Module> getDependencies() {
-        return Sets.<Module>newHashSet(new SimpleModule(), new EventScheduleBaseModule());
+        return Sets.<Module>newHashSet(/*new SimpleModule(),*/ new EventScheduleBaseModule());
     }
 }

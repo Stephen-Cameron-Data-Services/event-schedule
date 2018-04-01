@@ -38,41 +38,32 @@
 		<mb3:menu>
 			<mb3:named>Events</mb3:named>
 			<mb3:section>
-				<mb3:serviceAction objectType="EventsMenu" id="createAttendee">
-					<cpt:named>Create Attendee</cpt:named>
-				</mb3:serviceAction>
-				<mb3:serviceAction objectType="EventsMenu" id="createFacilitator">
-					<cpt:named>Create Facilitator</cpt:named>
-				</mb3:serviceAction>
-				<mb3:serviceAction objectType="EventsMenu" id="createSimpleEvent">
-					<cpt:named>Create Simple Event</cpt:named>
-				</mb3:serviceAction>
-				<mb3:serviceAction objectType="EventsMenu" id="createScheduledEvent">
-					<cpt:named>Create Scheduled Event</cpt:named>
-				</mb3:serviceAction>
-				<mb3:serviceAction objectType="EventsMenu" id="createCalendarableScheduledEvent">
-					<cpt:named>Create Calendarable Scheduled Event</cpt:named>
-				</mb3:serviceAction>
-				<mb3:serviceAction objectType="EventsMenu" id="listScheduledEvents">
-					<cpt:named>List Scheduled Events</cpt:named>
-				</mb3:serviceAction>
-				<mb3:serviceAction objectType="EventsMenu" id="listCalendarableScheduledEvent">
-					<cpt:named>List Calendarable Scheduled Event</cpt:named>
-				</mb3:serviceAction>
+				<mb3:serviceAction objectType="EventsMenu" id="createEventAttendee" />
+				<mb3:serviceAction objectType="EventsMenu" id="createEventFacilitator" />
+				<mb3:serviceAction objectType="EventsMenu" id="createSimpleEvent" />
+				<mb3:serviceAction objectType="EventsMenu" id="createScheduledEvent" />
+				<mb3:serviceAction objectType="EventsMenu" id="createCalendarableScheduledEvent" />
+				<mb3:serviceAction objectType="EventsMenu" id="listSimpleEvents" />
+				<mb3:serviceAction objectType="EventsMenu" id="listScheduledEvents" />
+				<mb3:serviceAction objectType="EventsMenu" id="listCalendarableScheduledEvent" />
+			</mb3:section>
+		</mb3:menu>
+		<mb3:menu>
+			<mb3:named>Activities</mb3:named>
+			<mb3:section>
+				<mb3:serviceAction objectType="ActivityMenu" id="createActivityEvent" />
+				<mb3:serviceAction objectType="ActivityMenu" id="createRecurringActivityEvent" />
+				<mb3:serviceAction objectType="ActivityMenu" id="listActivityEvents" />
+				<mb3:serviceAction objectType="ActivityMenu" id="listRecurringActivityEvents" />
 			</mb3:section>
 		</mb3:menu>
 		<mb3:menu>
 			<mb3:named>Contacts</mb3:named>
 			<mb3:section>
-				<mb3:serviceAction objectType="ContactsMenu" id="createContactor">
-					<cpt:named>Create Contactor</cpt:named>
-				</mb3:serviceAction>
-				<mb3:serviceAction objectType="ContactsMenu" id="createContactee">
-					<cpt:named>Create Contactee</cpt:named>
-				</mb3:serviceAction>
-				<mb3:serviceAction objectType="ContactsMenu" id="createScheduledContact">
-					<cpt:named>Create Scheduled Contact</cpt:named>
-				</mb3:serviceAction>
+				<mb3:serviceAction objectType="ContactsMenu" id="createContactor" />
+				<mb3:serviceAction objectType="ContactsMenu" id="createContactee" />
+				<mb3:serviceAction objectType="ContactsMenu" id="createScheduledContact" />
+				<mb3:serviceAction objectType="ContactsMenu" id="createContactAllocation" />
 			</mb3:section>
 		</mb3:menu>
 		<mb3:menu unreferencedActions="true">
