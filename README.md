@@ -19,7 +19,7 @@ To demonstrate, activities are an extension of scheduled events. Chats then buil
 
 A minimal event, an extension of the abstract BaseEvent class
 
-![Organisation Screen](https://github.com/Stephen-Cameron-Data-Services/event-schedule/blob/master/event-schedule-module-base/images/screen/SimpleEvent.png)
+![Organisation Screen](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/SimpleEvent.png)
 
 
 ## Implementation
