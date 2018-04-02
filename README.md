@@ -33,9 +33,9 @@ A Scheduled Event as previous but with the addition of being able to be displaye
 
 ![Calendarable Scheduled Event Screen](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/CalendarableScheduledEvent.png)
 
-![Calendarable Scheduled Events in Tabular View](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/CalendarableScheduledEventinTableView.png)
+![Calendarable Scheduled Events in Tabular View](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/CalendarableScheduledEventInTableView.png)
 
-![Calendarable Scheduled Events in Calendar View](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/CalendarableScheduledEventinCalendarView.png)
+![Calendarable Scheduled Events in Calendar View](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/CalendarableScheduledEventInCalendarView.png)
 
 ### Scheduled Activity
 
