@@ -15,12 +15,33 @@ To demonstrate, activities are an extension of scheduled events. Chats then buil
 
 ## Entities
 
-### SimpleEvent
+### Simple Event
 
 A minimal event, an extension of the abstract BaseEvent class
 
-![Organisation Screen](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/SimpleEvent.png)
+![Simple Event Screen](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/SimpleEvent.png)
 
+### Scheduled Event
+
+An event for scheduling with attendees having bookings. 
+
+![Scheduled Event Screen](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/ScheduledEvent.png)
+
+### Calendarable Scheduled Event
+
+A Scheduled Event as previous but with the addition of being able to be displayed in a calendar. This demonstrates the use of the Incode Calendar Module.
+
+![Calendarable Scheduled Event Screen](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/CalendarableScheduledEvent.png)
+
+![Calendarable Scheduled Events in Tabular View](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/CalendarableScheduledEventinTableView.png)
+
+![Calendarable Scheduled Events in Calendar View](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/CalendarableScheduledEventinCalendarView.png)
+
+### Scheduled Activity
+
+A Scheduled Activity is an extension of Calendarable Scheduled Event, but have Participations and Attendances instead of Bookings. Participations are an intention to attend an activity, Attendances are an after the fact record of attendance.
+
+![Scheduled Activity](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/ScheduledActivity.png)
 
 ## Implementation
 
