@@ -43,7 +43,7 @@ import lombok.Setter;
 @DomainObject(objectType = "ParentedActivityEvent")
 public class ParentedActivityEvent extends ActivityEvent {
 	
-	@Getter(value=AccessLevel.PRIVATE)
+	@Getter
 	@Setter(value=AccessLevel.PRIVATE)
 	protected RecurringActivityEvent parent;
 

@@ -5,8 +5,6 @@
 	<bs3:row>
 		<bs3:col span="12" unreferencedActions="true">
 			<cpt:domainObject bookmarking="AS_ROOT" />
-			<cpt:action id="addBooking" hidden="EVERYWHERE" />
-			<cpt:action id="removeBooking" hidden="EVERYWHERE" />
 		</bs3:col>
 	</bs3:row>
 	<bs3:row>
@@ -15,6 +13,7 @@
 				<cpt:property id="datanucleusIdLong" hidden="ALL_TABLES" />
 				<cpt:property id="datanucleusVersionLong" hidden="ALL_TABLES" />
 				<cpt:property id="datanucleusVersionTimestamp" hidden="ALL_TABLES" />
+				<cpt:property id="parent" />
 				<cpt:property id="name" />
 				<cpt:property id="codeName" hidden="ALL_TABLES" />
 				<cpt:property id="description" multiLine="4" hidden="ALL_TABLES" />
@@ -25,6 +24,14 @@
 				<cpt:property id="locationName" hidden="ALL_TABLES" />
 				<cpt:property id="streetAddress" hidden="ALL_TABLES" />
 			</cpt:fieldSet>
+			<cpt:collection defaultView="table" id="facilitators">
+				<cpt:action id="addFacilitator">
+					<cpt:named>Add</cpt:named>
+				</cpt:action>
+				<cpt:action id="removeFacilitator">
+					<cpt:named>Remove</cpt:named>
+				</cpt:action>
+			</cpt:collection>
 		</bs3:col>
 		<bs3:col span="6" unreferencedCollections="true">
 			<cpt:fieldSet name="Times" id="time">
@@ -55,24 +62,25 @@
 					</cpt:action>
 				</cpt:property>
 			</cpt:fieldSet>
-			<cpt:collection defaultView="table" id="bookingsList" hidden="EVERYWHERE" />
-			<cpt:collection defaultView="table" id="attendances" hidden="EVERYWHERE">
-				<cpt:action id="addAttendance" />
-				<cpt:action id="removeAttendance" />
-			</cpt:collection>
-			<cpt:collection defaultView="table" id="participations">
-				<cpt:action id="addParticipation">
-					<cpt:named>Add</cpt:named>
-				</cpt:action>
-				<cpt:action id="removeParticipation">
-					<cpt:named>Remove</cpt:named>
-				</cpt:action>
-			</cpt:collection>
+
 			<cpt:collection defaultView="table" id="childEvents">
 				<cpt:action id="addChildEvent">
 					<cpt:named>Add</cpt:named>
 				</cpt:action>
 				<cpt:action id="removeChildEvent">
+					<cpt:named>Remove</cpt:named>
+				</cpt:action>
+			</cpt:collection>
+			<cpt:collection defaultView="table" id="bookings" hidden="EVERYWHERE">
+				<cpt:action id="addBooking" />
+				<cpt:action id="removeBooking" />
+			</cpt:collection>
+			<!-- Participations are Bookings  -->
+			<cpt:collection defaultView="table" id="participations">
+				<cpt:action id="addParticipation">
+					<cpt:named>Add</cpt:named>
+				</cpt:action>
+				<cpt:action id="removeParticipation">
 					<cpt:named>Remove</cpt:named>
 				</cpt:action>
 			</cpt:collection>
@@ -87,11 +95,11 @@
 					<cpt:named>Move</cpt:named>
 				</cpt:action>
 			</cpt:collection>
-			<cpt:collection defaultView="table" id="facilitatorsList">
-				<cpt:action id="addFacilitator">
+			<cpt:collection defaultView="table" id="attendances">
+				<cpt:action id="addAttendance">
 					<cpt:named>Add</cpt:named>
 				</cpt:action>
-				<cpt:action id="removeFacilitator">
+				<cpt:action id="removeAttendance">
 					<cpt:named>Remove</cpt:named>
 				</cpt:action>
 			</cpt:collection>
