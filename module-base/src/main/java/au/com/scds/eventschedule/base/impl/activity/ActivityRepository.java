@@ -15,7 +15,7 @@ import au.com.scds.eventschedule.base.impl.Organisation;
 import au.com.scds.eventschedule.base.impl.ScheduledEvent;
 
 @DomainService(nature = NatureOfService.DOMAIN)
-public class ActivityBaseRepository {
+public class ActivityRepository {
 
 	public ActivityEvent createActivityEvent(Organisation organisation, String eventName, String calendarName,
 			DateTime date, String note) {

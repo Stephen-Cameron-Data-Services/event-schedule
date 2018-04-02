@@ -1,6 +1,6 @@
 /*
  *
- *  Copyright 2015 Stephen Cameron Data Services
+ *  Copyright 2018 Stephen Cameron Data Services
  *
  *
  *  Licensed under the Apache License, Version 2.0 (the
@@ -52,8 +52,8 @@ import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
-@Discriminator(value = "BaseActivityEvent")
-@DomainObject(objectType = "BaseActivityEvent")
+@Discriminator(value = "ActivityEvent")
+@DomainObject(objectType = "ActivityEvent")
 public class ActivityEvent extends CalendarableScheduledEvent {
 
 	@Persistent(mappedBy = "event")
@@ -167,7 +167,7 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 	EventsRepository baseRepo;
 
 	@Inject
-	ActivityBaseRepository activityRepo;
+	ActivityRepository activityRepo;
 
 	protected void createAttendanceSetFromParticipantSet() {
 		// TODO Auto-generated method stub

@@ -1,6 +1,6 @@
 /*
  *
- *  Copyright 2015 Stephen Cameron Data Services
+ *  Copyright 2018 Stephen Cameron Data Services
  *
  *
  *  Licensed under the Apache License, Version 2.0 (the
@@ -22,6 +22,7 @@ package au.com.scds.eventschedule.base.impl.activity;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.DomainObject;
@@ -70,6 +71,11 @@ public class Attendance implements Comparable<Attendance>{
 	
 	public String title(){
 		return this.getAttendee().getFullname() +  "-in-" + this.getEvent().getName();
+	}
+	
+	@NotPersistent
+	public String getAttendeeName() {
+		return this.getAttendee().getFullname();
 	}
 
 	@Override

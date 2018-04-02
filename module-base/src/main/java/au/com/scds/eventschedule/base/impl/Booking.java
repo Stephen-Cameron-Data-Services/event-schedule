@@ -1,6 +1,6 @@
 /*
  *
- *  Copyright 2015 Stephen Cameron Data Services
+ *  Copyright 2018 Stephen Cameron Data Services
  *
  *
  *  Licensed under the Apache License, Version 2.0 (the
@@ -29,6 +29,7 @@ import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.DomainObject;
+import org.apache.isis.applib.services.i18n.TranslatableString;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -55,8 +56,8 @@ public class Booking implements Comparable<Booking> {
 		setAttendee(attendee);
 	}
 	
-	public String title(){
-		return this.getAttendeeName() + "-in-" + this.getEvent().title();
+	public TranslatableString title(){
+		return TranslatableString.tr("{attendee}-at-{event}", "attendee", this.getAttendeeName(), "event" , this.getEvent().getName());
 	}
 	
 	@NotPersistent

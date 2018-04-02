@@ -69,6 +69,8 @@ public class RecurringActivities_IntegTest extends IntegTestAbstract {
 	        	assertThat(activities.get(0).getParticipations().size()).isEqualTo(1);
 	        	assertThat(activities.get(0).getChildEvents()).isNotNull();
 	        	assertThat(activities.get(0).getChildEvents().size()).isEqualTo(2);
+	        	//one participation from parent and one from child, so two
+	        	assertThat(activities.get(0).getChildEvents().first().getParticipations().size()).isEqualTo(2);
 	        }
 	    }
 

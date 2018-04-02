@@ -1,6 +1,6 @@
 /*
  *
- *  Copyright 2015 Stephen Cameron Data Services
+ *  Copyright 2018 Stephen Cameron Data Services
  *
  *
  *  Licensed under the Apache License, Version 2.0 (the
@@ -73,7 +73,7 @@ public class ContactAllocation implements Comparable<ContactAllocation>{
 	}
 	
 	@Inject
-	EventsRepository baseRepo;
+	ContactsRepository baseRepo;
 
 
 }

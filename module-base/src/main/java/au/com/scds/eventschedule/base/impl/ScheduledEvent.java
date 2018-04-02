@@ -1,6 +1,6 @@
 /*
  *
- *  Copyright 2015 Stephen Cameron Data Services
+ *  Copyright 2018 Stephen Cameron Data Services
  *
  *
  *  Licensed under the Apache License, Version 2.0 (the
@@ -148,7 +148,7 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 		return booking;
 	}
 
-	public SortedSet<Booking> getBookingsList() {
+	public SortedSet<Booking> getBookings() {
 		return Collections.unmodifiableSortedSet(this.getBookingSet());
 	}
 
@@ -219,7 +219,7 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 		return this.getFacilitatorSet();
 	}
 
-	public SortedSet<EventFacilitator> getFacilitatorsList() {
+	public SortedSet<EventFacilitator> getFacilitators() {
 		return Collections.unmodifiableSortedSet(this.getFacilitatorSet());
 	}
 

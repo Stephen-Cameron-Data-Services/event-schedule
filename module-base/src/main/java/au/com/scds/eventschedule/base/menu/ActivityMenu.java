@@ -13,7 +13,7 @@ import org.apache.isis.applib.annotation.ParameterLayout;
 import org.joda.time.DateTime;
 
 import au.com.scds.eventschedule.base.impl.Organisation;
-import au.com.scds.eventschedule.base.impl.activity.ActivityBaseRepository;
+import au.com.scds.eventschedule.base.impl.activity.ActivityRepository;
 import au.com.scds.eventschedule.base.impl.activity.ActivityEvent;
 import au.com.scds.eventschedule.base.impl.activity.RecurringActivityEvent;
 
@@ -46,5 +46,5 @@ public class ActivityMenu {
 	}
 
 	@Inject
-	ActivityBaseRepository repo;
+	ActivityRepository repo;
 }

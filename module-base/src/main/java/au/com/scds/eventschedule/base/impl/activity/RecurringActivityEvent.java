@@ -23,8 +23,8 @@ import lombok.Setter;
 
 @PersistenceCapable()
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
-@Discriminator(value = "BaseRecurringActivityEvent")
-@DomainObject(objectType = "BaseRecurringActivityEventt")
+@Discriminator(value = "RecurringActivityEvent")
+@DomainObject(objectType = "RecurringActivityEventt")
 public class RecurringActivityEvent extends ActivityEvent{
 
 	@Getter(value=AccessLevel.PROTECTED)
@@ -63,5 +63,5 @@ public class RecurringActivityEvent extends ActivityEvent{
 	}
 	
 	@Inject
-	ActivityBaseRepository activityRepo;
+	ActivityRepository activityRepo;
 }

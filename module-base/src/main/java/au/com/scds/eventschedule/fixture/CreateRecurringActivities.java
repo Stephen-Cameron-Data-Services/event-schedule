@@ -18,6 +18,9 @@ import au.com.scds.eventschedule.base.menu.ActivityMenu;
 import au.com.scds.eventschedule.base.menu.EventMenu;
 import au.com.scds.eventschedule.fixture.generated.Activities;
 import au.com.scds.eventschedule.fixture.generated.ActivityEvent;
+import au.com.scds.eventschedule.fixture.generated.Attendance;
+import au.com.scds.eventschedule.fixture.generated.Attendee;
+import au.com.scds.eventschedule.fixture.generated.EventFacilitator;
 import au.com.scds.eventschedule.fixture.generated.ObjectFactory;
 import au.com.scds.eventschedule.fixture.generated.ParentedActivityEvent;
 import au.com.scds.eventschedule.fixture.generated.Participation;
@@ -49,8 +52,41 @@ public class CreateRecurringActivities extends FixtureScript {
 					attendee = eventMenu.createEventAttendee(_participation.getAttendee().getPerson().getFullname());
 					parent.addParticipation(attendee);
 				}
+				for(Attendee _attendee : _parent.getWaitList().getAttendee()){
+					attendee = eventMenu.createEventAttendee(_attendee.getPerson().getFullname());
+					parent.addWaitListed(attendee);
+				}
+				au.com.scds.eventschedule.base.impl.EventFacilitator facilitator = null;
+				for(EventFacilitator _facilitator : _parent.getEventFacilitator()){
+					facilitator = eventMenu.createEventFacilitator(_facilitator.getPerson().getFullname());
+					parent.addFacilitator(facilitator);
+				}
+				//same for child events
 				for(ParentedActivityEvent _child : _parent.getChildEvent()){
 					parent.addChildEvent(new DateTime(_child.getDate()));
+					au.com.scds.eventschedule.base.impl.activity.ParentedActivityEvent child = null;
+					for(au.com.scds.eventschedule.base.impl.activity.ParentedActivityEvent e : parent.getChildEvents()){
+						if(e.getStart().equals(new DateTime(_child.getDate()))){
+							child = e;
+							break;
+						}
+					}
+					for(Participation _participation : _child.getParticipation()){
+						attendee = eventMenu.createEventAttendee(_participation.getAttendee().getPerson().getFullname());
+						child.addParticipation(attendee);
+					}
+					for(Attendee _attendee : _child.getWaitList().getAttendee()){
+						attendee = eventMenu.createEventAttendee(_attendee.getPerson().getFullname());
+						child.addWaitListed(attendee);
+					}
+					for(EventFacilitator _facilitator : _child.getEventFacilitator()){
+						facilitator = eventMenu.createEventFacilitator(_facilitator.getPerson().getFullname());
+						child.addFacilitator(facilitator);
+					}
+					for(Attendance _attendance : _child.getAttendance()){
+						attendee = eventMenu.createEventAttendee(_attendance.getAttendee().getPerson().getFullname());
+						child.addAttendance(attendee);
+					}
 				}
 				activities.add(parent);
 			}

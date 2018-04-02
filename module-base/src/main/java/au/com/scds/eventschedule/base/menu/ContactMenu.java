@@ -1,6 +1,7 @@
 package au.com.scds.eventschedule.base.menu;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -15,6 +16,7 @@ import org.joda.time.DateTime;
 import au.com.scds.eventschedule.base.impl.Contactee;
 import au.com.scds.eventschedule.base.impl.ContactAllocation;
 import au.com.scds.eventschedule.base.impl.Contactor;
+import au.com.scds.eventschedule.base.impl.ContactsRepository;
 import au.com.scds.eventschedule.base.impl.EventsRepository;
 import au.com.scds.eventschedule.base.impl.ScheduledContact;
 
@@ -40,6 +42,14 @@ public class ContactMenu {
 			@ParameterLayout(named="Date-time") DateTime date) {
 		return repo.createScheduledContact(contactor, contactee, date);
 	}
+	
+	public List<Contactor> choices0CreateScheduledContact(){
+		return repo.listAllContactors();
+	}
+	
+	public List<Contactee> choices1CreateScheduledContact(){
+		return repo.listAllContactees();
+	}
 
 	@Action
 	@MemberOrder(sequence = "4")
@@ -52,5 +62,7 @@ public class ContactMenu {
 	}
 	
 	@Inject
-	EventsRepository repo;
+	ContactsRepository repo;
+	
+	
 }

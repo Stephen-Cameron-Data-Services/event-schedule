@@ -53,19 +53,11 @@
 					</cpt:action>
 				</cpt:property>
 			</cpt:fieldSet>
-			<cpt:collection defaultView="table" id="bookingsList">
+			<cpt:collection defaultView="table" id="bookings">
 				<cpt:action id="addBooking">
 					<cpt:named>Add</cpt:named>
 				</cpt:action>
 				<cpt:action id="removeBooking">
-					<cpt:named>Remove</cpt:named>
-				</cpt:action>
-			</cpt:collection>
-			<cpt:collection defaultView="table" id="facilitatorsList">
-				<cpt:action id="addFacilitator">
-					<cpt:named>Add</cpt:named>
-				</cpt:action>
-				<cpt:action id="removeFacilitator">
 					<cpt:named>Remove</cpt:named>
 				</cpt:action>
 			</cpt:collection>
@@ -78,6 +70,14 @@
 				</cpt:action>
 				<cpt:action id="moveWaitListed">
 					<cpt:named>Move</cpt:named>
+				</cpt:action>
+			</cpt:collection>
+						<cpt:collection defaultView="table" id="facilitators">
+				<cpt:action id="addFacilitator">
+					<cpt:named>Add</cpt:named>
+				</cpt:action>
+				<cpt:action id="removeFacilitator">
+					<cpt:named>Remove</cpt:named>
 				</cpt:action>
 			</cpt:collection>
 		</bs3:col>

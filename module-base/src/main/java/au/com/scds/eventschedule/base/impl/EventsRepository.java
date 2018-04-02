@@ -1,6 +1,6 @@
 /*
  *
- *  Copyright 2015 Stephen Cameron Data Services
+ *  Copyright 2018 Stephen Cameron Data Services
  *
  *
  *  Licensed under the Apache License, Version 2.0 (the
@@ -86,42 +86,6 @@ public class EventsRepository {
 		repositoryService.removeAndFlush(booking);
 	}
 
-	public Contactee createContactee(String name) {
-		if (name == null)
-			return null;
-		Person person = new Person(name);
-		repositoryService.persistAndFlush(person);
-		Contactee object = new Contactee(person);
-		repositoryService.persistAndFlush(object);
-		return object;
-	}
-
-	public Contactee createContactee(Person person) {
-		if (person == null)
-			return null;
-		Contactee object = new Contactee(person);
-		repositoryService.persistAndFlush(object);
-		return object;
-	}
-
-	public Contactor createContactor(String name) {
-		if (name == null)
-			return null;
-		Person person = new Person(name);
-		repositoryService.persistAndFlush(person);
-		Contactor object = new Contactor(person);
-		repositoryService.persistAndFlush(object);
-		return object;
-	}
-
-	public Contactor createContactor(Person person) {
-		if (person == null)
-			return null;
-		Contactor object = new Contactor(person);
-		repositoryService.persistAndFlush(object);
-		return object;
-	}
-
 	public Organisation createOrganisation(String name) {
 		if (name == null)
 			return null;
@@ -137,27 +101,6 @@ public class EventsRepository {
 		repositoryService.persistAndFlush(object);
 		return object;
 	}
-
-	public ScheduledContact createScheduledContact(Contactor contactor, Contactee contactee, DateTime date) {
-		if (contactor == null || contactee == null || date == null)
-			return null;
-		ScheduledContact object = new ScheduledContact(contactor, contactee, date);
-		repositoryService.persistAndFlush(object);
-		return object;
-	}
-	
-	public ContactAllocation createContactAllocation(Contactor contactor, Contactee contactee) {
-		if (contactor == null || contactee == null)
-			return null;
-		ContactAllocation object = new ContactAllocation(contactor, contactee);
-		repositoryService.persistAndFlush(object);
-		return object;
-	}
-	
-	public void destroyContactAllocation(ContactAllocation allocation) {
-		repositoryService.removeAndFlush(allocation);
-	}
-	
 
 	public List<SimpleEvent> listSimpleEvent() {
 		return repositoryService.allInstances(SimpleEvent.class);

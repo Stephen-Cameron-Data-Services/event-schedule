@@ -62,15 +62,15 @@ public class Events_IntegTest extends IntegTestAbstract {
 	            assertThat(event.getName()).isEqualTo("Test Event");
 	            assertThat(event.getStart().toDate()).isCloseTo("2018-12-31T12:00:00",100);
 	            
-	            assertThat(event.getBookingsList().size()).isEqualTo(1);
+	            assertThat(event.getBookings().size()).isEqualTo(1);
 
 	            assertThat(event.getWaitListed().size()).isEqualTo(1);
-	            assertThat(event.getFacilitatorsList().size()).isEqualTo(1);
+	            assertThat(event.getFacilitators().size()).isEqualTo(1);
 	         
-	            Attendee attendee1 = event.getBookingsList().first().getAttendee();
+	            Attendee attendee1 = event.getBookings().first().getAttendee();
 	            //Attendee attendee2 = event.getAttendancesList().get(0).getAttendee();
 	            Attendee attendee3 = event.getWaitListed().first();
-	            EventFacilitator facilitator1 = event.getFacilitatorsList().first();
+	            EventFacilitator facilitator1 = event.getFacilitators().first();
 	            
 	            assertThat(attendee1.getFullname()).isEqualTo("Anders Zorn");
 	            //assertThat(attendee2.getFullname()).isEqualTo("Pablo Picasso");
@@ -80,15 +80,15 @@ public class Events_IntegTest extends IntegTestAbstract {
 	            assertThat(attendee1.getBookings().size()).isEqualTo(1);
 	            //assertThat(attendee2.getAttendancesList().size()).isEqualTo(1);
 	            
-	            event.removeBooking(event.getBookingsList().first());
+	            event.removeBooking(event.getBookings().first());
 	            //event.removeAttendance(event.getAttendancesList().get(0));
 	            event.removeWaitListed(attendee3);
 	            event.removeFacilitator(facilitator1);
 	            
-	            assertThat(event.getBookingsList().size()).isEqualTo(0);
+	            assertThat(event.getBookings().size()).isEqualTo(0);
 	            //assertThat(event.getAttendancesList().size()).isEqualTo(0);
 	            assertThat(event.getWaitListed().size()).isEqualTo(0);
-	            assertThat(event.getFacilitatorsList().size()).isEqualTo(0);
+	            assertThat(event.getFacilitators().size()).isEqualTo(0);
 	            assertThat(attendee1.getBookings().size()).isEqualTo(0);
 	            //assertThat(attendee2.getAttendancesList().size()).isEqualTo(0);
 	        }
