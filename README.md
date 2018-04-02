@@ -15,11 +15,11 @@ To demonstrate, activities are an extension of scheduled events. Chats then buil
 
 ## Entities
 
-### Organisation
+### SimpleEvent
 
-A formal on informal group of cooperating people. Individual Persons are linked to specific Organisations and view one linked Organisation at a time.
+A minimal event, an extension of the abstract BaseEvent class
 
-![Organisation Screen](https://github.com/stevecam62/cooperation/blob/master/module-base/images/screen/Organisation.png)
+![Organisation Screen](https://github.com/Stephen-Cameron-Data-Services/event-schedule/blob/master/event-schedule-module-base/images/screen/SimpleEvent.png)
 
 
 ## Implementation
