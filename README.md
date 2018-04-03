@@ -37,11 +37,11 @@ A Scheduled Event as previous but with the addition of being able to be displaye
 
 ![Calendarable Scheduled Events in Calendar View](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/CalendarableScheduledEventsInCalendarView.png)
 
-### Scheduled Activity
+### Activity (Event)
 
-A Scheduled Activity is an extension of Calendarable Scheduled Event, but have Participations and Attendances instead of Bookings. Participations are an intention to attend an activity, Attendances are an after the fact record of attendance.
+An Activity Event is an extension of Calendarable Scheduled Event, but have Participations and Attendances instead of Bookings. Participations are an intention to attend an activity, Attendances are an after the fact record of attendance.
 
-![Scheduled Activity](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/ScheduledActivity.png)
+![Activity Event](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/ActivityEvent.png)
 
 ### Recurring Activity
 
