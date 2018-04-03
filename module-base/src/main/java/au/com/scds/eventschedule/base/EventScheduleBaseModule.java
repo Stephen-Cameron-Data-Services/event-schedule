@@ -33,7 +33,7 @@ public class EventScheduleBaseModule extends ModuleAbstract {
             }
         };
     }*/
-
+	
     public static class PropertyDomainEvent<S,T>
             extends org.apache.isis.applib.services.eventbus.PropertyDomainEvent<S,T> {}
     public static class CollectionDomainEvent<S,T>

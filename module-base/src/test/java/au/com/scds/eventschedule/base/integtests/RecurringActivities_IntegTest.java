@@ -29,9 +29,9 @@ import au.com.scds.eventschedule.base.impl.Contactee;
 import au.com.scds.eventschedule.base.impl.Contactor;
 import au.com.scds.eventschedule.base.impl.activity.ActivityEvent;
 import au.com.scds.eventschedule.base.impl.activity.RecurringActivityEvent;
-import au.com.scds.eventschedule.fixture.CreateActivities;
-import au.com.scds.eventschedule.fixture.CreateAllocations;
-import au.com.scds.eventschedule.fixture.CreateRecurringActivities;
+import au.com.scds.eventschedule.fixture.scenarios.CreateActivities;
+import au.com.scds.eventschedule.fixture.scenarios.CreateAllocations;
+import au.com.scds.eventschedule.fixture.scenarios.CreateRecurringActivities;
 
 import org.apache.isis.applib.fixturescripts.FixtureScripts;
 import org.apache.isis.applib.services.xactn.TransactionService;

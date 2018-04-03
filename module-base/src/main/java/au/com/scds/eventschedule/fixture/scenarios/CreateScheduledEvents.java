@@ -1,4 +1,4 @@
-package au.com.scds.eventschedule.fixture;
+package au.com.scds.eventschedule.fixture.scenarios;
 
 import java.io.InputStream;
 
@@ -8,7 +8,6 @@ import javax.xml.bind.*;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 import org.joda.time.DateTime;
 
-import au.com.scds.eventschedule.fixture.generated.ScheduledEvent;
 import au.com.scds.eventschedule.base.menu.EventMenu;
 import au.com.scds.eventschedule.fixture.generated.*;
 

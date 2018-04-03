@@ -24,6 +24,9 @@ import org.apache.isis.applib.fixturescripts.FixtureScripts;
 import org.apache.isis.applib.services.fixturespec.FixtureScriptsSpecification;
 import org.apache.isis.applib.services.fixturespec.FixtureScriptsSpecificationProvider;
 
+import au.com.scds.eventschedule.base.EventScheduleBaseManifest;
+import au.com.scds.eventschedule.fixture.scenarios.CreateActivities;
+import au.com.scds.eventschedule.fixture.scenarios.CreateScheduledEvents;
 import domainapp.application.fixture.scenarios.DomainAppDemo;
 
 /**
@@ -35,11 +38,12 @@ import domainapp.application.fixture.scenarios.DomainAppDemo;
 public class DomainAppFixtureScriptsSpecificationProvider implements FixtureScriptsSpecificationProvider {
     public FixtureScriptsSpecification getSpecification() {
         return FixtureScriptsSpecification
-                .builder(DomainAppFixtureScriptsSpecificationProvider.class)
+                .builder(/*DomainAppFixtureScriptsSpecificationProvider.class*/ "au.com.scds.eventschedule.fixture")
                 .with(FixtureScripts.MultipleExecutionStrategy.EXECUTE)
-                .withRunScriptDefault(DomainAppDemo.class)
+                //.withRunScriptDefault(DomainAppDemo.class)
                 .withRunScriptDropDown(FixtureScriptsSpecification.DropDownPolicy.CHOICES)
-                .withRecreate(DomainAppDemo.class)
+                .withRecreate(/*DomainAppDemo.class*/ CreateScheduledEvents.class)
                 .build();
     }
+    
 }

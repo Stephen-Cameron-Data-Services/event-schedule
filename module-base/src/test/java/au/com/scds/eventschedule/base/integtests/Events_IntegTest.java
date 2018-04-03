@@ -27,7 +27,7 @@ import org.junit.Test;
 import au.com.scds.eventschedule.base.impl.Attendee;
 import au.com.scds.eventschedule.base.impl.EventFacilitator;
 import au.com.scds.eventschedule.base.impl.ScheduledEvent;
-import au.com.scds.eventschedule.fixture.CreateScheduledEvents;
+import au.com.scds.eventschedule.fixture.scenarios.CreateScheduledEvents;
 
 import org.apache.isis.applib.fixturescripts.FixtureScripts;
 import org.apache.isis.applib.services.xactn.TransactionService;

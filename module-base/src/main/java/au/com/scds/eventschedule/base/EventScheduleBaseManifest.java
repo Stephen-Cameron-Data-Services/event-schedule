@@ -18,20 +18,26 @@
  */
 package au.com.scds.eventschedule.base;
 
+import java.util.Arrays;
+
 import org.apache.isis.applib.AppManifestAbstract2;
 
+import au.com.scds.eventschedule.fixture.scenarios.*;
+
 /**
- * Used by <code>isis-maven-plugin</code> (build-time validation of the module) and also by module-level integration tests.
+ * Used by <code>isis-maven-plugin</code> (build-time validation of the module)
+ * and also by module-level integration tests.
  */
 public class EventScheduleBaseManifest extends AppManifestAbstract2 {
 
-    public static final Builder BUILDER = Builder.forModule(new EventScheduleBaseModule())
-            .withConfigurationProperty("isis.persistor.datanucleus.impl.datanucleus.schema.autoCreateAll","true")
-            .withConfigurationProperty("isis.persistor.datanucleus.impl.datanucleus.identifier.case","MixedCase")
-            ;
+	public static final Builder BUILDER = Builder.forModule(new EventScheduleBaseModule())
+			.withConfigurationProperty("isis.persistor.datanucleus.impl.datanucleus.schema.autoCreateAll", "true")
+			.withConfigurationProperty("isis.persistor.datanucleus.impl.datanucleus.identifier.case", "MixedCase")
+			.withFixtureScripts(Arrays.asList(CreateActivities.class, CreateAllocations.class,
+					CreateRecurringActivities.class, CreateScheduledEvents.class));
 
-    public EventScheduleBaseManifest() {
-        super(BUILDER);
-    }
+	public EventScheduleBaseManifest() {
+		super(BUILDER);
+	}
 
 }

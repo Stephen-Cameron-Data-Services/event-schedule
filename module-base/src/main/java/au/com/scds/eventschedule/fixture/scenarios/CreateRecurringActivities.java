@@ -1,4 +1,4 @@
-package au.com.scds.eventschedule.fixture;
+package au.com.scds.eventschedule.fixture.scenarios;
 
 import java.io.InputStream;
 import java.util.ArrayList;
