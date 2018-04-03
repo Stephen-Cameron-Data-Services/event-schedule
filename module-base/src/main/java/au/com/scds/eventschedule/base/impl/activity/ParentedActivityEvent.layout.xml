@@ -13,7 +13,7 @@
 				<cpt:property id="datanucleusIdLong" hidden="ALL_TABLES" />
 				<cpt:property id="datanucleusVersionLong" hidden="ALL_TABLES" />
 				<cpt:property id="datanucleusVersionTimestamp" hidden="ALL_TABLES" />
-				<cpt:property id="parent" />
+				<cpt:property id="parent" hidden="PARENTED_TABLES" />
 				<cpt:property id="name" />
 				<cpt:property id="codeName" hidden="ALL_TABLES" />
 				<cpt:property id="description" multiLine="4" hidden="ALL_TABLES" />
@@ -23,6 +23,8 @@
 				<cpt:property id="cutoffLimit" hidden="ALL_TABLES" />
 				<cpt:property id="locationName" hidden="ALL_TABLES" />
 				<cpt:property id="streetAddress" hidden="ALL_TABLES" />
+				<cpt:property id="calendarName" hidden="ALL_TABLES" />
+				<cpt:property id="calendarNote" hidden="ALL_TABLES" />
 			</cpt:fieldSet>
 			<cpt:collection defaultView="table" id="facilitators">
 				<cpt:action id="addFacilitator">
@@ -39,7 +41,7 @@
 					<cpt:named>Period</cpt:named>
 					<cpt:describedAs>Calculated Period Length (HH:MM).</cpt:describedAs>
 				</cpt:property>
-				<cpt:property id="intervalLengthInMinutes" hidden="OBJECT_FORMS">
+				<cpt:property id="intervalLengthInMinutes" hidden="ALL_EXCEPT_STANDALONE_TABLES">
 					<cpt:named>Minutes</cpt:named>
 					<cpt:describedAs>Calculated Period Length (Minutes).</cpt:describedAs>
 				</cpt:property>

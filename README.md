@@ -33,8 +33,6 @@ A Scheduled Event as previous but with the addition of being able to be displaye
 
 ![Calendarable Scheduled Event Screen](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/CalendarableScheduledEvent.png)
 
-If 
-
 ![Calendarable Scheduled Events in Tabular View](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/CalendarableScheduledEventsInTableView.png)
 
 ![Calendarable Scheduled Events in Calendar View](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/CalendarableScheduledEventsInCalendarView.png)
@@ -44,6 +42,16 @@ If
 A Scheduled Activity is an extension of Calendarable Scheduled Event, but have Participations and Attendances instead of Bookings. Participations are an intention to attend an activity, Attendances are an after the fact record of attendance.
 
 ![Scheduled Activity](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/ScheduledActivity.png)
+
+### Recurring Activity
+
+A Recurring Activity (parent) has child activities, any Participations created against the parent are seen in all child activities, together with those created in each child individually.
+
+![Recurring Activity Event](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/RecurringActivityEvent.png)
+
+A child activity, with a link back to its parent Recurring Activity and with two Participations, one from its parent and one created for this child.
+
+![Parented Activity Event](https://github.com/Stephen-Cameron-Data-Services/event-schedule/raw/master/module-base/images/screen/ParentedActivityEvent.png)
 
 ## Implementation
 

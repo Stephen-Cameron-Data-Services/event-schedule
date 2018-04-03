@@ -23,6 +23,7 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 
 import au.com.scds.eventschedule.base.EventScheduleBaseModule;
+import au.com.scds.eventschedule.fixture.EventScheduleFixturesModule;
 
 import org.apache.isis.applib.Module;
 import org.apache.isis.applib.ModuleAbstract;
@@ -33,6 +34,8 @@ public class DomainAppApplicationModule extends ModuleAbstract {
 
     @Override
     public Set<Module> getDependencies() {
-        return Sets.<Module>newHashSet(/*new SimpleModule(),*/ new EventScheduleBaseModule());
+        return Sets.<Module>newHashSet(/*new SimpleModule(),*/ 
+        		new EventScheduleBaseModule(),
+        		new EventScheduleFixturesModule());
     }
 }
