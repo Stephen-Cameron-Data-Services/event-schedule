@@ -22,7 +22,11 @@ package au.com.scds.eventschedule.base.impl;
 import java.util.Date;
 
 import javax.jdo.annotations.Column;
+import javax.jdo.annotations.Discriminator;
+import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.DomainObject;
@@ -33,8 +37,10 @@ import au.com.scds.eventschedule.base.impl.Contactor;
 import lombok.Getter;
 import lombok.Setter;
 
-@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "contact_event")
-@DomainObject(objectType = "ScheduledContact")
+@DomainObject()
+@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "scheduled_contact")
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+@Discriminator(value = "ScheduledContact")
 public class ScheduledContact extends BaseEvent {
 
 	@Column(allowsNull = "false")
@@ -46,6 +52,8 @@ public class ScheduledContact extends BaseEvent {
 	@Getter()
 	@Setter()
 	protected Contactee contactee;
+	
+	protected ScheduledContact() {}
 
 	public ScheduledContact(Contactor contactor, Contactee contactee, DateTime date) {
 		super(date, null);

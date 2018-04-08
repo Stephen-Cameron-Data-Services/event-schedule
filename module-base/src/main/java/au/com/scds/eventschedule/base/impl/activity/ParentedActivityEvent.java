@@ -46,13 +46,17 @@ public class ParentedActivityEvent extends ActivityEvent {
 	@Getter
 	@Setter(value=AccessLevel.PRIVATE)
 	protected RecurringActivityEvent parent;
-
+	
+	protected ParentedActivityEvent() {
+		super();
+	}
+	
 	public ParentedActivityEvent(RecurringActivityEvent parent, String name, String calendarName, DateTime date,
 			String note) {
 		super(null, name, calendarName, date, note);
 		this.setParent(parent);
 	}
-	
+
 	@Override
 	public SortedSet<Participation> getParticipations() {
 		SortedSet<Participation> set = new TreeSet();

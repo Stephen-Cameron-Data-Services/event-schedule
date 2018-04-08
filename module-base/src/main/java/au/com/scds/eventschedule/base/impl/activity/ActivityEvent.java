@@ -60,6 +60,10 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<Attendance> attendancesSet = new TreeSet<>();
+	
+	protected ActivityEvent() {
+		super();
+	}
 
 	public ActivityEvent(Organisation organisation, String name, String calendarName, DateTime date, String note) {
 		super(organisation, name, calendarName, date, note);

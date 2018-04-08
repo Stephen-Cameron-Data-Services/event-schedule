@@ -19,10 +19,15 @@ import au.com.scds.eventschedule.base.impl.ScheduledEvent;
 @Discriminator(value = "Participation")
 @DomainObject(objectType = "Participation")
 public class Participation extends Booking {
+	
+	protected Participation() {
+		super();
+	}
 
 	public Participation(ActivityEvent event, Attendee attendee) {
 		super(event, attendee);
 	}
+
 
 	@NotPersistent
 	public ActivityEvent getActivity() {

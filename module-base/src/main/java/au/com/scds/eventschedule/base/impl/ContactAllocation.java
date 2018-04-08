@@ -22,7 +22,11 @@ package au.com.scds.eventschedule.base.impl;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.Column;
+import javax.jdo.annotations.Discriminator;
+import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.Action;
@@ -32,8 +36,10 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+@DomainObject()
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table="contact_allocation")
-@DomainObject(objectType="ContactAllocation")
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value="ContactAllocation")
 public class ContactAllocation implements Comparable<ContactAllocation>{
 	
 	@Column(allowsNull = "false")

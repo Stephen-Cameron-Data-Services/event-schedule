@@ -56,10 +56,12 @@ public abstract class BaseEvent {
 	@Setter(value = AccessLevel.PROTECTED)
 	protected DateTime end;
 
-	public BaseEvent() {
+	protected BaseEvent() {
 	}
 
 	public BaseEvent(DateTime start, DateTime end) {
+		if(start == null)
+			throw new IllegalArgumentException("start parameeter cannot be null");
 		setStart(start);
 		setEnd(end);
 	}

@@ -48,10 +48,10 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+@DomainObject()
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "event")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
-@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, column = "type", value = "ScheduledEvent")
-@DomainObject(objectType = "ScheduledEvent")
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "ScheduledEvent")
 public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEvent> {
 
 	@Column(allowsNull = "true")
@@ -99,6 +99,10 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<EventFacilitator> facilitatorSet = new TreeSet<>();
+	
+	protected ScheduledEvent() {
+		super();
+	}
 
 	public ScheduledEvent(Organisation organisation, String name, DateTime date) {
 		super(date, null);

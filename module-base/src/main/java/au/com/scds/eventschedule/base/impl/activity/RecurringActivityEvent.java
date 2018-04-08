@@ -31,6 +31,10 @@ public class RecurringActivityEvent extends ActivityEvent{
 	@Setter(value=AccessLevel.PROTECTED)
 	protected SortedSet<ParentedActivityEvent> childEventsSet = new TreeSet<>();
 	
+	protected RecurringActivityEvent() {
+		super();
+	}
+	
 	public RecurringActivityEvent(Organisation organisation, String name, String calendarName, DateTime date,
 			String note) {
 		super(organisation, name, calendarName, date, note);

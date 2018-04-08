@@ -20,6 +20,8 @@
 package au.com.scds.eventschedule.base.impl;
 
 import javax.jdo.annotations.Column;
+import javax.jdo.annotations.Discriminator;
+import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
@@ -34,9 +36,10 @@ import org.joda.time.Duration;
 import lombok.Getter;
 import lombok.Setter;
 
+@DomainObject()
 @PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
-@DomainObject(objectType = "SimpleEvent")
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "SimpleEvent")
 public class SimpleEvent extends BaseEvent {
 
 	@Column(allowsNull = "true")

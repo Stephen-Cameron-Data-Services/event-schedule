@@ -59,7 +59,7 @@ This project uses the Java web-application framework [Apache Isis](http://isis.a
 
 It is based on the Apache Isis [SimpleApp Maven Archetype](https://isis.apache.org/guides/ugfun/ugfun.html#_ugfun_getting-started_simpleapp-archetype), see that guide for installation instructions.  
 
-It can be enhanced relatively easily by customising its Java Domain Model and/or integrating standard modules from the [Incode Platform](http://platform.incode.org).
+It can be enhanced easily by customising its Java Domain Model and/or integrating standard modules from the [Incode Platform](http://platform.incode.org).
 
 
 

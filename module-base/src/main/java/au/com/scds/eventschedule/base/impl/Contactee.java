@@ -25,7 +25,11 @@ import java.util.TreeSet;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.Column;
+import javax.jdo.annotations.Discriminator;
+import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
@@ -39,8 +43,10 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+@DomainObject()
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "contactee")
-@DomainObject(objectType = "Contactee")
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Contactee")
 public class Contactee {
 
 	@Column(allowsNull = "false")
@@ -49,15 +55,17 @@ public class Contactee {
 	protected Person person;
 
 	@Persistent(mappedBy = "contactee")
-	//@Order(column = "contactee_allocations_idx")
-	@Getter(value=AccessLevel.PROTECTED)
-	@Setter(value=AccessLevel.PROTECTED)
+	// @Order(column = "contactee_allocations_idx")
+	@Getter(value = AccessLevel.PROTECTED)
+	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<ContactAllocation> allocationSet = new TreeSet<>();
 
 	@Persistent
 	@Getter()
 	@Setter()
 	protected SortedSet<ScheduledContact> contactSet = new TreeSet<>();
+	
+	protected Contactee() {}
 
 	public Contactee(Person person) {
 		this.setPerson(person);

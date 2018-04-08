@@ -61,6 +61,10 @@ public class CalendarableScheduledEvent extends ScheduledEvent implements Calend
 	@Getter()
 	@Setter()
 	protected String calendarNote;
+	
+	protected CalendarableScheduledEvent() {
+		super();
+	}
 
 	public CalendarableScheduledEvent(Organisation organisation, String name, String calendarName, DateTime date,
 			String note) {
@@ -68,6 +72,8 @@ public class CalendarableScheduledEvent extends ScheduledEvent implements Calend
 		this.setCalendarName((calendarName != null) ? calendarName : this.DEFAULT_CALENDAR_NAME);
 		this.setCalendarNote(note);
 	}
+
+
 
 	@Override
 	public CalendarEvent toCalendarEvent() {

@@ -24,7 +24,11 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.jdo.annotations.Column;
+import javax.jdo.annotations.Discriminator;
+import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
@@ -38,8 +42,10 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+@DomainObject()
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "attendee")
-@DomainObject(objectType = "Attendee")
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Attendee")
 public class Attendee implements Comparable<Attendee> {
 
 	@Persistent(mappedBy = "attendee")
@@ -59,7 +65,7 @@ public class Attendee implements Comparable<Attendee> {
 	@Setter(value = AccessLevel.PRIVATE)
 	protected Person person;
 
-	private Attendee() {
+	protected Attendee() {
 	}
 
 	public Attendee(Person person) {

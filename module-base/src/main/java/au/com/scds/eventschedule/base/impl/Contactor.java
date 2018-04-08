@@ -24,7 +24,11 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.jdo.annotations.Column;
+import javax.jdo.annotations.Discriminator;
+import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
@@ -37,8 +41,10 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+@DomainObject()
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "contactor")
-@DomainObject(objectType="Contactor")
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Contactor")
 public class Contactor {
 
 	@Column(allowsNull = "false")
@@ -51,6 +57,8 @@ public class Contactor {
 	@Getter()
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<ContactAllocation> allocationSet = new TreeSet<>();
+	
+	protected Contactor() {}
 
 	public Contactor(Person person) {
 		this.setPerson(person);

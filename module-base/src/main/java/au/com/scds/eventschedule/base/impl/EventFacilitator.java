@@ -20,7 +20,11 @@
 package au.com.scds.eventschedule.base.impl;
 
 import javax.jdo.annotations.Column;
+import javax.jdo.annotations.Discriminator;
+import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 
@@ -31,9 +35,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+@DomainObject()
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "eventfacilitator")
-@DomainObject(objectType = "EventFacilitator")
-public class EventFacilitator implements Comparable<EventFacilitator>{
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "EventFacilitator")
+public class EventFacilitator implements Comparable<EventFacilitator> {
 
 	@Column(allowsNull = "true")
 	@Getter()

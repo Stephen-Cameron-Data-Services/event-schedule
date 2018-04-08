@@ -36,30 +36,34 @@ import lombok.Getter;
 import lombok.Setter;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "booking")
-@Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
-@Discriminator(strategy=DiscriminatorStrategy.VALUE_MAP, value="Booking")
-@DomainObject(objectType="Booking")
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Booking")
+@DomainObject(objectType = "Booking")
 public class Booking implements Comparable<Booking> {
 
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter(value=AccessLevel.PROTECTED)
+	@Setter(value = AccessLevel.PROTECTED)
 	protected ScheduledEvent event;
 
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter(value=AccessLevel.PROTECTED)
+	@Setter(value = AccessLevel.PROTECTED)
 	public Attendee attendee;
+
+	protected Booking() {
+	}
 
 	public Booking(ScheduledEvent event, Attendee attendee) {
 		setEvent(event);
 		setAttendee(attendee);
 	}
-	
-	public TranslatableString title(){
-		return TranslatableString.tr("{attendee}-at-{event}", "attendee", this.getAttendeeName(), "event" , this.getEvent().getName());
+
+	public TranslatableString title() {
+		return TranslatableString.tr("{attendee}-at-{event}", "attendee", this.getAttendeeName(), "event",
+				this.getEvent().getName());
 	}
-	
+
 	@NotPersistent
 	public String getAttendeeName() {
 		return this.getAttendee().getFullname();
