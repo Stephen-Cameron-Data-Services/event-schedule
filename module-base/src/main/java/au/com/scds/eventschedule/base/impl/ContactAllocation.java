@@ -52,6 +52,9 @@ public class ContactAllocation implements Comparable<ContactAllocation>{
 	@Setter(value=AccessLevel.PRIVATE)
 	protected Contactee contactee;
 	
+	protected ContactAllocation() {
+	}
+	
 	public ContactAllocation(Contactor contactor, Contactee contactee){
 		this.setContactor(contactor);
 		this.setContactee(contactee);
@@ -68,13 +71,15 @@ public class ContactAllocation implements Comparable<ContactAllocation>{
 	
 	@Action
 	public void delete(){
-		//this.getContactee().removeAllocation(this);
-		//this.getContactor().removeAllocation(this);
 		baseRepo.destroyContactAllocation(this);
 	}
 	
 	@Override
 	public int compareTo(ContactAllocation other) {
+		return doCompareTo(other);
+	}
+	
+	protected int doCompareTo(ContactAllocation other) {
 		return this.getContactee().compareTo(other.getContactee());
 	}
 	

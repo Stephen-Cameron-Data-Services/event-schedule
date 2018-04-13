@@ -85,8 +85,12 @@ public class Attendance implements Comparable<Attendance>{
 	}
 
 	@Override
-	public int compareTo(Attendance o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(Attendance other) {
+		return doCompareTo(other);
 	}
+	
+	protected int doCompareTo(Attendance other) {
+		return this.getAttendee().compareTo(other.getAttendee());
+	}
+	
 }

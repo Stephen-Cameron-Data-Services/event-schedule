@@ -14,8 +14,6 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 public class Adapter1
     extends XmlAdapter<String, Date>
 {
-
-
     public Date unmarshal(String value) {
         return (au.com.scds.eventschedule.fixture.generated.DataTypeAdapter.parseDateTime(value));
     }
@@ -23,5 +21,4 @@ public class Adapter1
     public String marshal(Date value) {
         return (au.com.scds.eventschedule.fixture.generated.DataTypeAdapter.printDateTime(value));
     }
-
 }

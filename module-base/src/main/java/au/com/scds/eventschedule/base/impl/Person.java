@@ -29,6 +29,7 @@ import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.DomainObject;
+import org.joda.time.LocalDate;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -39,10 +40,30 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Person")
 public class Person implements Comparable<Person>{
-
+	
+	@Column(allowsNull = "true")
+	@Getter
+	@Setter(value = AccessLevel.PROTECTED)
+	String firstname;
+	@Column(allowsNull = "true")
+	@Getter
+	@Setter
+	private String middlename;
+	@Column(allowsNull = "true")
+	@Getter
+	@Setter(value = AccessLevel.PROTECTED)
+	private String surname;
+	@Column(allowsNull = "true")
+	@Getter
+	@Setter
+	private String preferredname;
+	@Column(allowsNull = "true")
+	@Getter
+	@Setter(value = AccessLevel.PROTECTED)
+	private LocalDate birthdate;
 	@Column(allowsNull = "true")
 	@Getter()
-	@Setter(value=AccessLevel.PRIVATE)
+	@Setter(value=AccessLevel.PROTECTED)
     protected String fullname;
 	
 	public Person() {
@@ -56,7 +77,12 @@ public class Person implements Comparable<Person>{
 		return this.getFullname();
 	}
 
+	@Override
 	public int compareTo(Person person) {
-		return this.getFullname().compareTo(person.getFullname());
+		return doCompareTo(person);
+	}
+	
+	protected int doCompareTo(Person person){
+		return this.getFullname().compareTo(person.getFullname());		
 	}
 }

@@ -70,12 +70,16 @@ public class Booking implements Comparable<Booking> {
 	}
 
 	@Override
-	public int compareTo(Booking o) {
-		int result = this.getEvent().compareTo(o.getEvent());
+	public int compareTo(Booking other) {
+		return doCompareTo(other);
+	}
+	
+	protected int doCompareTo(Booking other){
+		int result = this.getEvent().compareTo(other.getEvent());
 		if (result != 0) {
 			return result;
 		} else {
-			return this.getAttendee().compareTo(o.getAttendee());
-		}
+			return this.getAttendee().compareTo(other.getAttendee());
+		}		
 	}
 }

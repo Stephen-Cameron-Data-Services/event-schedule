@@ -45,7 +45,7 @@ import lombok.Setter;
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "contactor")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Contactor")
-public class Contactor {
+public class Contactor implements Comparable<Contactor>{
 
 	@Column(allowsNull = "false")
 	@Getter()
@@ -80,6 +80,14 @@ public class Contactor {
 	public void removeAllocation(ContactAllocation allocation) {
 		if(this.getAllocationSet().contains(allocation))
 			this.getAllocationSet().remove(allocation);
-		
+	}
+
+	@Override
+	public int compareTo(Contactor other) {
+		return doCompareTo(other);
+	}
+	
+	protected int doCompareTo(Contactor other){
+		return this.getPerson().compareTo(other.getPerson());
 	}
 }

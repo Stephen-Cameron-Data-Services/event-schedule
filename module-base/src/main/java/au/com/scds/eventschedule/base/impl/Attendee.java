@@ -62,7 +62,7 @@ public class Attendee implements Comparable<Attendee> {
 
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter(value = AccessLevel.PRIVATE)
+	@Setter(value = AccessLevel.PROTECTED)
 	protected Person person;
 
 	protected Attendee() {
@@ -109,7 +109,12 @@ public class Attendee implements Comparable<Attendee> {
 			this.getAttendancesSet().remove(attendance);
 	}
 
-	public int compareTo(Attendee o) {
-		return this.getPerson().compareTo(o.getPerson());
+	@Override
+	public int compareTo(Attendee other) {
+		return doCompareTo(other); 
+	}
+
+	protected int doCompareTo(Attendee other) {
+		return this.getPerson().compareTo(other.getPerson());
 	}
 }

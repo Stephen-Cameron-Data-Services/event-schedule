@@ -99,7 +99,7 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<EventFacilitator> facilitatorSet = new TreeSet<>();
-	
+
 	protected ScheduledEvent() {
 		super();
 	}
@@ -241,8 +241,11 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 	EventsRepository baseRepo;
 
 	@Override
-	public int compareTo(final ScheduledEvent other) {
+	public int compareTo(ScheduledEvent other) {
+		return doCompareTo(other);
+	}
 
+	protected int doCompareTo(ScheduledEvent other) {
 		if (this == other) {
 			return 0;
 		} else {
@@ -255,5 +258,4 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 			}
 		}
 	}
-
 }

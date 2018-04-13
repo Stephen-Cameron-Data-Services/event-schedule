@@ -34,6 +34,8 @@ import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.Order;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.Queries;
+import javax.jdo.annotations.Query;
 
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.DomainObject;
@@ -50,17 +52,20 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+@DomainObject()
 @PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
 @Discriminator(value = "ActivityEvent")
-@DomainObject(objectType = "ActivityEvent")
+@Queries({ @Query(name = "findActivityByUpperCaseName", language = "JDOQL", value = "SELECT "
+		+ "FROM au.com.scds.eventschedule.base.impl.activity.ActivityEvent " 
+		+ "WHERE name.trim().toUpperCase() == :name") })
 public class ActivityEvent extends CalendarableScheduledEvent {
 
 	@Persistent(mappedBy = "event")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<Attendance> attendancesSet = new TreeSet<>();
-	
+
 	protected ActivityEvent() {
 		super();
 	}
@@ -76,7 +81,7 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 		this.getBookingSet().add(participation);
 		return this;
 	}
-	
+
 	public List<Attendee> choices0AddParticipation() {
 		return baseRepo.listAttendees();
 	}
@@ -147,7 +152,7 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 	public SortedSet<Attendance> getAttendances() {
 		return Collections.unmodifiableSortedSet(this.getAttendancesSet());
 	}
-	
+
 	@Override
 	public String doValidateStartAndFinishDateTimes(DateTime start, DateTime finish) {
 		if (start != null && finish != null) {

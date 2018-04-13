@@ -61,6 +61,10 @@ public class EventFacilitator implements Comparable<EventFacilitator> {
 
 	@Override
 	public int compareTo(EventFacilitator other) {
-		return this.getPerson().compareTo(other.getPerson());
+		return doCompareTo(other);
+	}
+	
+	protected int doCompareTo(EventFacilitator other){
+		return this.getPerson().compareTo(other.getPerson());		
 	}
 }
