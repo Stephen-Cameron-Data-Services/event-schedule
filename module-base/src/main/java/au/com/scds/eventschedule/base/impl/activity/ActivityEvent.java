@@ -57,7 +57,7 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
 @Discriminator(value = "ActivityEvent")
 @Queries({ @Query(name = "findActivityByUpperCaseName", language = "JDOQL", value = "SELECT "
-		+ "FROM au.com.scds.eventschedule.base.impl.activity.ActivityEvent " 
+		+ "FROM au.com.scds.eventschedule.base.impl.activity.ActivityEvent "
 		+ "WHERE name.trim().toUpperCase() == :name") })
 public class ActivityEvent extends CalendarableScheduledEvent {
 
@@ -77,13 +77,18 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 	// Activities have Participations instead of Bookings
 	@Action
 	public ActivityEvent addParticipation(Attendee attendee) {
-		Participation participation = activityRepo.createParticipation(this, attendee);
-		this.getBookingSet().add(participation);
+		this.createParticipation(attendee);
 		return this;
 	}
 
 	public List<Attendee> choices0AddParticipation() {
 		return baseRepo.listAttendees();
+	}
+	
+	protected Participation createParticipation(Attendee attendee) {
+		Participation participation = activityRepo.createParticipation(this, attendee);
+		this.getBookingSet().add(participation);
+		return participation;
 	}
 
 	@Action
@@ -109,13 +114,9 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 	}
 
 	@Override
-	public ScheduledEvent addBooking(Attendee attendee) {
-		throw new java.lang.UnsupportedOperationException("Use addParticipation() method");
-	}
-
-	@Override
-	public ScheduledEvent removeBooking(Booking booking) {
-		throw new java.lang.UnsupportedOperationException("Use removeParticipation() method");
+	public ActivityEvent addBooking(Attendee attendee) {
+		this.addParticipation(attendee);
+		return this;
 	}
 
 	// Attendances
@@ -142,7 +143,7 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 		return this.getAttendancesSet();
 	}
 
-	public Attendance createAttendance(Attendee attendee) {
+	protected Attendance createAttendance(Attendee attendee) {
 		Attendance attendance = activityRepo.createAttendance(this, attendee);
 		this.getAttendancesSet().add(attendance);
 		attendee.addAttendance(attendance);

@@ -34,6 +34,7 @@ import org.joda.time.DateTime;
 
 import au.com.scds.eventschedule.base.impl.Contactee;
 import au.com.scds.eventschedule.base.impl.Contactor;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,12 +46,12 @@ public class ScheduledContact extends BaseEvent {
 
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter()
+	@Setter(value=AccessLevel.PROTECTED)
 	protected Contactor contactor;
 
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter()
+	@Setter(value=AccessLevel.PROTECTED)
 	protected Contactee contactee;
 	
 	protected ScheduledContact() {}

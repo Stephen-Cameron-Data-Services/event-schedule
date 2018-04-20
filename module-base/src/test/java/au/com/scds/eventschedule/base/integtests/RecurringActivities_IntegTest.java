@@ -59,7 +59,7 @@ public class RecurringActivities_IntegTest extends IntegTestAbstract {
 	        assertThat(activities).isNotNull();
 	    }
 
-	    public static class Activities extends RecurringActivities_IntegTest {
+	    public static class RecurringActivities extends RecurringActivities_IntegTest {
 
 	        @Test
 	        public void accessible() throws Exception {
