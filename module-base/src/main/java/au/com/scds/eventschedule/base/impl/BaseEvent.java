@@ -80,10 +80,10 @@ public abstract class BaseEvent {
 	}
 
 	@NotPersistent
-	public Long getIntervalLengthInMinutes() {
+	public Integer getIntervalLengthInMinutes() {
 		if (this.getStart() != null && this.getEnd() != null) {
 			Duration duration = new Duration(this.getStart(), this.getEnd());
-			return duration.getStandardMinutes();
+			return (int) duration.getStandardMinutes();
 		} else
 			return null;
 	}

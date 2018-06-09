@@ -121,7 +121,17 @@ public class EventsRepository {
 	public List<Attendee> listAttendees() {
 		return repositoryService.allInstances(Attendee.class);
 	}
+	
+	public List<Contactor> listContactors() {
+		return repositoryService.allInstances(Contactor.class);
+	}
+	
+	public List<Contactee> listContactees() {
+		return repositoryService.allInstances(Contactee.class);
+	}
 
 	@Inject
 	RepositoryService repositoryService;
+
+
 }

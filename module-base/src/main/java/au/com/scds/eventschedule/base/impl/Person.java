@@ -44,7 +44,7 @@ public class Person implements Comparable<Person>{
 	@Column(allowsNull = "true")
 	@Getter
 	@Setter(value = AccessLevel.PROTECTED)
-	String firstname;
+	private String firstname;
 	@Column(allowsNull = "true")
 	@Getter
 	@Setter

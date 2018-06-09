@@ -19,16 +19,18 @@
 
 package au.com.scds.eventschedule.base.impl;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.inject.Inject;
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.Discriminator;
-import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.PersistenceCapable;
 
+import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.joda.time.DateTime;
 
@@ -46,19 +48,47 @@ public class ScheduledContact extends BaseEvent {
 
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter(value=AccessLevel.PROTECTED)
+	@Setter(value = AccessLevel.PROTECTED)
 	protected Contactor contactor;
 
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter(value=AccessLevel.PROTECTED)
+	@Setter(value = AccessLevel.PROTECTED)
 	protected Contactee contactee;
-	
-	protected ScheduledContact() {}
+
+	protected ScheduledContact() {
+	}
 
 	public ScheduledContact(Contactor contactor, Contactee contactee, DateTime date) {
 		super(date, null);
 		this.setContactor(contactor);
 		this.setContactee(contactee);
 	}
+
+	public boolean isCompleted() {
+		return getStart() != null && getEnd() != null;
+	}
+
+	@Action()
+	public ScheduledContact moveContact(Contactor contactor, DateTime dateTime) {
+		if (!isCompleted()) {
+			setContactor(contactor);
+			updateStartDateTime(dateTime);
+		}
+		return this;
+	}
+
+	public List<Contactor> choices0MoveContact() {
+		return eventsRepo.listContactors();
+	}
+
+	public String disableMoveContact() {
+		if (isCompleted())
+			return "Cannot move a completed Scheduled Contact ";
+		else
+			return null;
+	}
+
+	@Inject
+	EventsRepository eventsRepo;
 }

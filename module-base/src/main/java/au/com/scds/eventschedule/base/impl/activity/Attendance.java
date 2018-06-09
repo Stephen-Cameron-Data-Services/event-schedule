@@ -47,24 +47,26 @@ public class Attendance implements Comparable<Attendance>{
 	@Column(allowsNull = "false")
 	@Getter()
 	@Setter(value=AccessLevel.PROTECTED)
-	public ScheduledEvent event;
+	private ScheduledEvent event;
 	@Column(allowsNull = "false")
 	@Getter()
 	@Setter(value=AccessLevel.PROTECTED)
-	public Attendee attendee;
+	private Attendee attendee;
 	@Column(allowsNull = "true")
 	@Getter()
 	@Setter()
-	public Booking booking;
+	private Booking booking;
 	@Column(allowsNull = "true")
 	@Getter()
 	@Setter()
-	public Boolean attended;
+	private Boolean attended;
 
 	protected Attendance() {
+		this.setAttended(true);
 	}
 
 	public Attendance(ScheduledEvent event, Attendee attendee) {
+		this.setAttended(true);
 		this.setEvent(event);
 		this.setAttendee(attendee);
 	}

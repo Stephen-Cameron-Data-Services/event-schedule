@@ -56,9 +56,16 @@ import lombok.Setter;
 @PersistenceCapable(identityType = IdentityType.DATASTORE)
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
 @Discriminator(value = "ActivityEvent")
-@Queries({ @Query(name = "findActivityByUpperCaseName", language = "JDOQL", value = "SELECT "
-		+ "FROM au.com.scds.eventschedule.base.impl.activity.ActivityEvent "
-		+ "WHERE name.trim().toUpperCase() == :name") })
+@Queries({
+		@Query(name = "findActivityByUpperCaseName", language = "JDOQL", value = "SELECT "
+				+ "FROM au.com.scds.eventschedule.base.impl.activity.ActivityEvent "
+				+ "WHERE name.trim().toUpperCase() == :name"),
+		@Query(name = "findActivitiesAfter", language = "JDOQL", value = "SELECT "
+				+ "FROM au.com.scds.eventschedule.base.impl.activity.ActivityEvent WHERE start > :date "),
+		@Query(name = "findActivitiesBefore", language = "JDOQL", value = "SELECT "
+				+ "FROM au.com.scds.eventschedule.base.impl.activity.ActivityEvent WHERE start < :date "),
+		@Query(name = "findActivitiesBetween", language = "JDOQL", value = "SELECT "
+				+ "FROM au.com.scds.eventschedule.base.impl.activity.ActivityEvent WHERE start > :start && start < :end "),})
 public class ActivityEvent extends CalendarableScheduledEvent {
 
 	@Persistent(mappedBy = "event")
@@ -84,8 +91,8 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 	public List<Attendee> choices0AddParticipation() {
 		return baseRepo.listAttendees();
 	}
-	
-	protected Participation createParticipation(Attendee attendee) {
+
+	public Participation createParticipation(Attendee attendee) {
 		Participation participation = activityRepo.createParticipation(this, attendee);
 		this.getBookingSet().add(participation);
 		return participation;
@@ -143,7 +150,7 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 		return this.getAttendancesSet();
 	}
 
-	protected Attendance createAttendance(Attendee attendee) {
+	public Attendance createAttendance(Attendee attendee) {
 		Attendance attendance = activityRepo.createAttendance(this, attendee);
 		this.getAttendancesSet().add(attendance);
 		attendee.addAttendance(attendance);
@@ -173,13 +180,28 @@ public class ActivityEvent extends CalendarableScheduledEvent {
 		return null;
 	}
 
+	public void createAttendanceSetFromParticipantSet() {
+		for (Participation participation : getParticipations()) {
+			Attendee attendee = participation.getAttendee();
+			if (!hasAttendance(attendee)) {
+				this.createAttendance(attendee);
+			}
+		}
+	}
+	
+	public boolean hasAttendance(Attendee attendee) {
+		for(Attendance attendance: this.getAttendances()){
+			if(attendance.getAttendee().equals(attendee)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 	@Inject
 	EventsRepository baseRepo;
 
 	@Inject
 	ActivityRepository activityRepo;
-
-	protected void createAttendanceSetFromParticipantSet() {
-		// TODO Auto-generated method stub
-	}
 }
