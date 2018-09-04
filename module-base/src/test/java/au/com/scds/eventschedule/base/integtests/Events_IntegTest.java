@@ -67,7 +67,7 @@ public class Events_IntegTest extends IntegTestAbstract {
 	            assertThat(event.getWaitListed().size()).isEqualTo(1);
 	            assertThat(event.getFacilitators().size()).isEqualTo(1);
 	         
-	            Attendee attendee1 = event.getBookings().first().getAttendee();
+	            Attendee attendee1 = (Attendee) event.getBookings().first().getBooker();
 	            //Attendee attendee2 = event.getAttendancesList().get(0).getAttendee();
 	            Attendee attendee3 = event.getWaitListed().first();
 	            EventFacilitator facilitator1 = event.getFacilitators().first();

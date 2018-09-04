@@ -33,5 +33,10 @@ public class Participation extends Booking {
 	public ActivityEvent getActivity() {
 		return ((ActivityEvent) this.getEvent());
 	}
+	
+	@NotPersistent
+	public Attendee getAttendee() {
+		return ((Attendee) this.getBooker());
+	}
 
 }

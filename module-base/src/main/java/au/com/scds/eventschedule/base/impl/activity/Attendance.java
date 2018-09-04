@@ -17,7 +17,6 @@
  *  under the License.
  */
 
-
 package au.com.scds.eventschedule.base.impl.activity;
 
 import javax.jdo.annotations.Column;
@@ -40,17 +39,17 @@ import lombok.Setter;
 
 @DomainObject()
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "attendance")
-@Inheritance(strategy=InheritanceStrategy.NEW_TABLE)
-@Discriminator(strategy=DiscriminatorStrategy.VALUE_MAP, value="Attendance")
-public class Attendance implements Comparable<Attendance>{
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Attendance")
+public class Attendance implements Comparable<Attendance> {
 
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter(value=AccessLevel.PROTECTED)
+	@Setter(value = AccessLevel.PROTECTED)
 	private ScheduledEvent event;
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter(value=AccessLevel.PROTECTED)
+	@Setter(value = AccessLevel.PROTECTED)
 	private Attendee attendee;
 	@Column(allowsNull = "true")
 	@Getter()
@@ -70,17 +69,18 @@ public class Attendance implements Comparable<Attendance>{
 		this.setEvent(event);
 		this.setAttendee(attendee);
 	}
-	
+
 	public Attendance(Booking booking) {
-		this.setEvent(booking.getEvent());
-		this.setAttendee(booking.getAttendee());
+		this.setAttended(true);
+		this.setEvent((ScheduledEvent) booking.getEvent());
+		this.setAttendee((Attendee) booking.getBooker());
 		this.setBooking(booking);
 	}
-	
-	public String title(){
-		return this.getAttendee().getFullname() +  "-in-" + this.getEvent().getName();
+
+	public String title() {
+		return this.getAttendee().getFullname() + "-in-" + this.getEvent().getName();
 	}
-	
+
 	@NotPersistent
 	public String getAttendeeName() {
 		return this.getAttendee().getFullname();
@@ -90,9 +90,9 @@ public class Attendance implements Comparable<Attendance>{
 	public int compareTo(Attendance other) {
 		return doCompareTo(other);
 	}
-	
+
 	protected int doCompareTo(Attendance other) {
 		return this.getAttendee().compareTo(other.getAttendee());
 	}
-	
+
 }

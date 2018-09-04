@@ -91,4 +91,10 @@ public class ScheduledContact extends BaseEvent {
 
 	@Inject
 	EventsRepository eventsRepo;
+
+	@Override
+	public int compareTo(BaseEvent o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

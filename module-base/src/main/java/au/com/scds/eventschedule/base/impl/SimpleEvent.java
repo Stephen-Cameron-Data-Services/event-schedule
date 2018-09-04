@@ -55,4 +55,10 @@ public class SimpleEvent extends BaseEvent {
 		return TranslatableString.tr("{name}", "name", this.getName());
 	}
 
+	@Override
+	public int compareTo(BaseEvent o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

@@ -72,7 +72,7 @@ public class EventsRepository {
 		return object;
 	}
 
-	public Booking createBooking(ScheduledEvent event, Attendee attendee) {
+	public Booking createBooking(BaseEvent event, Attendee attendee) {
 		if (event == null || attendee == null)
 			return null;
 		Booking object = new Booking(event, attendee);
@@ -82,7 +82,7 @@ public class EventsRepository {
 
 	public void destroyBooking(Booking booking) {
 		booking.getEvent().getBookingSet().remove(booking);
-		booking.getAttendee().getBookingsSet().remove(booking);
+		booking.getBooker().getBookingsSet().remove(booking);
 		repositoryService.removeAndFlush(booking);
 	}
 

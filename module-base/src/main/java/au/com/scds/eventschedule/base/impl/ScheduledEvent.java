@@ -52,7 +52,7 @@ import lombok.Setter;
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "event")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "ScheduledEvent")
-public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEvent> {
+public class ScheduledEvent extends BaseEvent  {
 
 	@Column(allowsNull = "true")
 	@Getter()
@@ -84,11 +84,6 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 	@Getter()
 	@Setter()
 	protected Address address;
-	@Persistent(mappedBy = "event")
-	@Order(column = "event_booking_idx")
-	@Getter(value = AccessLevel.PROTECTED)
-	@Setter(value = AccessLevel.PROTECTED)
-	protected SortedSet<Booking> bookingSet = new TreeSet<>();
 	@Persistent
 	@Join
 	@Getter(value = AccessLevel.PROTECTED)
@@ -240,22 +235,10 @@ public class ScheduledEvent extends BaseEvent implements Comparable<ScheduledEve
 	@Inject
 	EventsRepository baseRepo;
 
-	@Override
-	public int compareTo(ScheduledEvent other) {
-		return doCompareTo(other);
-	}
 
-	protected int doCompareTo(ScheduledEvent other) {
-		if (this == other) {
-			return 0;
-		} else {
-			// most recent first
-			int result = other.getStart().compareTo(this.getStart());
-			if (result != 0) {
-				return result;
-			} else {
-				return this.getName().compareTo(other.getName());
-			}
-		}
+	@Override
+	public int compareTo(BaseEvent o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

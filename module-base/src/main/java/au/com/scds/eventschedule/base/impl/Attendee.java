@@ -46,16 +46,9 @@ import lombok.Setter;
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "attendee")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Attendee")
-public class Attendee implements Comparable<Attendee> {
+public class Attendee extends Booker implements  Comparable<Attendee> {
 
 	@Persistent(mappedBy = "attendee")
-	// @Order(column = "attendee_bookings_idx")
-	@Getter(value = AccessLevel.PROTECTED)
-	@Setter(value = AccessLevel.PROTECTED)
-	protected SortedSet<Booking> bookingsSet = new TreeSet<>();
-
-	@Persistent(mappedBy = "attendee")
-	// @Order(column = "attendee_attendances_idx")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<Attendance> attendancesSet = new TreeSet<>();
@@ -81,22 +74,8 @@ public class Attendee implements Comparable<Attendee> {
 		return this.getPerson().getFullname();
 	}
 
-	public SortedSet<Booking> getBookings() {
-		return Collections.unmodifiableSortedSet(this.getBookingsSet());
-	}
-
 	public SortedSet<Attendance> getAttendances() {
 		return Collections.unmodifiableSortedSet(this.getAttendancesSet());
-	}
-
-	public void addBooking(Booking booking) {
-		if (!this.getBookingsSet().contains(booking))
-			this.getBookingsSet().add(booking);
-	}
-
-	public void removeBooking(Booking booking) {
-		if (this.getBookingsSet().contains(booking))
-			this.getBookingsSet().remove(booking);
 	}
 
 	public void addAttendance(Attendance attendance) {

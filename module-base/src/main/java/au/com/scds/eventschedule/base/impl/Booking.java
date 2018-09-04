@@ -39,47 +39,41 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Booking")
 @DomainObject(objectType = "Booking")
-public class Booking implements Comparable<Booking> {
+public class Booking {
+	
+	@Column(allowsNull = "true")
+	@Getter()
+	@Setter(value = AccessLevel.PROTECTED)
+	protected Bookable booked;
+	
+	@Column(allowsNull = "false")
+	@Getter()
+	@Setter(value = AccessLevel.PROTECTED)
+	protected Booker booker;
 
 	@Column(allowsNull = "false")
 	@Getter()
 	@Setter(value = AccessLevel.PROTECTED)
-	protected ScheduledEvent event;
-
-	@Column(allowsNull = "false")
-	@Getter()
-	@Setter(value = AccessLevel.PROTECTED)
-	public Attendee attendee;
+	protected BaseEvent event;
 
 	protected Booking() {
 	}
 
-	public Booking(ScheduledEvent event, Attendee attendee) {
+	public Booking(BaseEvent event, Booker attendee) {
 		setEvent(event);
-		setAttendee(attendee);
+		setBooker(attendee);
+	}
+	
+	public Booking(BaseEvent event, Booker attendee, Bookable booked) {
+		setEvent(event);
+		setBooker(attendee);
+		setBooked(booked);
 	}
 
 	public TranslatableString title() {
-		return TranslatableString.tr("{attendee}-at-{event}", "attendee", this.getAttendeeName(), "event",
-				this.getEvent().getName());
-	}
-
-	@NotPersistent
-	public String getAttendeeName() {
-		return this.getAttendee().getFullname();
-	}
-
-	@Override
-	public int compareTo(Booking other) {
-		return doCompareTo(other);
-	}
-	
-	protected int doCompareTo(Booking other){
-		int result = this.getEvent().compareTo(other.getEvent());
-		if (result != 0) {
-			return result;
-		} else {
-			return this.getAttendee().compareTo(other.getAttendee());
-		}		
+		return TranslatableString.tr("{booker}-has-{bookable}-at-{event}", 
+				"booker", this.getBooker().title(), 
+				"bookable", this.getBooked().title(),
+				"event", this.getEvent().getStart());
 	}
 }

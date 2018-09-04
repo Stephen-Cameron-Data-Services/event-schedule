@@ -19,11 +19,16 @@
 
 package au.com.scds.eventschedule.base.impl;
 
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.NotPersistent;
+import javax.jdo.annotations.Order;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.Optionality;
@@ -45,7 +50,7 @@ import lombok.Setter;
  */
 @PersistenceCapable()
 @Inheritance(strategy = InheritanceStrategy.SUBCLASS_TABLE)
-public abstract class BaseEvent {
+public abstract class BaseEvent implements Comparable<BaseEvent>{
 
 	@Column(allowsNull = "true")
 	@Getter
@@ -55,7 +60,12 @@ public abstract class BaseEvent {
 	@Getter
 	@Setter(value = AccessLevel.PROTECTED)
 	protected DateTime end;
-
+	@Persistent(mappedBy = "event")
+	@Order(column = "event_booking_idx")
+	@Getter(value = AccessLevel.PROTECTED)
+	@Setter(value = AccessLevel.PROTECTED)
+	protected SortedSet<Booking> bookingSet = new TreeSet<>();
+	
 	protected BaseEvent() {
 	}
 
@@ -159,5 +169,20 @@ public abstract class BaseEvent {
 		final long millisSinceHour = new Duration(hour, dateTime).getMillis();
 		final int roundedMinutes = ((int) Math.round(millisSinceHour / 60000.0));
 		return hour.plusMinutes(roundedMinutes);
+	}
+	
+
+	public int compareTo(BaseEvent other) {
+		if (this == other) {
+			return 0;
+		} else {
+			// most recent first
+			int result = other.getStart().compareTo(this.getStart());
+			if (result != 0) {
+				return result;
+			} else {
+				return other.getEnd().compareTo(this.getEnd());
+			}
+		}
 	}
 }
