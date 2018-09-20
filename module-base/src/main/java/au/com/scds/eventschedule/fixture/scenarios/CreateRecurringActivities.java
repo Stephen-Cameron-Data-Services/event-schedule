@@ -47,7 +47,7 @@ public class CreateRecurringActivities extends FixtureScript {
 			RecurringActivities _activities = (RecurringActivities) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(is));
 			for (RecurringActivityEvent _parent: _activities.getRecurringActivity()) {
 				au.com.scds.eventschedule.base.impl.activity.RecurringActivityEvent parent = activityMenu.createRecurringActivityEvent(_parent.getName(), new DateTime(_parent.getDate()));
-				au.com.scds.eventschedule.base.impl.Attendee attendee = null;
+				au.com.scds.eventschedule.base.impl.activity.Attendee attendee = null;
 				for(Participation _participation : _parent.getParticipation()){
 					attendee = eventMenu.createEventAttendee(_participation.getAttendee().getPerson().getFullname());
 					parent.addParticipation(attendee);
@@ -56,7 +56,7 @@ public class CreateRecurringActivities extends FixtureScript {
 					attendee = eventMenu.createEventAttendee(_attendee.getPerson().getFullname());
 					parent.addWaitListed(attendee);
 				}
-				au.com.scds.eventschedule.base.impl.EventFacilitator facilitator = null;
+				au.com.scds.eventschedule.base.impl.event.EventFacilitator facilitator = null;
 				for(EventFacilitator _facilitator : _parent.getEventFacilitator()){
 					facilitator = eventMenu.createEventFacilitator(_facilitator.getPerson().getFullname());
 					parent.addFacilitator(facilitator);

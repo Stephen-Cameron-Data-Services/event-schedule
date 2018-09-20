@@ -24,8 +24,8 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.Nature;
 import org.apache.isis.applib.services.i18n.TranslatableString;
 
-import au.com.scds.eventschedule.base.impl.EventsRepository;
-import au.com.scds.eventschedule.base.impl.SimpleEvent;
+import au.com.scds.eventschedule.base.impl.event.EventsRepository;
+import au.com.scds.eventschedule.base.impl.event.SimpleEvent;
 
 @DomainObject(
         nature = Nature.VIEW_MODEL,

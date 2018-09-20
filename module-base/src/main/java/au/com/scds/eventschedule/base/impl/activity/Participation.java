@@ -10,9 +10,8 @@ import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.DomainObject;
 
-import au.com.scds.eventschedule.base.impl.Attendee;
 import au.com.scds.eventschedule.base.impl.Booking;
-import au.com.scds.eventschedule.base.impl.ScheduledEvent;
+import au.com.scds.eventschedule.base.impl.event.ScheduledEvent;
 
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "participation")
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)

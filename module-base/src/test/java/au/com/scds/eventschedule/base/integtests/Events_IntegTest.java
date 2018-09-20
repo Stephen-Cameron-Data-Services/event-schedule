@@ -24,9 +24,9 @@ import javax.inject.Inject;
 import org.junit.Before;
 import org.junit.Test;
 
-import au.com.scds.eventschedule.base.impl.Attendee;
-import au.com.scds.eventschedule.base.impl.EventFacilitator;
-import au.com.scds.eventschedule.base.impl.ScheduledEvent;
+import au.com.scds.eventschedule.base.impl.activity.Attendee;
+import au.com.scds.eventschedule.base.impl.event.EventFacilitator;
+import au.com.scds.eventschedule.base.impl.event.ScheduledEvent;
 import au.com.scds.eventschedule.fixture.scenarios.CreateScheduledEvents;
 
 import org.apache.isis.applib.fixturescripts.FixtureScripts;

@@ -9,10 +9,9 @@ import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.joda.time.DateTime;
 
-import au.com.scds.eventschedule.base.impl.Attendee;
 import au.com.scds.eventschedule.base.impl.Booking;
-import au.com.scds.eventschedule.base.impl.Organisation;
-import au.com.scds.eventschedule.base.impl.ScheduledEvent;
+import au.com.scds.eventschedule.base.impl.event.Organisation;
+import au.com.scds.eventschedule.base.impl.event.ScheduledEvent;
 
 @DomainService(nature = NatureOfService.DOMAIN)
 public class ActivityRepository {

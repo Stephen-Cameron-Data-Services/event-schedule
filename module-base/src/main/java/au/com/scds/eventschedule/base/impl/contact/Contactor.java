@@ -17,13 +17,12 @@
  *  under the License.
  */
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.contact;
 
 import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.inject.Inject;
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.Discriminator;
 import javax.jdo.annotations.DiscriminatorStrategy;
@@ -36,44 +35,37 @@ import javax.jdo.annotations.Persistent;
 import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.services.i18n.TranslatableString;
-import org.apache.isis.applib.services.repository.RepositoryService;
 
-import au.com.scds.eventschedule.base.impl.Person;
+import au.com.scds.eventschedule.base.impl.event.Person;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 @DomainObject()
-@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "contactee")
+@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "contactor")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
-@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Contactee")
-public class Contactee implements Comparable<Contactee> {
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Contactor")
+public class Contactor implements Comparable<Contactor>{
 
 	@Column(allowsNull = "false")
 	@Getter()
-	@Setter()
+	@Setter(value = AccessLevel.PROTECTED)
 	protected Person person;
 
-	@Persistent(mappedBy = "contactee")
-	// @Order(column = "contactee_allocations_idx")
-	@Getter(value = AccessLevel.PROTECTED)
+	@Persistent(mappedBy = "contactor")
+	//@Order(column="contactor_allocations_idx")
+	@Getter()
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<ContactAllocation> allocationSet = new TreeSet<>();
+	
+	protected Contactor() {}
 
-	@Persistent
-	@Getter()
-	@Setter()
-	protected SortedSet<ScheduledContact> contactSet = new TreeSet<>();
-
-	protected Contactee() {
-	}
-
-	public Contactee(Person person) {
+	public Contactor(Person person) {
 		this.setPerson(person);
 	}
-
+	
 	public TranslatableString title() {
-		return TranslatableString.tr("Contactee: {fullname}", "fullname", this.getPerson().getFullname());
+		return TranslatableString.tr("Contactor: {fullname}", "fullname", this.getPerson().getFullname());
 	}
 
 	@Action
@@ -86,16 +78,16 @@ public class Contactee implements Comparable<Contactee> {
 	}
 
 	public void removeAllocation(ContactAllocation allocation) {
-		if (this.getAllocationSet().contains(allocation))
+		if(this.getAllocationSet().contains(allocation))
 			this.getAllocationSet().remove(allocation);
 	}
 
 	@Override
-	public int compareTo(Contactee other) {
+	public int compareTo(Contactor other) {
 		return doCompareTo(other);
 	}
 	
-	protected int doCompareTo(Contactee other){
-		return this.getPerson().compareTo(other.getPerson());		
+	protected int doCompareTo(Contactor other){
+		return this.getPerson().compareTo(other.getPerson());
 	}
 }

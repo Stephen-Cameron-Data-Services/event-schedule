@@ -17,7 +17,7 @@
  *  under the License.
  */
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.event;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,8 +42,8 @@ import org.apache.isis.applib.annotation.Title;
 import org.apache.isis.applib.services.i18n.TranslatableString;
 import org.joda.time.DateTime;
 import au.com.scds.eventschedule.base.impl.Booking;
-import au.com.scds.eventschedule.base.impl.EventFacilitator;
-import au.com.scds.eventschedule.base.impl.Attendee;
+import au.com.scds.eventschedule.base.impl.BookingsRepository;
+import au.com.scds.eventschedule.base.impl.activity.Attendee;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,7 +52,7 @@ import lombok.Setter;
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "event")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "ScheduledEvent")
-public class ScheduledEvent extends BaseEvent  {
+public class ScheduledEvent extends MutableEvent  {
 
 	@Column(allowsNull = "true")
 	@Getter()
@@ -117,7 +117,7 @@ public class ScheduledEvent extends BaseEvent  {
 	}
 
 	public List<Attendee> choices0AddBooking() {
-		return baseRepo.listAttendees();
+		return eventsRepo.listAttendees();
 	}
 
 	public String disableAddBooking() {
@@ -142,7 +142,7 @@ public class ScheduledEvent extends BaseEvent  {
 	}
 
 	public Booking createBooking(Attendee attendee) {
-		Booking booking = baseRepo.createBooking(this, attendee);
+		Booking booking = bookingsRepo.createBooking(this, attendee);
 		this.getBookingSet().add(booking);
 		return booking;
 	}
@@ -158,7 +158,7 @@ public class ScheduledEvent extends BaseEvent  {
 	}
 
 	public List<Attendee> choices0AddWaitListed() {
-		return baseRepo.listAttendees();
+		return eventsRepo.listAttendees();
 	}
 
 	@Action
@@ -204,7 +204,7 @@ public class ScheduledEvent extends BaseEvent  {
 	}
 
 	public List<EventFacilitator> choices0AddFacilitator() {
-		return baseRepo.listEventFacilitators();
+		return eventsRepo.listEventFacilitators();
 	}
 
 	@Action
@@ -231,14 +231,11 @@ public class ScheduledEvent extends BaseEvent  {
 	public String getStreetAddress() {
 		return (getAddress() != null) ? getAddress().getFullStreetAddress() : null;
 	}
+	
+	@Inject
+	BookingsRepository bookingsRepo;
 
 	@Inject
-	EventsRepository baseRepo;
+	EventsRepository eventsRepo;
 
-
-	@Override
-	public int compareTo(BaseEvent o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

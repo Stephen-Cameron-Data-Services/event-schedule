@@ -17,12 +17,16 @@
  *  under the License.
  */
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.event;
 
+import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.jdo.annotations.Column;
+import javax.jdo.annotations.Discriminator;
+import javax.jdo.annotations.DiscriminatorStrategy;
+import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
 import javax.jdo.annotations.NotPersistent;
@@ -31,49 +35,42 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 
 import org.apache.isis.applib.annotation.Action;
+import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.Optionality;
 import org.apache.isis.applib.annotation.Parameter;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
+import au.com.scds.eventschedule.base.impl.Booking;
+import au.com.scds.eventschedule.base.impl.Event;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  *
- * An event having a start date-time.
- * 
- * Possibly also an interval if having a finish date-time.
+ * An event having a start date-time, possibly an mutable Interval if having a finish date-time.
  * 
  */
-@PersistenceCapable()
-@Inheritance(strategy = InheritanceStrategy.SUBCLASS_TABLE)
-public abstract class BaseEvent implements Comparable<BaseEvent>{
+@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "event")
+@Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Event")
+@DomainObject(objectType = "Event")
+public abstract class MutableEvent extends Event {
 
-	@Column(allowsNull = "true")
-	@Getter
-	@Setter(value = AccessLevel.PROTECTED)
-	protected DateTime start;
-	@Column(allowsNull = "true")
-	@Getter
-	@Setter(value = AccessLevel.PROTECTED)
-	protected DateTime end;
 	@Persistent(mappedBy = "event")
 	@Order(column = "event_booking_idx")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<Booking> bookingSet = new TreeSet<>();
-	
-	protected BaseEvent() {
+
+	public MutableEvent() {
+		super();
 	}
 
-	public BaseEvent(DateTime start, DateTime end) {
-		if(start == null)
-			throw new IllegalArgumentException("start parameeter cannot be null");
-		setStart(start);
-		setEnd(end);
+	public MutableEvent(DateTime start, DateTime end) {
+		super(start, end);
 	}
 
 	@NotPersistent
@@ -107,7 +104,7 @@ public abstract class BaseEvent implements Comparable<BaseEvent>{
 	}
 
 	@Action()
-	public BaseEvent updateStartDateTime(
+	public MutableEvent updateStartDateTime(
 			@Parameter(optionality = Optionality.MANDATORY) @ParameterLayout(named = "Start Time") DateTime start) {
 		this.setStart(trimSeconds(start));
 		return this;
@@ -127,7 +124,7 @@ public abstract class BaseEvent implements Comparable<BaseEvent>{
 	// NOTE Must keep end date time optional to be able to change start date
 	// time to anything
 	@Action()
-	public BaseEvent updateEndDateTime(
+	public MutableEvent updateEndDateTime(
 			@Parameter(optionality = Optionality.OPTIONAL) @ParameterLayout(named = "End Time") DateTime end) {
 		this.setEnd(trimSeconds(end));
 		return this;
@@ -145,7 +142,7 @@ public abstract class BaseEvent implements Comparable<BaseEvent>{
 	}
 
 	@Action()
-	public BaseEvent updateEndDateTimeOffStart(
+	public MutableEvent updateEndDateTimeOffStart(
 			@Parameter(optionality = Optionality.MANDATORY) @ParameterLayout(named = "Add N Minutes to Start Date Time") Integer minutes) {
 		this.setEnd(this.getStart().plusMinutes(minutes));
 		return this;
@@ -171,18 +168,15 @@ public abstract class BaseEvent implements Comparable<BaseEvent>{
 		return hour.plusMinutes(roundedMinutes);
 	}
 	
+	public MutableEvent addBooking(Booking booking) {
+		if (!this.getBookingSet().contains(booking))
+			this.getBookingSet().add(booking);
+		return this;
+	}
 
-	public int compareTo(BaseEvent other) {
-		if (this == other) {
-			return 0;
-		} else {
-			// most recent first
-			int result = other.getStart().compareTo(this.getStart());
-			if (result != 0) {
-				return result;
-			} else {
-				return other.getEnd().compareTo(this.getEnd());
-			}
-		}
+	public MutableEvent removeBooking(Booking booking) {
+		if (this.getBookingSet().contains(booking))
+			this.getBookingSet().remove(booking);
+		return this;
 	}
 }

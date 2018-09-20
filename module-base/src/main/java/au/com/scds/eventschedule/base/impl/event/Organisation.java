@@ -17,7 +17,7 @@
  *  under the License.
  */
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.event;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.IdentityType;

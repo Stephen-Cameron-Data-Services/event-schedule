@@ -13,12 +13,12 @@ import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.joda.time.DateTime;
 
-import au.com.scds.eventschedule.base.impl.Contactee;
-import au.com.scds.eventschedule.base.impl.ContactAllocation;
-import au.com.scds.eventschedule.base.impl.Contactor;
-import au.com.scds.eventschedule.base.impl.ContactsRepository;
-import au.com.scds.eventschedule.base.impl.EventsRepository;
-import au.com.scds.eventschedule.base.impl.ScheduledContact;
+import au.com.scds.eventschedule.base.impl.contact.ContactAllocation;
+import au.com.scds.eventschedule.base.impl.contact.Contactee;
+import au.com.scds.eventschedule.base.impl.contact.Contactor;
+import au.com.scds.eventschedule.base.impl.contact.ContactsRepository;
+import au.com.scds.eventschedule.base.impl.contact.ScheduledContact;
+import au.com.scds.eventschedule.base.impl.event.EventsRepository;
 
 @DomainService(nature = NatureOfService.VIEW_MENU_ONLY, objectType = "ContactsMenu")
 @DomainServiceLayout(named = "Contacts", menuOrder = "40")

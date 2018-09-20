@@ -31,6 +31,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.services.i18n.TranslatableString;
 
+import au.com.scds.eventschedule.base.impl.event.MutableEvent;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,7 +40,7 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Booking")
 @DomainObject(objectType = "Booking")
-public class Booking {
+public class Booking implements Comparable<Booking>{
 	
 	@Column(allowsNull = "true")
 	@Getter()
@@ -54,19 +55,19 @@ public class Booking {
 	@Column(allowsNull = "false")
 	@Getter()
 	@Setter(value = AccessLevel.PROTECTED)
-	protected BaseEvent event;
+	protected MutableEvent event;
 
 	protected Booking() {
 	}
 
-	public Booking(BaseEvent event, Booker attendee) {
+	public Booking(MutableEvent event, Booker booker) {
 		setEvent(event);
-		setBooker(attendee);
+		setBooker(booker);
 	}
 	
-	public Booking(BaseEvent event, Booker attendee, Bookable booked) {
+	public Booking(MutableEvent event, Booker booker, Bookable booked) {
 		setEvent(event);
-		setBooker(attendee);
+		setBooker(booker);
 		setBooked(booked);
 	}
 
@@ -75,5 +76,11 @@ public class Booking {
 				"booker", this.getBooker().title(), 
 				"bookable", this.getBooked().title(),
 				"event", this.getEvent().getStart());
+	}
+
+	@Override
+	public int compareTo(Booking o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

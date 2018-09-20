@@ -18,7 +18,7 @@
  */
 
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.event;
 
 import java.util.Date;
 import java.util.Set;

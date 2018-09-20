@@ -12,10 +12,10 @@ import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.joda.time.DateTime;
 
-import au.com.scds.eventschedule.base.impl.Organisation;
 import au.com.scds.eventschedule.base.impl.activity.ActivityRepository;
 import au.com.scds.eventschedule.base.impl.activity.ActivityEvent;
 import au.com.scds.eventschedule.base.impl.activity.RecurringActivityEvent;
+import au.com.scds.eventschedule.base.impl.event.Organisation;
 
 @DomainService(nature = NatureOfService.VIEW_MENU_ONLY, objectType = "ActivityMenu")
 @DomainServiceLayout(named = "Activities", menuOrder = "30")

@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.jdo.annotations.Column;
 import javax.jdo.annotations.Discriminator;
 import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -21,27 +22,36 @@ import lombok.Setter;
 /**
  * An entity that holds bookings of <class>Bookable</class>.
  */
-@PersistenceCapable()
-@Inheritance(strategy = InheritanceStrategy.SUBCLASS_TABLE)
-public abstract class Booker {
+@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "booker")
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Booker")
+@DomainObject(objectType = "Booker")
+public class Booker {
 	
-	public abstract String title();
-	
+	@Column(allowsNull = "true")
+	@Getter()
+	@Setter()
+	private String name;
+
 	@Persistent(mappedBy = "booker")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<Booking> bookingsSet = new TreeSet<>();
 	
+	public String title() {
+		return getName();
+	}
+	
 	public SortedSet<Booking> getBookings() {
 		return Collections.unmodifiableSortedSet(this.getBookingsSet());
 	}
 
-	public void addBooking(Booking booking) {
+	void addBooking(Booking booking) {
 		if (!this.getBookingsSet().contains(booking))
 			this.getBookingsSet().add(booking);
 	}
 
-	public void removeBooking(Booking booking) {
+	void removeBooking(Booking booking) {
 		if (this.getBookingsSet().contains(booking))
 			this.getBookingsSet().remove(booking);
 	}

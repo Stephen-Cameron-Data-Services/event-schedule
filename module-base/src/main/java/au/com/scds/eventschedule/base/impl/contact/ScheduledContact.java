@@ -17,7 +17,7 @@
  *  under the License.
  */
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.contact;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +34,8 @@ import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.joda.time.DateTime;
 
-import au.com.scds.eventschedule.base.impl.Contactee;
-import au.com.scds.eventschedule.base.impl.Contactor;
+import au.com.scds.eventschedule.base.impl.event.MutableEvent;
+import au.com.scds.eventschedule.base.impl.event.EventsRepository;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,7 +44,7 @@ import lombok.Setter;
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "scheduled_contact")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(value = "ScheduledContact")
-public class ScheduledContact extends BaseEvent {
+public class ScheduledContact extends MutableEvent {
 
 	@Column(allowsNull = "false")
 	@Getter()
@@ -92,9 +92,4 @@ public class ScheduledContact extends BaseEvent {
 	@Inject
 	EventsRepository eventsRepo;
 
-	@Override
-	public int compareTo(BaseEvent o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

@@ -14,14 +14,13 @@ import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.joda.time.DateTime;
 
-import au.com.scds.eventschedule.base.impl.Attendee;
-import au.com.scds.eventschedule.base.impl.CalendarableScheduledEvent;
-import au.com.scds.eventschedule.base.impl.EventFacilitator;
-import au.com.scds.eventschedule.base.impl.EventsRepository;
-import au.com.scds.eventschedule.base.impl.Organisation;
-import au.com.scds.eventschedule.base.impl.ScheduledEvent;
-//import domainapp.modules.simple.dom.impl.SimpleObject;
-import au.com.scds.eventschedule.base.impl.SimpleEvent;
+import au.com.scds.eventschedule.base.impl.activity.Attendee;
+import au.com.scds.eventschedule.base.impl.event.CalendarableScheduledEvent;
+import au.com.scds.eventschedule.base.impl.event.EventFacilitator;
+import au.com.scds.eventschedule.base.impl.event.EventsRepository;
+import au.com.scds.eventschedule.base.impl.event.Organisation;
+import au.com.scds.eventschedule.base.impl.event.ScheduledEvent;
+import au.com.scds.eventschedule.base.impl.event.SimpleEvent;
 
 @DomainService(nature = NatureOfService.VIEW_MENU_ONLY, objectType = "EventsMenu")
 @DomainServiceLayout(named = "Events", menuOrder = "20")

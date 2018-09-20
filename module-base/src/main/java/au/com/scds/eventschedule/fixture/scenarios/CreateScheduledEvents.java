@@ -17,7 +17,7 @@ public class CreateScheduledEvents extends FixtureScript {
 		withDiscoverability(Discoverability.DISCOVERABLE);
 	}
 
-	private au.com.scds.eventschedule.base.impl.ScheduledEvent event = null;
+	private au.com.scds.eventschedule.base.impl.event.ScheduledEvent event = null;
 
 	@Override
 	protected void execute(ExecutionContext ec) {
@@ -32,7 +32,7 @@ public class CreateScheduledEvents extends FixtureScript {
 
 			for (ScheduledEvent _event : _events.getEvent()) {
 				this.event = eventMenu.createScheduledEvent(_event.getName(), new DateTime(_event.getDate()));
-				au.com.scds.eventschedule.base.impl.Attendee attendee = null;
+				au.com.scds.eventschedule.base.impl.activity.Attendee attendee = null;
 				for(Booking _booking : _event.getBooking()){
 					attendee = eventMenu.createEventAttendee(_booking.getAttendee().getPerson().getFullname());
 					event.addBooking(attendee);
@@ -41,7 +41,7 @@ public class CreateScheduledEvents extends FixtureScript {
 					attendee = eventMenu.createEventAttendee(_attendee.getPerson().getFullname());
 					event.addWaitListed(attendee);
 				}
-				au.com.scds.eventschedule.base.impl.EventFacilitator facilitator = null;
+				au.com.scds.eventschedule.base.impl.event.EventFacilitator facilitator = null;
 				for(EventFacilitator _facilitator : _event.getEventFacilitator()){
 					facilitator = eventMenu.createEventFacilitator(_facilitator.getPerson().getFullname());
 					event.addFacilitator(facilitator);
@@ -53,7 +53,7 @@ public class CreateScheduledEvents extends FixtureScript {
 		}
 	}
 
-	public au.com.scds.eventschedule.base.impl.ScheduledEvent getEvent() {
+	public au.com.scds.eventschedule.base.impl.event.ScheduledEvent getEvent() {
 		return this.event;
 	}
 	

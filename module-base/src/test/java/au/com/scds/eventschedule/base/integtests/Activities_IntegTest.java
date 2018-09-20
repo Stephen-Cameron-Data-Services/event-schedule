@@ -24,10 +24,10 @@ import javax.inject.Inject;
 import org.junit.Before;
 import org.junit.Test;
 
-import au.com.scds.eventschedule.base.impl.ContactAllocation;
-import au.com.scds.eventschedule.base.impl.Contactee;
-import au.com.scds.eventschedule.base.impl.Contactor;
 import au.com.scds.eventschedule.base.impl.activity.ActivityEvent;
+import au.com.scds.eventschedule.base.impl.contact.ContactAllocation;
+import au.com.scds.eventschedule.base.impl.contact.Contactee;
+import au.com.scds.eventschedule.base.impl.contact.Contactor;
 import au.com.scds.eventschedule.fixture.scenarios.CreateActivities;
 import au.com.scds.eventschedule.fixture.scenarios.CreateAllocations;
 

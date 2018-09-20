@@ -16,7 +16,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  */
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.event;
 
 import java.util.ArrayList;
 import java.util.List;

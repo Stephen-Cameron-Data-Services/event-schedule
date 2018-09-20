@@ -20,7 +20,7 @@ public class CreateAllocations extends FixtureScript {
 		withDiscoverability(Discoverability.DISCOVERABLE);
 	}
 
-	private List<au.com.scds.eventschedule.base.impl.ContactAllocation> allocations = new ArrayList<>();
+	private List<au.com.scds.eventschedule.base.impl.contact.ContactAllocation> allocations = new ArrayList<>();
 
 	@Override
 	protected void execute(ExecutionContext ec) {
@@ -33,11 +33,11 @@ public class CreateAllocations extends FixtureScript {
 			jaxbUnmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
 			Allocations _allocations = (Allocations) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(is));
 			for (ContactAllocation _allocation : _allocations.getAllocation()) {
-				au.com.scds.eventschedule.base.impl.Contactee contactee = contactMenu
+				au.com.scds.eventschedule.base.impl.contact.Contactee contactee = contactMenu
 						.createContactee(_allocation.getContactee().getPerson().getFullname());
-				au.com.scds.eventschedule.base.impl.Contactor contactor = contactMenu
+				au.com.scds.eventschedule.base.impl.contact.Contactor contactor = contactMenu
 						.createContactor(_allocation.getContactor().getPerson().getFullname());
-				au.com.scds.eventschedule.base.impl.ContactAllocation allocation = contactMenu
+				au.com.scds.eventschedule.base.impl.contact.ContactAllocation allocation = contactMenu
 						.createContactAllocation(contactor, contactee);
 				this.allocations.add(allocation);
 			}
@@ -46,7 +46,7 @@ public class CreateAllocations extends FixtureScript {
 		}
 	}
 
-	public List<au.com.scds.eventschedule.base.impl.ContactAllocation> getAllocations() {
+	public List<au.com.scds.eventschedule.base.impl.contact.ContactAllocation> getAllocations() {
 		return this.allocations;
 	}
 

@@ -17,7 +17,7 @@
  *  under the License.
  */
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.event;
 
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.Discriminator;
@@ -25,40 +25,45 @@ import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
+import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.Editing;
-import org.apache.isis.applib.services.i18n.TranslatableString;
-import org.joda.time.DateTime;
-import org.joda.time.Duration;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 @DomainObject()
-@PersistenceCapable(identityType = IdentityType.DATASTORE)
+@PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "eventfacilitator")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
-@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "SimpleEvent")
-public class SimpleEvent extends BaseEvent {
+@Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "EventFacilitator")
+public class EventFacilitator implements Comparable<EventFacilitator> {
 
 	@Column(allowsNull = "true")
-	@Getter
-	@Setter
-	private String name;
-	@Column(allowsNull = "true")
-	@Getter
-	@Setter
-	private String description;
-	
-	public TranslatableString title() {
-		return TranslatableString.tr("{name}", "name", this.getName());
+	@Getter()
+	@Setter(value = AccessLevel.PRIVATE)
+	protected Person person;
+
+	public EventFacilitator(Person person) {
+		this.setPerson(person);
+	}
+
+	@NotPersistent
+	public String getFullname() {
+		return this.getPerson().getFullname();
+	}
+
+	public String title() {
+		return this.getFullname();
 	}
 
 	@Override
-	public int compareTo(BaseEvent o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(EventFacilitator other) {
+		return doCompareTo(other);
 	}
-
+	
+	protected int doCompareTo(EventFacilitator other){
+		return this.getPerson().compareTo(other.getPerson());		
+	}
 }

@@ -18,7 +18,7 @@
  */
 
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.event;
 
 import java.util.List;
 import javax.inject.Inject;
@@ -26,6 +26,11 @@ import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.joda.time.DateTime;
+
+import au.com.scds.eventschedule.base.impl.Booking;
+import au.com.scds.eventschedule.base.impl.activity.Attendee;
+import au.com.scds.eventschedule.base.impl.contact.Contactee;
+import au.com.scds.eventschedule.base.impl.contact.Contactor;
 
 @DomainService(nature = NatureOfService.DOMAIN)
 public class EventsRepository {
@@ -70,20 +75,6 @@ public class EventsRepository {
 		EventFacilitator object = new EventFacilitator(person);
 		repositoryService.persistAndFlush(object);
 		return object;
-	}
-
-	public Booking createBooking(BaseEvent event, Attendee attendee) {
-		if (event == null || attendee == null)
-			return null;
-		Booking object = new Booking(event, attendee);
-		repositoryService.persistAndFlush(object);
-		return object;
-	}
-
-	public void destroyBooking(Booking booking) {
-		booking.getEvent().getBookingSet().remove(booking);
-		booking.getBooker().getBookingsSet().remove(booking);
-		repositoryService.removeAndFlush(booking);
 	}
 
 	public Organisation createOrganisation(String name) {

@@ -17,7 +17,7 @@
  *  under the License.
  */
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.event;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.Column;
@@ -37,9 +37,9 @@ import org.incode.example.commchannel.dom.api.GeocodedAddress;
 @Inheritance(strategy = InheritanceStrategy.SUPERCLASS_TABLE)
 @Discriminator(value = "Address")
 @Queries({
-		@Query(name = "findAddressByName", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.Address WHERE name == :name"),
-		@Query(name = "findAllAddresses", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.Address"),
-		@Query(name = "findAllNamedAddresses", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.Address WHERE name != null && name.trim().length() > 0 ORDER BY name") })
+		@Query(name = "findAddressByName", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.event.Address WHERE name == :name"),
+		@Query(name = "findAllAddresses", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.event.Address"),
+		@Query(name = "findAllNamedAddresses", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.event.Address WHERE name != null && name.trim().length() > 0 ORDER BY name") })
 public class Address extends Location {
 
 	private String street1;

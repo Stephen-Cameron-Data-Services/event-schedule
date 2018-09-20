@@ -18,7 +18,7 @@
  */
 
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.contact;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.Column;

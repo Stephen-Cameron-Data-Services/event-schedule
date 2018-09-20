@@ -42,12 +42,11 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
-import au.com.scds.eventschedule.base.impl.Attendee;
 import au.com.scds.eventschedule.base.impl.Booking;
-import au.com.scds.eventschedule.base.impl.CalendarableScheduledEvent;
-import au.com.scds.eventschedule.base.impl.EventsRepository;
-import au.com.scds.eventschedule.base.impl.Organisation;
-import au.com.scds.eventschedule.base.impl.ScheduledEvent;
+import au.com.scds.eventschedule.base.impl.event.CalendarableScheduledEvent;
+import au.com.scds.eventschedule.base.impl.event.EventsRepository;
+import au.com.scds.eventschedule.base.impl.event.Organisation;
+import au.com.scds.eventschedule.base.impl.event.ScheduledEvent;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

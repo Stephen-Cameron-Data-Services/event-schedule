@@ -18,7 +18,7 @@
  */
 
 
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.contact;
 
 import java.util.List;
 
@@ -27,6 +27,8 @@ import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.services.repository.RepositoryService;
 import org.joda.time.DateTime;
+
+import au.com.scds.eventschedule.base.impl.event.Person;
 
 @DomainService(nature = NatureOfService.DOMAIN)
 public class ContactsRepository {

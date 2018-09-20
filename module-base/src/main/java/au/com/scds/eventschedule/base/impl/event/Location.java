@@ -16,7 +16,7 @@
  *  specific language governing permissions and limitations
  *  under the License.
  */
-package au.com.scds.eventschedule.base.impl;
+package au.com.scds.eventschedule.base.impl.event;
 
 import javax.inject.Inject;
 import javax.jdo.annotations.Column;
@@ -46,8 +46,8 @@ import org.apache.isis.applib.annotation.Where;
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Location")
 @Queries({
-		@Query(name = "findLocationByName", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.Location WHERE name == :name"),
-		@Query(name = "findAllLocations", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.Location ORDER BY name") })
+		@Query(name = "findLocationByName", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.event.Location WHERE name == :name"),
+		@Query(name = "findAllLocations", language = "JDOQL", value = "SELECT FROM au.com.scds.eventschedule.base.impl.event.Location ORDER BY name") })
 @DomainObject()
 public class Location {
 
