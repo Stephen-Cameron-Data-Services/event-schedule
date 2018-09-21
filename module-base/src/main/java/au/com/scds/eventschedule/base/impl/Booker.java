@@ -26,22 +26,30 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Booker")
 @DomainObject(objectType = "Booker")
-public class Booker {
-	
-	@Column(allowsNull = "true")
+public class Booker implements Comparable<Booker> {
+
+	@Column(allowsNull = "false")
 	@Getter()
 	@Setter()
-	private String name;
+	private String identifier;
 
 	@Persistent(mappedBy = "booker")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<Booking> bookingsSet = new TreeSet<>();
 	
-	public String title() {
-		return getName();
+	protected Booker(){
+		this.setIdentifier("");
 	}
 	
+	public Booker(String identifier){
+		this.setIdentifier(identifier);
+	}
+
+	public String title() {
+		return getIdentifier();
+	}
+
 	public SortedSet<Booking> getBookings() {
 		return Collections.unmodifiableSortedSet(this.getBookingsSet());
 	}
@@ -54,6 +62,11 @@ public class Booker {
 	void removeBooking(Booking booking) {
 		if (this.getBookingsSet().contains(booking))
 			this.getBookingsSet().remove(booking);
+	}
+
+	@Override
+	public int compareTo(Booker o) {
+		return this.getIdentifier().compareTo(o.getIdentifier());
 	}
 
 }

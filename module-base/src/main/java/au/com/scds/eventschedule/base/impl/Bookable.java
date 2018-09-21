@@ -29,21 +29,29 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Bookable")
 @DomainObject(objectType = "Bookable")
-public class Bookable {
+public class Bookable implements Comparable<Bookable> {
 
 	@Column(allowsNull = "true")
 	@Unique()
 	@Getter()
 	@Setter()
-	private String identity;
+	private String identifier;
 
 	@Persistent(mappedBy = "booked")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
 	protected SortedSet<Booking> bookingsSet = new TreeSet<>();
+	
+	protected Bookable(){
+		this.setIdentifier("");
+	}
+	
+	public Bookable(String identifier){
+		this.setIdentifier(identifier);
+	}
 
 	public String title() {
-		return getIdentity();
+		return getIdentifier();
 	}
 
 	public SortedSet<Booking> getBookings() {
@@ -62,5 +70,10 @@ public class Bookable {
 
 	public Bookable createBooking(Booker booker, Event interval) {
 		return this;
+	}
+
+	@Override
+	public int compareTo(Bookable o) {
+		return this.getIdentifier().compareTo(o.getIdentifier());
 	}
 }

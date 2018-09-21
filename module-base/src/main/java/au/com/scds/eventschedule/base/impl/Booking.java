@@ -40,13 +40,13 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Booking")
 @DomainObject(objectType = "Booking")
-public class Booking implements Comparable<Booking>{
-	
+public class Booking implements Comparable<Booking> {
+
 	@Column(allowsNull = "true")
 	@Getter()
 	@Setter(value = AccessLevel.PROTECTED)
 	protected Bookable booked;
-	
+
 	@Column(allowsNull = "false")
 	@Getter()
 	@Setter(value = AccessLevel.PROTECTED)
@@ -64,7 +64,7 @@ public class Booking implements Comparable<Booking>{
 		setEvent(event);
 		setBooker(booker);
 	}
-	
+
 	public Booking(MutableEvent event, Booker booker, Bookable booked) {
 		setEvent(event);
 		setBooker(booker);
@@ -72,15 +72,19 @@ public class Booking implements Comparable<Booking>{
 	}
 
 	public TranslatableString title() {
-		return TranslatableString.tr("{booker}-has-{bookable}-at-{event}", 
-				"booker", this.getBooker().title(), 
-				"bookable", this.getBooked().title(),
-				"event", this.getEvent().getStart());
+		return TranslatableString.tr("{booker}-has-{bookable}-at-{event}", "booker", this.getBooker().title(),
+				"bookable", this.getBooked().title(), "event", this.getEvent().getStart());
 	}
 
 	@Override
 	public int compareTo(Booking o) {
-		// TODO Auto-generated method stub
-		return 0;
+		int i = this.getBooker().compareTo(o.getBooker());
+		if (i == 0) {
+			i = this.getEvent().compareTo(o.getEvent());
+			if (i == 0 && this.getBooked() != null && o.getBooked() != null) {
+				i = this.getBooked().compareTo(o.getBooked());
+			}
+		}
+		return i;
 	}
 }

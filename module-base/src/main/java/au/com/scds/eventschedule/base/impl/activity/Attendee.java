@@ -46,7 +46,7 @@ import lombok.Setter;
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "attendee")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Attendee")
-public class Attendee extends Booker implements  Comparable<Attendee> {
+public class Attendee extends Booker {
 
 	@Persistent(mappedBy = "attendee")
 	@Getter(value = AccessLevel.PROTECTED)
@@ -86,14 +86,5 @@ public class Attendee extends Booker implements  Comparable<Attendee> {
 	public void removeAttendance(Attendance attendance) {
 		if (this.getAttendancesSet().contains(attendance))
 			this.getAttendancesSet().remove(attendance);
-	}
-
-	@Override
-	public int compareTo(Attendee other) {
-		return doCompareTo(other); 
-	}
-
-	protected int doCompareTo(Attendee other) {
-		return this.getPerson().compareTo(other.getPerson());
 	}
 }
