@@ -15,16 +15,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for Person complex type.
+ * <p>Java class for Booker complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Person"&gt;
+ * &lt;complexType name="Booker"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="fullname" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="identifier" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -34,36 +34,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Person", propOrder = {
-    "fullname"
+@XmlType(name = "Booker", propOrder = {
+    "identifier"
 })
-public class Person {
+public class Booker {
 
     @XmlElement(required = true)
-    protected String fullname;
+    protected String identifier;
 
     /**
-     * Gets the value of the fullname property.
+     * Gets the value of the identifier property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getFullname() {
-        return fullname;
+    public String getIdentifier() {
+        return identifier;
     }
 
     /**
-     * Sets the value of the fullname property.
+     * Sets the value of the identifier property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setFullname(String value) {
-        this.fullname = value;
+    public void setIdentifier(String value) {
+        this.identifier = value;
     }
 
 }

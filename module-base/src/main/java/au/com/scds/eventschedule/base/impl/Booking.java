@@ -45,7 +45,7 @@ public class Booking implements Comparable<Booking> {
 	@Column(allowsNull = "true")
 	@Getter()
 	@Setter(value = AccessLevel.PROTECTED)
-	protected Bookable booked;
+	protected Bookable bookable;
 
 	@Column(allowsNull = "false")
 	@Getter()
@@ -55,25 +55,25 @@ public class Booking implements Comparable<Booking> {
 	@Column(allowsNull = "false")
 	@Getter()
 	@Setter(value = AccessLevel.PROTECTED)
-	protected MutableEvent event;
+	protected Event event;
 
 	protected Booking() {
 	}
 
-	public Booking(MutableEvent event, Booker booker) {
+	public Booking(Event event, Booker booker) {
 		setEvent(event);
 		setBooker(booker);
 	}
 
-	public Booking(MutableEvent event, Booker booker, Bookable booked) {
+	public Booking(Bookable bookable, Booker booker, Event event) {
 		setEvent(event);
 		setBooker(booker);
-		setBooked(booked);
+		setBookable(bookable);
 	}
 
 	public TranslatableString title() {
 		return TranslatableString.tr("{booker}-has-{bookable}-at-{event}", "booker", this.getBooker().title(),
-				"bookable", this.getBooked().title(), "event", this.getEvent().getStart());
+				"bookable", this.getBookable().title(), "event", this.getEvent().getStart());
 	}
 
 	@Override
@@ -81,8 +81,8 @@ public class Booking implements Comparable<Booking> {
 		int i = this.getBooker().compareTo(o.getBooker());
 		if (i == 0) {
 			i = this.getEvent().compareTo(o.getEvent());
-			if (i == 0 && this.getBooked() != null && o.getBooked() != null) {
-				i = this.getBooked().compareTo(o.getBooked());
+			if (i == 0 && this.getBookable() != null && o.getBookable() != null) {
+				i = this.getBookable().compareTo(o.getBookable());
 			}
 		}
 		return i;

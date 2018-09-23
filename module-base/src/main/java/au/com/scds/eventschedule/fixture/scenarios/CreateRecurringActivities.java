@@ -46,7 +46,7 @@ public class CreateRecurringActivities extends FixtureScript {
 			jaxbUnmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
 			RecurringActivities _activities = (RecurringActivities) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(is));
 			for (RecurringActivityEvent _parent: _activities.getRecurringActivity()) {
-				au.com.scds.eventschedule.base.impl.activity.RecurringActivityEvent parent = activityMenu.createRecurringActivityEvent(_parent.getName(), new DateTime(_parent.getDate()));
+				au.com.scds.eventschedule.base.impl.activity.RecurringActivityEvent parent = activityMenu.createRecurringActivityEvent(_parent.getName(), new DateTime(_parent.getStart()));
 				au.com.scds.eventschedule.base.impl.activity.Attendee attendee = null;
 				for(Participation _participation : _parent.getParticipation()){
 					attendee = eventMenu.createEventAttendee(_participation.getAttendee().getPerson().getFullname());

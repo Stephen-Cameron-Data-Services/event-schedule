@@ -12,20 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for WaitList complex type.
+ * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="WaitList"&gt;
+ * &lt;complexType&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="attendee" type="{http://www.example.org/EventSchedule}Attendee" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="event" type="{http://www.example.org/EventSchedule}ScheduledEvent" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -35,40 +37,42 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "WaitList", propOrder = {
-    "attendee"
+@XmlType(name = "", propOrder = {
+    "event"
 })
-public class WaitList {
+@XmlRootElement(name = "scheduledEvents")
+public class ScheduledEvents {
 
-    protected List<Attendee> attendee;
+    @XmlElement(required = true)
+    protected List<ScheduledEvent> event;
 
     /**
-     * Gets the value of the attendee property.
+     * Gets the value of the event property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the attendee property.
+     * This is why there is not a <CODE>set</CODE> method for the event property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAttendee().add(newItem);
+     *    getEvent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Attendee }
+     * {@link ScheduledEvent }
      * 
      * 
      */
-    public List<Attendee> getAttendee() {
-        if (attendee == null) {
-            attendee = new ArrayList<Attendee>();
+    public List<ScheduledEvent> getEvent() {
+        if (event == null) {
+            event = new ArrayList<ScheduledEvent>();
         }
-        return this.attendee;
+        return this.event;
     }
 
 }

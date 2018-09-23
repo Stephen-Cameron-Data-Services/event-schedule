@@ -40,7 +40,7 @@ public class CreateActivities extends FixtureScript {
 			jaxbUnmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
 			Activities _activities = (Activities) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(is));
 			for (ActivityEvent _activity : _activities.getActivity()) {
-				au.com.scds.eventschedule.base.impl.activity.ActivityEvent activity = activityMenu.createActivityEvent(_activity.getName(), new DateTime(_activity.getDate()));
+				au.com.scds.eventschedule.base.impl.activity.ActivityEvent activity = activityMenu.createActivityEvent(_activity.getName(), new DateTime(_activity.getStart()));
 				au.com.scds.eventschedule.base.impl.activity.Attendee attendee = null;
 				for(Participation _participation : _activity.getParticipation()){
 					attendee = eventMenu.createEventAttendee(_participation.getAttendee().getPerson().getFullname());

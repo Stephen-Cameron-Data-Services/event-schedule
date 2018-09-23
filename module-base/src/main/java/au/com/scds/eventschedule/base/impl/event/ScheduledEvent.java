@@ -142,7 +142,7 @@ public class ScheduledEvent extends MutableEvent  {
 	}
 
 	public Booking createBooking(Attendee attendee) {
-		Booking booking = bookingsRepo.createBooking(this, attendee);
+		Booking booking = bookingsRepo.createBooking(null, attendee, this);
 		this.getBookingSet().add(booking);
 		return booking;
 	}

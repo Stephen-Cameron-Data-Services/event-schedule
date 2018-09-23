@@ -59,11 +59,7 @@ import lombok.Setter;
 @DomainObject(objectType = "Event")
 public abstract class MutableEvent extends Event {
 
-	@Persistent(mappedBy = "event")
-	@Order(column = "event_booking_idx")
-	@Getter(value = AccessLevel.PROTECTED)
-	@Setter(value = AccessLevel.PROTECTED)
-	protected SortedSet<Booking> bookingSet = new TreeSet<>();
+
 
 	public MutableEvent() {
 		super();
@@ -166,17 +162,5 @@ public abstract class MutableEvent extends Event {
 		final long millisSinceHour = new Duration(hour, dateTime).getMillis();
 		final int roundedMinutes = ((int) Math.round(millisSinceHour / 60000.0));
 		return hour.plusMinutes(roundedMinutes);
-	}
-	
-	public MutableEvent addBooking(Booking booking) {
-		if (!this.getBookingSet().contains(booking))
-			this.getBookingSet().add(booking);
-		return this;
-	}
-
-	public MutableEvent removeBooking(Booking booking) {
-		if (this.getBookingSet().contains(booking))
-			this.getBookingSet().remove(booking);
-		return this;
 	}
 }

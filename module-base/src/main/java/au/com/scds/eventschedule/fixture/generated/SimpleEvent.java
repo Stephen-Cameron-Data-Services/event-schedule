@@ -8,26 +8,29 @@
 
 package au.com.scds.eventschedule.fixture.generated;
 
+import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Java class for Organisation complex type.
+ * <p>Java class for SimpleEvent complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Organisation"&gt;
+ * &lt;complexType name="SimpleEvent"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="sheduledEvent" type="{http://www.example.org/EventSchedule}ScheduledEvent"/&gt;
- *         &lt;element name="eventFacilitator" type="{http://www.example.org/EventSchedule}EventFacilitator"/&gt;
- *         &lt;element name="contactor" type="{http://www.example.org/EventSchedule}Contactor"/&gt;
+ *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="start" type="{http://www.w3.org/2001/XMLSchema}dateTime"/&gt;
+ *         &lt;element name="end" type="{http://www.w3.org/2001/XMLSchema}dateTime"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -37,22 +40,26 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Organisation", propOrder = {
+@XmlType(name = "SimpleEvent", propOrder = {
     "name",
-    "sheduledEvent",
-    "eventFacilitator",
-    "contactor"
+    "description",
+    "start",
+    "end"
 })
-public class Organisation {
+public class SimpleEvent {
 
     @XmlElement(required = true)
     protected String name;
     @XmlElement(required = true)
-    protected ScheduledEvent sheduledEvent;
-    @XmlElement(required = true)
-    protected EventFacilitator eventFacilitator;
-    @XmlElement(required = true)
-    protected Contactor contactor;
+    protected String description;
+    @XmlElement(required = true, type = String.class)
+    @XmlJavaTypeAdapter(Adapter1 .class)
+    @XmlSchemaType(name = "dateTime")
+    protected Date start;
+    @XmlElement(required = true, type = String.class)
+    @XmlJavaTypeAdapter(Adapter1 .class)
+    @XmlSchemaType(name = "dateTime")
+    protected Date end;
 
     /**
      * Gets the value of the name property.
@@ -79,75 +86,75 @@ public class Organisation {
     }
 
     /**
-     * Gets the value of the sheduledEvent property.
+     * Gets the value of the description property.
      * 
      * @return
      *     possible object is
-     *     {@link ScheduledEvent }
+     *     {@link String }
      *     
      */
-    public ScheduledEvent getSheduledEvent() {
-        return sheduledEvent;
+    public String getDescription() {
+        return description;
     }
 
     /**
-     * Sets the value of the sheduledEvent property.
+     * Sets the value of the description property.
      * 
      * @param value
      *     allowed object is
-     *     {@link ScheduledEvent }
+     *     {@link String }
      *     
      */
-    public void setSheduledEvent(ScheduledEvent value) {
-        this.sheduledEvent = value;
+    public void setDescription(String value) {
+        this.description = value;
     }
 
     /**
-     * Gets the value of the eventFacilitator property.
+     * Gets the value of the start property.
      * 
      * @return
      *     possible object is
-     *     {@link EventFacilitator }
+     *     {@link String }
      *     
      */
-    public EventFacilitator getEventFacilitator() {
-        return eventFacilitator;
+    public Date getStart() {
+        return start;
     }
 
     /**
-     * Sets the value of the eventFacilitator property.
+     * Sets the value of the start property.
      * 
      * @param value
      *     allowed object is
-     *     {@link EventFacilitator }
+     *     {@link String }
      *     
      */
-    public void setEventFacilitator(EventFacilitator value) {
-        this.eventFacilitator = value;
+    public void setStart(Date value) {
+        this.start = value;
     }
 
     /**
-     * Gets the value of the contactor property.
+     * Gets the value of the end property.
      * 
      * @return
      *     possible object is
-     *     {@link Contactor }
+     *     {@link String }
      *     
      */
-    public Contactor getContactor() {
-        return contactor;
+    public Date getEnd() {
+        return end;
     }
 
     /**
-     * Sets the value of the contactor property.
+     * Sets the value of the end property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Contactor }
+     *     {@link String }
      *     
      */
-    public void setContactor(Contactor value) {
-        this.contactor = value;
+    public void setEnd(Date value) {
+        this.end = value;
     }
 
 }

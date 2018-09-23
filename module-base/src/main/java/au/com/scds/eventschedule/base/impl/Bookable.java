@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.inject.Inject;
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.Discriminator;
 import javax.jdo.annotations.DiscriminatorStrategy;
@@ -14,6 +15,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.Unique;
 
+import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.DomainObject;
 
 import lombok.AccessLevel;
@@ -37,10 +39,10 @@ public class Bookable implements Comparable<Bookable> {
 	@Setter()
 	private String identifier;
 
-	@Persistent(mappedBy = "booked")
+	@Persistent(mappedBy = "bookable")
 	@Getter(value = AccessLevel.PROTECTED)
 	@Setter(value = AccessLevel.PROTECTED)
-	protected SortedSet<Booking> bookingsSet = new TreeSet<>();
+	protected SortedSet<Booking> bookingSet = new TreeSet<>();
 	
 	protected Bookable(){
 		this.setIdentifier("");
@@ -55,19 +57,20 @@ public class Bookable implements Comparable<Bookable> {
 	}
 
 	public SortedSet<Booking> getBookings() {
-		return Collections.unmodifiableSortedSet(this.getBookingsSet());
+		return Collections.unmodifiableSortedSet(this.getBookingSet());
 	}
 
 	void addBooking(Booking booking) {
-		if (!this.getBookingsSet().contains(booking))
-			this.getBookingsSet().add(booking);
+		if (!this.getBookingSet().contains(booking))
+			this.getBookingSet().add(booking);
 	}
 
 	void removeBooking(Booking booking) {
-		if (this.getBookingsSet().contains(booking))
-			this.getBookingsSet().remove(booking);
+		if (this.getBookingSet().contains(booking))
+			bookingsRepo.destroyBooking(booking);
 	}
 
+	@Action
 	public Bookable createBooking(Booker booker, Event interval) {
 		return this;
 	}
@@ -76,4 +79,7 @@ public class Bookable implements Comparable<Bookable> {
 	public int compareTo(Bookable o) {
 		return this.getIdentifier().compareTo(o.getIdentifier());
 	}
+	
+	@Inject
+	BookingsRepository bookingsRepo;
 }

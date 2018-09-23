@@ -11,6 +11,7 @@ import javax.jdo.annotations.PersistenceCapable;
 import org.apache.isis.applib.annotation.DomainObject;
 
 import au.com.scds.eventschedule.base.impl.Bookable;
+import au.com.scds.eventschedule.base.impl.Booking;
 import au.com.scds.eventschedule.base.impl.Event;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -28,10 +29,15 @@ import lombok.Setter;
 @Discriminator(strategy = DiscriminatorStrategy.VALUE_MAP, value = "Timeslot")
 public class Timeslot extends Event {
 
-	@Column(allowsNull = "true")
+	@Column(allowsNull = "false")
 	@Getter
 	@Setter(value = AccessLevel.PRIVATE)
 	private Bookable bookable;
+	
+	@Column(allowsNull = "true")
+	@Getter()
+	@Setter()
+	private Booking booking;
 
 	@Column(allowsNull = "true")
 	@Getter
