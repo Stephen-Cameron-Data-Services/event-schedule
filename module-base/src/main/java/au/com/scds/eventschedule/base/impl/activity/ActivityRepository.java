@@ -10,6 +10,7 @@ import org.apache.isis.applib.services.repository.RepositoryService;
 import org.joda.time.DateTime;
 
 import au.com.scds.eventschedule.base.impl.Booking;
+import au.com.scds.eventschedule.base.impl.event.Attendee;
 import au.com.scds.eventschedule.base.impl.event.Organisation;
 import au.com.scds.eventschedule.base.impl.event.ScheduledEvent;
 

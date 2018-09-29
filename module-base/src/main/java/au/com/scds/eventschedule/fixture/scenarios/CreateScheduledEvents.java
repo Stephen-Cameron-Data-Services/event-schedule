@@ -24,17 +24,16 @@ public class CreateScheduledEvents extends FixtureScript {
 
 		try {
 			// import object graph from XML
-			InputStream is = this.getClass().getResourceAsStream("/au/com/scds/eventschedule/fixture/events.xml");
+			InputStream is = this.getClass().getResourceAsStream("/au/com/scds/eventschedule/fixture/scheduled_events.xml");
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			jaxbUnmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
-			Events _events = (Events) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(is));
-
+			ScheduledEvents _events = (ScheduledEvents) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(is));
 			for (ScheduledEvent _event : _events.getEvent()) {
-				this.event = eventMenu.createScheduledEvent(_event.getName(), new DateTime(_event.getDate()));
-				au.com.scds.eventschedule.base.impl.activity.Attendee attendee = null;
-				for(Booking _booking : _event.getBooking()){
-					attendee = eventMenu.createEventAttendee(_booking.getAttendee().getPerson().getFullname());
+				this.event = eventMenu.createScheduledEvent(_event.getName(), new DateTime(_event.getStart()));
+				au.com.scds.eventschedule.base.impl.event.Attendee attendee = null;
+				for(Booking _booking : _event.getBookings().getBooking()){
+					attendee = eventMenu.createEventAttendee(_booking.getBooker().getIdentifier());
 					event.addBooking(attendee);
 				}
 				for(Attendee _attendee : _event.getWaitList().getAttendee()){
@@ -47,7 +46,6 @@ public class CreateScheduledEvents extends FixtureScript {
 					event.addFacilitator(facilitator);
 				}
 			}
-
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}

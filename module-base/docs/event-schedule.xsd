@@ -12,8 +12,7 @@
 	<xsd:complexType name="ScheduledEvent">
 		<xsd:complexContent>
 			<xsd:extension base="tns:Event">
-				<xsd:sequence>
-					<xsd:element name="booking" type="tns:Attendee" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+				<xsd:sequence>
 					<xsd:element name="waitList" type="tns:WaitList" maxOccurs="1" minOccurs="1"></xsd:element>
 					<xsd:element name="eventFacilitator" type="tns:EventFacilitator" maxOccurs="unbounded" minOccurs="0"></xsd:element>
 					<xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="1"></xsd:element>
@@ -42,7 +41,6 @@
 	<xsd:complexType name="Booking">
 		<xsd:sequence>
 
-			<xsd:element name="event" type="tns:Event" maxOccurs="1" minOccurs="1"></xsd:element>
 			<xsd:element name="booker" type="tns:Booker" maxOccurs="1" minOccurs="1"></xsd:element>
 			<xsd:element name="bookable" type="tns:Bookable" maxOccurs="1" minOccurs="0"></xsd:element>
 		</xsd:sequence>
@@ -105,8 +103,7 @@
 	<xsd:complexType name="ActivityEvent">
 		<xsd:complexContent>
 			<xsd:extension base="tns:ScheduledEvent">
-				<xsd:sequence>
-					<xsd:element name="participation" type="tns:Participation" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+				<xsd:sequence>
 
 					<xsd:element name="attendance" type="tns:Attendance" maxOccurs="unbounded" minOccurs="0"></xsd:element>
 				</xsd:sequence>
@@ -117,7 +114,11 @@
 
 	<xsd:complexType name="Participation">
 		<xsd:complexContent>
-			<xsd:extension base="tns:Booking"></xsd:extension>
+			<xsd:extension base="tns:Booking">
+				<xsd:sequence>
+					<xsd:element name="attendee" type="tns:Attendee" maxOccurs="1" minOccurs="1"></xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 
@@ -173,6 +174,13 @@
 		<xsd:sequence>
 			<xsd:element name="start" type="xsd:dateTime" minOccurs="1" maxOccurs="1"></xsd:element>
 			<xsd:element name="end" type="xsd:dateTime" minOccurs="1" maxOccurs="1"></xsd:element>
+			<xsd:element name="bookings" maxOccurs="1" minOccurs="1">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="booking" type="tns:Booking" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -185,8 +193,10 @@
 	<xsd:element name="events">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element name="event" type="tns:Event" maxOccurs="1" minOccurs="1"></xsd:element>
+				<xsd:element name="event" type="tns:Event" maxOccurs="unbounded" minOccurs="1"></xsd:element>
 			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
+
+
 </xsd:schema>

@@ -28,7 +28,6 @@ import org.apache.isis.applib.services.repository.RepositoryService;
 import org.joda.time.DateTime;
 
 import au.com.scds.eventschedule.base.impl.Booking;
-import au.com.scds.eventschedule.base.impl.activity.Attendee;
 import au.com.scds.eventschedule.base.impl.contact.Contactee;
 import au.com.scds.eventschedule.base.impl.contact.Contactor;
 

@@ -43,6 +43,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
 import au.com.scds.eventschedule.base.impl.Booking;
+import au.com.scds.eventschedule.base.impl.event.Attendee;
 import au.com.scds.eventschedule.base.impl.event.CalendarableScheduledEvent;
 import au.com.scds.eventschedule.base.impl.event.EventsRepository;
 import au.com.scds.eventschedule.base.impl.event.Organisation;

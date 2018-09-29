@@ -43,7 +43,6 @@ import org.apache.isis.applib.services.i18n.TranslatableString;
 import org.joda.time.DateTime;
 import au.com.scds.eventschedule.base.impl.Booking;
 import au.com.scds.eventschedule.base.impl.BookingsRepository;
-import au.com.scds.eventschedule.base.impl.activity.Attendee;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

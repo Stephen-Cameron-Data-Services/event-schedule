@@ -17,7 +17,7 @@
  *  under the License.
  */
 
-package au.com.scds.eventschedule.base.impl.activity;
+package au.com.scds.eventschedule.base.impl.event;
 
 import java.util.Collections;
 import java.util.SortedSet;
@@ -37,7 +37,7 @@ import org.apache.isis.applib.annotation.DomainObject;
 
 import au.com.scds.eventschedule.base.impl.Booker;
 import au.com.scds.eventschedule.base.impl.Booking;
-import au.com.scds.eventschedule.base.impl.event.Person;
+import au.com.scds.eventschedule.base.impl.activity.Attendance;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

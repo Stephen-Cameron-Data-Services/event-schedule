@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  tns:recurringActivities xmlns:tns="http://www.example.org/EventSchedule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/EventSchedule event-schedule.xsd ">
+	<tns:recurringActivity>
+		<tns:start>2001-12-31T12:00:00</tns:start>
+		<tns:end>2001-12-31T12:00:00</tns:end>
+		<tns:bookings>
+			<tns:booking xsi:type="tns:Booking">
+				<tns:booker>
+					<tns:identifier>tns:identifier</tns:identifier>
+				</tns:booker>
+				<tns:bookable>
+					<tns:identifier>tns:identifier</tns:identifier>
+				</tns:bookable>
+			</tns:booking>
+		</tns:bookings>
+		<tns:waitList>
+			<tns:attendee>
+				<tns:person>
+					<tns:fullname>tns:fullname</tns:fullname>
+				</tns:person>
+			</tns:attendee>
+		</tns:waitList>
+		<tns:eventFacilitator>
+			<tns:person>
+				<tns:fullname>tns:fullname</tns:fullname>
+			</tns:person>
+		</tns:eventFacilitator>
+		<tns:name>tns:name</tns:name>
+		<tns:attendance>
+			<tns:attendee>
+				<tns:person>
+					<tns:fullname>tns:fullname</tns:fullname>
+				</tns:person>
+			</tns:attendee>
+		</tns:attendance>
+		<tns:childEvent>
+			<tns:start>2001-12-31T12:00:00</tns:start>
+			<tns:end>2001-12-31T12:00:00</tns:end>
+			<tns:bookings>
+				<tns:booking xsi:type="tns:Booking">
+					<tns:booker>
+						<tns:identifier>tns:identifier</tns:identifier>
+					</tns:booker>
+				</tns:booking>
+			</tns:bookings>
+			<tns:waitList>
+				<tns:attendee>
+					<tns:person>
+						<tns:fullname>tns:fullname</tns:fullname>
+					</tns:person>
+				</tns:attendee>
+			</tns:waitList>
+			<tns:eventFacilitator>
+				<tns:person>
+					<tns:fullname>tns:fullname</tns:fullname>
+				</tns:person>
+			</tns:eventFacilitator>
+			<tns:name>tns:name</tns:name>
+			<tns:attendance>
+				<tns:attendee>
+					<tns:person>
+						<tns:fullname>tns:fullname</tns:fullname>
+					</tns:person>
+				</tns:attendee>
+			</tns:attendance>
+		</tns:childEvent>
+	</tns:recurringActivity>
+</tns:recurringActivities-->
+<tns:recurringActivities xmlns:tns="http://www.example.org/EventSchedule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/EventSchedule event-schedule.xsd ">
+	<tns:recurringActivity>
+		<tns:start>2018-01-01T12:00:00</tns:start>
+		<tns:end>2001-12-31T12:00:00</tns:end>
+		<tns:bookings>
+			<tns:booking xsi:type="tns:Booking">
+				<tns:booker>
+					<tns:identifier>John Glover</tns:identifier>
+				</tns:booker>
+			</tns:booking>
+		</tns:bookings>
+		<tns:waitList>
+			<tns:attendee>
+				<tns:person>
+					<tns:fullname>William Turner</tns:fullname>
+				</tns:person>
+			</tns:attendee>
+		</tns:waitList>
+		<tns:eventFacilitator>
+			<tns:person>
+				<tns:fullname>John Constable</tns:fullname>
+			</tns:person>
+		</tns:eventFacilitator>
+		<tns:name>Parent Activity</tns:name>
+		<tns:childEvent>
+			<tns:start>2018-02-01T12:00:00</tns:start>
+			<tns:end>2018-02-01T13:00:00</tns:end>
+			<tns:bookings>
+				<tns:booking xsi:type="tns:Booking">
+					<tns:booker>
+						<tns:identifier>Anders Zorn</tns:identifier>
+					</tns:booker>
+				</tns:booking>
+			</tns:bookings>
+			<tns:waitList>
+				<tns:attendee>
+					<tns:person>
+						<tns:fullname>Albert Namatjira</tns:fullname>
+					</tns:person>
+				</tns:attendee>
+			</tns:waitList>
+			<tns:eventFacilitator>
+				<tns:person>
+					<tns:fullname>Rembrandt van Rijn</tns:fullname>
+				</tns:person>
+			</tns:eventFacilitator>
+			<tns:name>Parent Activity First Child</tns:name>
+			<tns:attendance>
+				<tns:attendee>
+					<tns:person>
+						<tns:fullname>Pablo Picasso</tns:fullname>
+					</tns:person>
+				</tns:attendee>
+			</tns:attendance>
+		</tns:childEvent>
+		<tns:childEvent>
+			<tns:start>2018-03-01T12:00:00</tns:start>
+			<tns:end>2018-03-01T12:00:00</tns:end>
+			<tns:bookings>
+				<tns:booking xsi:type="tns:Booking">
+					<tns:booker>
+						<tns:identifier>Raffaello Sanzio da Urbino (Raphael)</tns:identifier>
+					</tns:booker>
+				</tns:booking>
+			</tns:bookings>
+			<tns:waitList>
+				<tns:attendee>
+					<tns:person>
+						<tns:fullname>Michelangelo di Lodovico Buonarroti Simoni</tns:fullname>
+					</tns:person>
+				</tns:attendee>
+			</tns:waitList>
+			<tns:eventFacilitator>
+				<tns:person>
+					<tns:fullname>Leonardo da Vinci</tns:fullname>
+				</tns:person>
+			</tns:eventFacilitator>
+			<tns:name>Parent Activity Second Child</tns:name>
+			<tns:attendance>
+				<tns:attendee>
+					<tns:person>
+						<tns:fullname>Donato di Niccolò di Betto Bardi (Donatello)</tns:fullname>
+					</tns:person>
+				</tns:attendee>
+			</tns:attendance>
+		</tns:childEvent>
+	</tns:recurringActivity>
+</tns:recurringActivities>

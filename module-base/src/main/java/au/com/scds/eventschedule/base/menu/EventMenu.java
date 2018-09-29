@@ -14,7 +14,7 @@ import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.annotation.ParameterLayout;
 import org.joda.time.DateTime;
 
-import au.com.scds.eventschedule.base.impl.activity.Attendee;
+import au.com.scds.eventschedule.base.impl.event.Attendee;
 import au.com.scds.eventschedule.base.impl.event.CalendarableScheduledEvent;
 import au.com.scds.eventschedule.base.impl.event.EventFacilitator;
 import au.com.scds.eventschedule.base.impl.event.EventsRepository;

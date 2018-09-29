@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import org.junit.Before;
 import org.junit.Test;
 
-import au.com.scds.eventschedule.base.impl.activity.Attendee;
+import au.com.scds.eventschedule.base.impl.event.Attendee;
 import au.com.scds.eventschedule.base.impl.event.EventFacilitator;
 import au.com.scds.eventschedule.base.impl.event.ScheduledEvent;
 import au.com.scds.eventschedule.fixture.scenarios.CreateScheduledEvents;
@@ -34,7 +34,7 @@ import org.apache.isis.applib.services.xactn.TransactionService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Events_IntegTest extends IntegTestAbstract {
+public class ScheduledEvents_IntegTest extends IntegTestAbstract {
 
 	   @Inject
 	    FixtureScripts fixtureScripts;
@@ -53,7 +53,7 @@ public class Events_IntegTest extends IntegTestAbstract {
 	        assertThat(event).isNotNull();
 	    }
 
-	    public static class Events extends Events_IntegTest {
+	    public static class Events extends ScheduledEvents_IntegTest {
 
 	        @Test
 	        public void accessible() throws Exception {

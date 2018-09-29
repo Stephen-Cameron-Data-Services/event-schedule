@@ -15,6 +15,7 @@ import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.joda.time.DateTime;
 
+import au.com.scds.eventschedule.base.impl.event.Attendee;
 import au.com.scds.eventschedule.base.impl.event.Organisation;
 import lombok.AccessLevel;
 import lombok.Getter;

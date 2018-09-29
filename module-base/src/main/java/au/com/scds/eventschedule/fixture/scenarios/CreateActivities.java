@@ -18,6 +18,7 @@ import au.com.scds.eventschedule.base.menu.ActivityMenu;
 import au.com.scds.eventschedule.base.menu.EventMenu;
 import au.com.scds.eventschedule.fixture.generated.Activities;
 import au.com.scds.eventschedule.fixture.generated.ActivityEvent;
+import au.com.scds.eventschedule.fixture.generated.Booking;
 import au.com.scds.eventschedule.fixture.generated.ObjectFactory;
 import au.com.scds.eventschedule.fixture.generated.Participation;
 
@@ -41,9 +42,9 @@ public class CreateActivities extends FixtureScript {
 			Activities _activities = (Activities) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(is));
 			for (ActivityEvent _activity : _activities.getActivity()) {
 				au.com.scds.eventschedule.base.impl.activity.ActivityEvent activity = activityMenu.createActivityEvent(_activity.getName(), new DateTime(_activity.getStart()));
-				au.com.scds.eventschedule.base.impl.activity.Attendee attendee = null;
-				for(Participation _participation : _activity.getParticipation()){
-					attendee = eventMenu.createEventAttendee(_participation.getAttendee().getPerson().getFullname());
+				au.com.scds.eventschedule.base.impl.event.Attendee attendee = null;
+				for(Booking _booking : _activity.getBookings().getBooking()){
+					attendee = eventMenu.createEventAttendee(_booking.getBooker().getIdentifier());
 					activity.addParticipation(attendee);
 				}
 				activities.add(activity);

@@ -20,6 +20,7 @@ import au.com.scds.eventschedule.fixture.generated.Activities;
 import au.com.scds.eventschedule.fixture.generated.ActivityEvent;
 import au.com.scds.eventschedule.fixture.generated.Attendance;
 import au.com.scds.eventschedule.fixture.generated.Attendee;
+import au.com.scds.eventschedule.fixture.generated.Booking;
 import au.com.scds.eventschedule.fixture.generated.EventFacilitator;
 import au.com.scds.eventschedule.fixture.generated.ObjectFactory;
 import au.com.scds.eventschedule.fixture.generated.ParentedActivityEvent;
@@ -47,9 +48,9 @@ public class CreateRecurringActivities extends FixtureScript {
 			RecurringActivities _activities = (RecurringActivities) JAXBIntrospector.getValue(jaxbUnmarshaller.unmarshal(is));
 			for (RecurringActivityEvent _parent: _activities.getRecurringActivity()) {
 				au.com.scds.eventschedule.base.impl.activity.RecurringActivityEvent parent = activityMenu.createRecurringActivityEvent(_parent.getName(), new DateTime(_parent.getStart()));
-				au.com.scds.eventschedule.base.impl.activity.Attendee attendee = null;
-				for(Participation _participation : _parent.getParticipation()){
-					attendee = eventMenu.createEventAttendee(_participation.getAttendee().getPerson().getFullname());
+				au.com.scds.eventschedule.base.impl.event.Attendee attendee = null;
+				for(Booking _booking : _parent.getBookings().getBooking()){
+					attendee = eventMenu.createEventAttendee(_booking.getBooker().getIdentifier());
 					parent.addParticipation(attendee);
 				}
 				for(Attendee _attendee : _parent.getWaitList().getAttendee()){
@@ -63,16 +64,16 @@ public class CreateRecurringActivities extends FixtureScript {
 				}
 				//same for child events
 				for(ParentedActivityEvent _child : _parent.getChildEvent()){
-					parent.addChildEvent(new DateTime(_child.getDate()));
+					parent.addChildEvent(new DateTime(_child.getStart()));
 					au.com.scds.eventschedule.base.impl.activity.ParentedActivityEvent child = null;
 					for(au.com.scds.eventschedule.base.impl.activity.ParentedActivityEvent e : parent.getChildEvents()){
-						if(e.getStart().equals(new DateTime(_child.getDate()))){
+						if(e.getStart().equals(new DateTime(_child.getStart()))){
 							child = e;
 							break;
 						}
 					}
-					for(Participation _participation : _child.getParticipation()){
-						attendee = eventMenu.createEventAttendee(_participation.getAttendee().getPerson().getFullname());
+					for(Booking _booking : _child.getBookings().getBooking()){
+						attendee = eventMenu.createEventAttendee(_booking.getBooker().getIdentifier());
 						child.addParticipation(attendee);
 					}
 					for(Attendee _attendee : _child.getWaitList().getAttendee()){

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:events xmlns:tns="http://www.example.org/EventSchedule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/EventSchedule event-schedule.xsd ">
+  <tns:event xsi:type="tns:Event">
+    <tns:start>2018-12-31T12:00:00</tns:start>
+    <tns:end>2018-12-31T12:00:00</tns:end>
+    <tns:bookings>
+      <tns:booking xsi:type="tns:Booking">
+        <tns:booker>
+          <tns:identifier>Booker 1</tns:identifier>
+        </tns:booker>
+        <tns:bookable>
+          <tns:identifier>Seat 1</tns:identifier>
+        </tns:bookable>
+      </tns:booking>
+    </tns:bookings>
+  </tns:event>
+</tns:events>
