@@ -1,9 +1,5 @@
 package au.com.scds.eventschedule.base.impl.timeslot;
 
-import java.util.Collections;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import javax.inject.Inject;
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.Discriminator;
