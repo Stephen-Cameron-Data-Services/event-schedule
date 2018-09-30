@@ -56,6 +56,8 @@ public class Event implements Comparable<Event> {
 	public Event(DateTime start, DateTime end) {
 		if(start == null)
 			throw new IllegalArgumentException("start parameter cannot be null");
+		if (end != null && !start.isBefore(end))
+			throw new IllegalArgumentException("start must be before end");
 		setStart(start);
 		setEnd(end);
 	}

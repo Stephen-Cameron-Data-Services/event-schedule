@@ -12,22 +12,24 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for RecurringActivityEvent complex type.
+ * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="RecurringActivityEvent"&gt;
+ * &lt;complexType&gt;
  *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.example.org/EventSchedule}ActivityEvent"&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="childEvent" type="{http://www.example.org/EventSchedule}ParentedActivityEvent" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="bookable" type="{http://www.example.org/EventSchedule}BookableWithTimeslots" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
- *     &lt;/extension&gt;
+ *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
  * </pre>
@@ -35,42 +37,42 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RecurringActivityEvent", propOrder = {
-    "childEvent"
+@XmlType(name = "", propOrder = {
+    "bookable"
 })
-public class RecurringActivityEvent
-    extends ActivityEvent
-{
+@XmlRootElement(name = "timeslots")
+public class Timeslots {
 
-    protected List<ParentedActivityEvent> childEvent;
+    @XmlElement(required = true)
+    protected List<BookableWithTimeslots> bookable;
 
     /**
-     * Gets the value of the childEvent property.
+     * Gets the value of the bookable property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the childEvent property.
+     * This is why there is not a <CODE>set</CODE> method for the bookable property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getChildEvent().add(newItem);
+     *    getBookable().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ParentedActivityEvent }
+     * {@link BookableWithTimeslots }
      * 
      * 
      */
-    public List<ParentedActivityEvent> getChildEvent() {
-        if (childEvent == null) {
-            childEvent = new ArrayList<ParentedActivityEvent>();
+    public List<BookableWithTimeslots> getBookable() {
+        if (bookable == null) {
+            bookable = new ArrayList<BookableWithTimeslots>();
         }
-        return this.childEvent;
+        return this.bookable;
     }
 
 }

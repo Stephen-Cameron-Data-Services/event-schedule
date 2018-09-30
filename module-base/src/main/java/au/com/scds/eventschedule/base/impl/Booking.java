@@ -25,13 +25,11 @@ import javax.jdo.annotations.DiscriminatorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.Inheritance;
 import javax.jdo.annotations.InheritanceStrategy;
-import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
 
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.services.i18n.TranslatableString;
 
-import au.com.scds.eventschedule.base.impl.event.MutableEvent;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

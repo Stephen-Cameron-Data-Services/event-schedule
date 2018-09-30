@@ -10,14 +10,16 @@
 	<bs3:row>
 		<bs3:col span="6">
 			<cpt:fieldSet name="General" id="general" unreferencedProperties="true">
+				<cpt:property id="booker" />
+				<cpt:property id="bookable" />
+				<cpt:property id="event" />
+			</cpt:fieldSet>
+		</bs3:col>
+		<bs3:col span="6">
+			<cpt:fieldSet name="Other" id="general">
 				<cpt:property id="datanucleusIdLong" />
 				<cpt:property id="datanucleusVersionLong" />
 				<cpt:property id="datanucleusVersionTimestamp" />
-				<cpt:property id="attendee" hidden="ALL_TABLES" />
-				<cpt:property id="attendeeName" hidden="OBJECT_FORMS">
-					<cpt:named>Name</cpt:named>
-				</cpt:property>
-				<cpt:property id="event" hidden="PARENTED_TABLES" />
 			</cpt:fieldSet>
 		</bs3:col>
 		<bs3:col span="6" unreferencedCollections="true" />

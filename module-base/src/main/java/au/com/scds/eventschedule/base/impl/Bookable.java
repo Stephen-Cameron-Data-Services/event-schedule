@@ -24,7 +24,7 @@ import lombok.Setter;
 
 /**
  *
- * An thing that can be booked/reserved.
+ * A thing that can be booked/reserved.
  * 
  */
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "bookable")

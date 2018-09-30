@@ -18,19 +18,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Java class for SimpleEvent complex type.
+ * <p>Java class for Timeslot complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="SimpleEvent"&gt;
+ * &lt;complexType name="Timeslot"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="start" type="{http://www.w3.org/2001/XMLSchema}dateTime"/&gt;
  *         &lt;element name="end" type="{http://www.w3.org/2001/XMLSchema}dateTime"/&gt;
+ *         &lt;element name="booking" type="{http://www.example.org/EventSchedule}Booking" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -40,18 +39,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SimpleEvent", propOrder = {
-    "name",
-    "description",
+@XmlType(name = "Timeslot", propOrder = {
     "start",
-    "end"
+    "end",
+    "booking"
 })
-public class SimpleEvent {
+public class Timeslot {
 
-    @XmlElement(required = true)
-    protected String name;
-    @XmlElement(required = true)
-    protected String description;
     @XmlElement(required = true, type = String.class)
     @XmlJavaTypeAdapter(Adapter1 .class)
     @XmlSchemaType(name = "dateTime")
@@ -60,54 +54,7 @@ public class SimpleEvent {
     @XmlJavaTypeAdapter(Adapter1 .class)
     @XmlSchemaType(name = "dateTime")
     protected Date end;
-
-    /**
-     * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
-    }
-
-    /**
-     * Gets the value of the description property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Sets the value of the description property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setDescription(String value) {
-        this.description = value;
-    }
+    protected Booking booking;
 
     /**
      * Gets the value of the start property.
@@ -155,6 +102,30 @@ public class SimpleEvent {
      */
     public void setEnd(Date value) {
         this.end = value;
+    }
+
+    /**
+     * Gets the value of the booking property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Booking }
+     *     
+     */
+    public Booking getBooking() {
+        return booking;
+    }
+
+    /**
+     * Sets the value of the booking property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Booking }
+     *     
+     */
+    public void setBooking(Booking value) {
+        this.booking = value;
     }
 
 }

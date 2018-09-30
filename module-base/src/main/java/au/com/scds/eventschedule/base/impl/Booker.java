@@ -22,7 +22,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * An entity that holds bookings of <class>Bookable</class>.
+ * An entity that holds bookings of specific <class>Bookable</class> entities.
  */
 @PersistenceCapable(identityType = IdentityType.DATASTORE, schema = "event_schedule", table = "booker")
 @Inheritance(strategy = InheritanceStrategy.NEW_TABLE)

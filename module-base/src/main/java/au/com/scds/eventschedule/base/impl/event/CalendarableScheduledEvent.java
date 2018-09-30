@@ -73,8 +73,6 @@ public class CalendarableScheduledEvent extends ScheduledEvent implements Calend
 		this.setCalendarNote(note);
 	}
 
-
-
 	@Override
 	public CalendarEvent toCalendarEvent() {
 		return new CalendarEvent(this.getStart(),
