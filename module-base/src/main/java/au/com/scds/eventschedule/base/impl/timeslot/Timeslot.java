@@ -1,5 +1,7 @@
 package au.com.scds.eventschedule.base.impl.timeslot;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.jdo.annotations.Column;
 import javax.jdo.annotations.Discriminator;
@@ -74,6 +76,10 @@ public class Timeslot extends Event {
 		if (!isBooked())
 			super.createBooking(booker, this.getBookable());
 		return this;
+	}
+	
+	public List<Booker> choices0CreateBooking(){
+		return bookingsRepo.listBookers();
 	}
 
 	public String disableCreateBooking() {

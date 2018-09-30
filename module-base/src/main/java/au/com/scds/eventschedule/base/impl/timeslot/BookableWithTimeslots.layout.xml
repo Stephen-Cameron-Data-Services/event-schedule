@@ -8,20 +8,24 @@
 		</bs3:col>
 	</bs3:row>
 	<bs3:row>
-		<bs3:col span="6">
+		<bs3:col span="4">
 			<cpt:fieldSet name="General" id="general" unreferencedProperties="true">
-				<cpt:property id="booker" />
-				<cpt:property id="bookable" />
-				<cpt:property id="event" />
-			</cpt:fieldSet>
-		</bs3:col>
-		<bs3:col span="6">
-			<cpt:fieldSet name="Other" id="other">
 				<cpt:property id="datanucleusIdLong" />
 				<cpt:property id="datanucleusVersionLong" />
 				<cpt:property id="datanucleusVersionTimestamp" />
+				<cpt:property id="first" />
+				<cpt:property id="identifier" />
+				<cpt:property id="last" />
 			</cpt:fieldSet>
 		</bs3:col>
-		<bs3:col span="6" unreferencedCollections="true" />
+		<bs3:col span="8" unreferencedCollections="true">
+			<cpt:collection id="bookings" defaultView="Table" hidden="EVERYWHERE">
+				<cpt:action id="createBooking" />
+			</cpt:collection>
+			<cpt:collection id="timeslots" defaultView="Table">
+				<cpt:action id="addTimeslot" />
+				<cpt:action id="removeTimeslot" />
+			</cpt:collection>
+		</bs3:col>
 	</bs3:row>
 </bs3:grid>

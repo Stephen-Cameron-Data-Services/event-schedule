@@ -40,16 +40,6 @@ public class BookableWithTimeslots extends Bookable {
 	@Setter(value = AccessLevel.PROTECTED)
 	protected LinkedList<Timeslot> timeslotsList = new LinkedList<>();
 
-	@Column(allowsNull = "true")
-	@Getter
-	@Setter(value = AccessLevel.PACKAGE)
-	private Timeslot first;
-
-	@Column(allowsNull = "true")
-	@Getter
-	@Setter(value = AccessLevel.PACKAGE)
-	private Timeslot last;
-
 	protected BookableWithTimeslots() {
 		super();
 	}
