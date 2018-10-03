@@ -58,22 +58,30 @@ public class BookableWithTimeslots extends Bookable {
 		if (start.isAfter(end))
 			return null;
 		synchronized (this.timeslotsList) {
-			if (findFirstOverlapWith(start, end) != null) {
-				return null;
-			}
+
 			Timeslot timeslot = timeslotRepo.createTimeslot(this, start, end);
+			addTimeslot(timeslot);
+
+			return timeslot;
+		}
+	}
+
+	public void addTimeslot(Timeslot timeslot) {
+		if(timeslot == null)
+			return;
+		else if (findFirstOverlapWith(timeslot.getStart(), timeslot.getEnd()) != null) {
+			return;
+		}
+		else if (this.getTimeslotsList().isEmpty()) {
+			this.getTimeslotsList().add(0, timeslot);
+		} else {
 			Timeslot prev = null;
-			if (this.getTimeslotsList().isEmpty()) {
-				this.getTimeslotsList().add(0, timeslot);
-			} else {
-				for (int i = 0; i < this.getTimeslotsList().size(); i++) {
-					prev = this.getTimeslotsList().get(i);
-					if (prev.getEnd().isBefore(start) || prev.getEnd().equals(start)) {
-						this.getTimeslotsList().add(i + 1, timeslot);
-					}
+			for (int i = 0; i < this.getTimeslotsList().size(); i++) {
+				prev = this.getTimeslotsList().get(i);
+				if (prev.getEnd().isBefore(timeslot.getStart()) || prev.getEnd().equals(timeslot.getStart())) {
+					this.getTimeslotsList().add(i + 1, timeslot);
 				}
 			}
-			return timeslot;
 		}
 	}
 
@@ -90,17 +98,23 @@ public class BookableWithTimeslots extends Bookable {
 			return "";
 	}
 
-	private Timeslot findFirstOverlapWith(DateTime start, DateTime end) {
-		if (start == null || end == null)
-			throw new IllegalArgumentException("start and end cannot be null");
+	private Timeslot findFirstOverlapWith(Interval interval) {
 		if (this.getTimeslotsList().isEmpty())
 			return null;
-		Interval interval = new Interval(start, end);
 		for (Timeslot timeslot : this.getTimeslotsList()) {
 			if (timeslot.asInterval().overlaps(interval))
 				return timeslot;
 		}
 		return null;
+	}
+
+	public Timeslot findFirstOverlapWith(DateTime start, DateTime end) {
+		if (start == null || end == null)
+			throw new IllegalArgumentException("start and end cannot be null");
+		else if (this.getTimeslotsList().isEmpty())
+			return null;
+		else
+			return findFirstOverlapWith(new Interval(start, end));
 	}
 
 	@Action

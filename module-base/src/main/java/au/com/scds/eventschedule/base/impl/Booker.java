@@ -1,6 +1,8 @@
 package au.com.scds.eventschedule.base.impl;
 
 import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -66,6 +68,10 @@ public class Booker implements Comparable<Booker> {
 		if (this.getBookingsSet().contains(booking))
 			bookingsRepo.destroyBooking(booking);
 		return this;
+	}
+	
+	public Set<Booking> choices0RemoveBooking(){
+		return this.getBookingsSet();
 	}
 
 	@Override

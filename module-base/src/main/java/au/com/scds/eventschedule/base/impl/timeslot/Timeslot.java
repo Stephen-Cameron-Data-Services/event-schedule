@@ -42,7 +42,7 @@ public class Timeslot extends Event {
 	@Setter(value = AccessLevel.PRIVATE)
 	private Bookable bookable;
 
-	Timeslot(Bookable bookable, DateTime start, DateTime end) {
+	public Timeslot(Bookable bookable, DateTime start, DateTime end) {
 		super(start, end);
 		// enforce end not null
 		if (end == null)

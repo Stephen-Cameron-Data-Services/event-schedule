@@ -71,14 +71,21 @@ public class Event implements Comparable<Event> {
 			this.getBookingSet().add(booking);
 	}
 
-	void removeBooking(Booking booking) {
+	/*void removeBooking(Booking booking) {
 		if (this.getBookingSet().contains(booking))
 			bookingRepo.destroyBooking(booking);
-	}
+	}*/
 	
 	@Action
 	public Event createBooking(Booker booker, Bookable bookable) {
 		bookingRepo.createBooking(bookable, booker, this);
+		return this;
+	}
+	
+	@Action
+	public Event destroyBooking(Booking booking) {
+		if (this.getBookingSet().contains(booking))
+			bookingRepo.destroyBooking(booking);
 		return this;
 	}
 

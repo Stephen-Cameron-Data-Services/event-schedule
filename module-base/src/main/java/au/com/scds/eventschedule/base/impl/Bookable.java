@@ -1,6 +1,7 @@
 package au.com.scds.eventschedule.base.impl;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -71,10 +72,19 @@ public class Bookable implements Comparable<Bookable> {
 	}
 
 	@Action
-	public Bookable createBooking(Booker booker, Event interval) {
+	public Bookable createBooking(Booker booker, Event event) {
+		bookingsRepo.createBooking(this, booker, event);
 		return this;
 	}
-
+	
+	public List<Booker> choices0CreateBooking(){
+		return bookingsRepo.listBookers();
+	}
+	
+	public List<Event> choices1CreateBooking(){
+		return bookingsRepo.listEvents();
+	}
+	
 	@Override
 	public int compareTo(Bookable o) {
 		return this.getIdentifier().compareTo(o.getIdentifier());
